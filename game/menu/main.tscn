@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://cgyu886cvgwbc"]
+[gd_scene load_steps=3 format=3 uid="uid://cgyu886cvgwbc"]
 
 [ext_resource type="Script" uid="uid://dffjij0a7n4gt" path="res://game/scripts/main_menu.gd" id="1_8vd0o"]
+[ext_resource type="Texture2D" uid="uid://cr2trthfwjky5" path="res://game/assets/fondos/mainmenu.png" id="2_my0by"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_8vd0o")
@@ -13,12 +14,28 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Control"]
+layout_mode = 0
+offset_left = -2.0
+offset_top = -2.0
+offset_right = 1281.0
+offset_bottom = 717.0
+texture = ExtResource("2_my0by")
+
 [node name="Button (Iniciar)" type="Button" parent="CanvasLayer/Control"]
 layout_mode = 0
-offset_right = 8.0
-offset_bottom = 8.0
+offset_left = 6.0
+offset_top = 298.0
+offset_right = 613.0
+offset_bottom = 712.0
+text = "boton iniciar"
 
 [node name="Button (Modo Accesible)" type="Button" parent="CanvasLayer/Control"]
 layout_mode = 0
-offset_right = 8.0
-offset_bottom = 8.0
+offset_left = 666.0
+offset_top = 294.0
+offset_right = 1276.0
+offset_bottom = 715.0
+text = "Boton Accesibilidad"
+
+[connection signal="pressed" from="CanvasLayer/Control/Button (Iniciar)" to="." method="_on_button_iniciar_pressed"]
