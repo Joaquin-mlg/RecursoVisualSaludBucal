@@ -1,16 +1,25 @@
-[gd_scene load_steps=3 format=3 uid="uid://ddt4ihh27dja4"]
+[gd_scene load_steps=6 format=3 uid="uid://ddt4ihh27dja4"]
 
 [ext_resource type="Script" uid="uid://o4brvc8yk4qm" path="res://game/scripts/player_esquivar.gd" id="1_2e0mf"]
+[ext_resource type="Texture2D" uid="uid://b3wypn3gtie8x" path="res://game/assets/sprite/personajes/ardilla.png" id="2_1x4i7"]
+[ext_resource type="Script" uid="uid://db3866gmeyjs1" path="res://game/scripts/spawner.gd" id="2_6omkn"]
+[ext_resource type="PackedScene" uid="uid://dmvx4dofooko4" path="res://game/minijuegos/esquivar/asteroide.tscn" id="3_qjfgf"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_6omkn"]
-radius = 4.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_qjfgf"]
 
-[node name="Node2D" type="Node2D"]
-script = ExtResource("1_2e0mf")
+[node name="Esquivar" type="Node2D"]
 
 [node name="Player" type="CharacterBody2D" parent="."]
+script = ExtResource("1_2e0mf")
 
 [node name="Sprite2D" type="Sprite2D" parent="Player"]
+position = Vector2(2, 628)
+scale = Vector2(0.44959348, 0.44842407)
+texture = ExtResource("2_1x4i7")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
-shape = SubResource("CircleShape2D_6omkn")
+shape = SubResource("CircleShape2D_qjfgf")
+
+[node name="Spawner" type="Node2D" parent="."]
+script = ExtResource("2_6omkn")
+asteroide_scene = ExtResource("3_qjfgf")

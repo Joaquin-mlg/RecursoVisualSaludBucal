@@ -1,23 +1,26 @@
-extends CharacterBody2D
+extends Area2D
 
-@export var velocidad : float = 400.0
-var objetivo_x : float = 0.0
-var ancho_pantalla : float = 0.0
+@export var speed := 100.0
 
-func _ready():
-	ancho_pantalla = ProjectSettings.get_setting("display/window/size/width")
-	objetivo_x = position.x
+# 1. Función para reiniciar el nivel
+func _reiniciar_nivel():
+	# get_tree().reload_current_scene() es perfecto para reiniciar la escena actual
+	get_tree().reload_current_scene()
+
+
+# 2. **CAMBIO CLAVE:** Usar la señal body_entered
+# Esta función se llama automáticamente cuando un CharacterBody2D
+# (como tu nave) entra en el área del asteroide.
+func _on_body_entered(body: Node2D) -> void:
+	# Opcional pero recomendado: Verificar que el cuerpo sea el jugador
+	# Asegúrate de que tu nave (CharacterBody2D) esté en el grupo "player"
+	if body.is_in_group("player"): 
+		print("💥 Colisión con el jugador")
+		# Usar call_deferred es bueno para evitar problemas de sincronización
+		call_deferred("_reiniciar_nivel")
+
 
 func _process(delta):
-	var dir = 0
-	if Input.is_action_pressed("ui_left"):
-		dir -= 1
-	if Input.is_action_pressed("ui_right"):
-		dir += 1
-
-	# Movimiento con teclado o toque
-	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
-		objetivo_x = get_global_mouse_position().x
-
-	var nueva_x = lerp(position.x, objetivo_x, 0.2)
-	position.x = clamp(nueva_x + dir * velocidad * delta, 0, ancho_pantalla)
+	position.y += speed * delta
+	if position.y >= 800: # fuera de pantalla
+		queue_free()
