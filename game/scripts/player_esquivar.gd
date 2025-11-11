@@ -1,26 +1,69 @@
-extends Area2D
+extends CharacterBody2D # ¡Correcto!
 
-@export var speed := 100.0
+@export var speed := 350.0 # Velocidad adecuada para CharacterBody2D
 
-# 1. Función para reiniciar el nivel
-func _reiniciar_nivel():
-	# get_tree().reload_current_scene() es perfecto para reiniciar la escena actual
-	get_tree().reload_current_scene()
+# Variable de estado para almacenar la dirección de movimiento deseada por toque
+# -1.0 = Izquierda, 1.0 = Derecha, 0.0 = Detenido
+var target_direction: float = 0.0 
+
+# Función para configurar el jugador (llamada una vez al inicio)
+func _ready():
+	# **AGREGADO:** Asegura que el jugador esté en el grupo "player"
+	add_to_group("player")
+	
+# Función para manejar entradas táctiles (TOUCH SCREEN)
+# Esta función es crucial para la accesibilidad en Android.
+func _input(event):
+	# Solo procesamos eventos táctiles en la pantalla (para celular)
+	if event is InputEventScreenTouch:
+		var screen_width = get_viewport_rect().size.x
+		
+		if event.is_pressed():
+			# Toque inicial: Determinar la dirección
+			# Si la posición del toque está en la mitad izquierda de la pantalla
+			if event.position.x < screen_width / 2:
+				# Mover a la izquierda
+				target_direction = -1.0
+			else:
+				# Mover a la derecha
+				target_direction = 1.0
+		else:
+			# El toque ha terminado: Detener el movimiento táctil
+			target_direction = 0.0
 
 
-# 2. **CAMBIO CLAVE:** Usar la señal body_entered
-# Esta función se llama automáticamente cuando un CharacterBody2D
-# (como tu nave) entra en el área del asteroide.
-func _on_body_entered(body: Node2D) -> void:
-	# Opcional pero recomendado: Verificar que el cuerpo sea el jugador
-	# Asegúrate de que tu nave (CharacterBody2D) esté en el grupo "player"
-	if body.is_in_group("player"): 
-		print("💥 Colisión con el jugador")
-		# Usar call_deferred es bueno para evitar problemas de sincronización
-		call_deferred("_reiniciar_nivel")
-
-
-func _process(delta):
-	position.y += speed * delta
-	if position.y >= 800: # fuera de pantalla
-		queue_free()
+func _physics_process(delta):
+	# 1. Determinar la dirección de movimiento con prioridad:
+	var final_direction: float = 0.0
+	
+	# Prioridad 1: Input táctil (si el usuario está tocando la pantalla)
+	if target_direction != 0.0:
+		final_direction = target_direction
+	else:
+		# Prioridad 2: Input de teclado/virtual (para la opción Web/PC si se exporta)
+		final_direction = Input.get_axis("ui_left", "ui_right")
+	
+	
+	# 2. Calcular la nueva velocidad horizontal
+	velocity.x = final_direction * speed
+	
+	# 3. La gravedad no se aplica en este minijuego, la velocidad vertical se mantiene en 0
+	velocity.y = 0 
+	
+	# 4. Mueve el cuerpo del personaje con Godot Physics
+	move_and_slide()
+	
+	# 5. Limitar al jugador a los bordes de la pantalla (para que no salga)
+	var screen_width = get_viewport_rect().size.x
+	var player_extent = 0.0
+	
+	# Verificación segura del CollisionShape para evitar errores si no existe
+	if $CollisionShape2D and $CollisionShape2D.shape:
+		# Intentar obtener el tamaño del shape para el clamp correcto
+		if $CollisionShape2D.shape is CircleShape2D:
+			player_extent = $CollisionShape2D.shape.radius
+		elif $CollisionShape2D.shape is RectangleShape2D:
+			player_extent = $CollisionShape2D.shape.size.x / 2.0
+	
+	# Usar player_extent para el límite (0 + extent, width - extent)
+	position.x = clamp(position.x, player_extent, screen_width - player_extent)
