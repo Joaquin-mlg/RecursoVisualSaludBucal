@@ -15,7 +15,7 @@ func _reiniciar_nivel():
 
 # Esta es la señal correcta para conectar al Player (CharacterBody2D)
 func _on_body_entered(body: Node2D) -> void:
-	# Asegúrate de que tu Player (CharacterBody2D) esté en el grupo "player" en el Inspector
+ 	# Asegúrate de que tu Player (CharacterBody2D) esté en el grupo "player" en el Inspector
 	if body.is_in_group("player"):	
 		print("💥 Colisión con el jugador. Reiniciando...")
 		# 📱 Implementar la vibración (verás que Godot la simula en el editor)
