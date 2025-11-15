@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://dmvx4dofooko4"]
 
-[ext_resource type="Script" uid="uid://u4g3foick4h3" path="res://game/scripts/asteroide.gd" id="1_fc85a"]
+[ext_resource type="Script" uid="uid://u4g3foick4h3" path="res://game/minijuegos/esquivar/asteroide.gd" id="1_fc85a"]
 [ext_resource type="Texture2D" uid="uid://clwprn2q5r16r" path="res://game/assets/sprite/personajes/Asteroide.png" id="2_ha7y2"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ha7y2"]

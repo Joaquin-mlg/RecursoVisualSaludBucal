@@ -2,10 +2,9 @@ extends Node2D
 
 @onready var sprite = $Sprite2D
 var imagenes = [
-	preload("res://game/assets/fondos/historia1_1.png"),
-	preload("res://game/assets/fondos/historia1_2.png"),
-	preload("res://game/assets/fondos/historia1_3.png"),
-	preload("res://game/assets/fondos/historia1_4.png")
+	preload("res://game/assets/fondos/historia2_1.png"),
+	preload("res://game/assets/fondos/historia2_2.png"),
+	preload("res://game/assets/fondos/historia2_3.png"),
 ]
 var indice = 0
 

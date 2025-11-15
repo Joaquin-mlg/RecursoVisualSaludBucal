@@ -1,9 +1,9 @@
 [gd_scene load_steps=7 format=3 uid="uid://ddt4ihh27dja4"]
 
-[ext_resource type="Script" uid="uid://o4brvc8yk4qm" path="res://game/scripts/player_esquivar.gd" id="1_2e0mf"]
-[ext_resource type="Script" uid="uid://dkbgkal4tfsbt" path="res://game/scripts/esquivar.gd" id="1_w25gl"]
+[ext_resource type="Script" uid="uid://o4brvc8yk4qm" path="res://game/minijuegos/esquivar/player_esquivar.gd" id="1_2e0mf"]
+[ext_resource type="Script" uid="uid://dkbgkal4tfsbt" path="res://game/minijuegos/esquivar/esquivar.gd" id="1_w25gl"]
 [ext_resource type="Texture2D" uid="uid://b3wypn3gtie8x" path="res://game/assets/sprite/personajes/ardilla.png" id="2_1x4i7"]
-[ext_resource type="Script" uid="uid://db3866gmeyjs1" path="res://game/scripts/spawner.gd" id="2_6omkn"]
+[ext_resource type="Script" uid="uid://db3866gmeyjs1" path="res://game/minijuegos/esquivar/spawner.gd" id="2_6omkn"]
 [ext_resource type="PackedScene" uid="uid://dmvx4dofooko4" path="res://game/minijuegos/esquivar/asteroide.tscn" id="3_qjfgf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1x4i7"]

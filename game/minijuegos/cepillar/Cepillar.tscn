@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://0mq636bbf6c"]
+
+[node name="Cepillar" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Area2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+
+[node name="ColorRect" type="ColorRect" parent="Area2D"]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer"]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TextureButton" type="TextureButton" parent="CanvasLayer/HBoxContainer"]
+layout_mode = 2
+
+[node name="TextureButton2" type="TextureButton" parent="CanvasLayer/HBoxContainer"]
+layout_mode = 2

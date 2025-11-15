@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://du6g012gxiym4"]
 
-[ext_resource type="Script" uid="uid://bftgu7wop7ckk" path="res://game/scripts/historia_1.gd" id="1_8282d"]
+[ext_resource type="Script" uid="uid://bftgu7wop7ckk" path="res://game/historia/historia_1.gd" id="1_8282d"]
 
 [node name="Historia1" type="Node2D"]
 script = ExtResource("1_8282d")
