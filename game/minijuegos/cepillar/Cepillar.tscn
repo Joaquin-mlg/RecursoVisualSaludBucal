@@ -1,27 +1,113 @@
-[gd_scene format=3 uid="uid://0mq636bbf6c"]
+[gd_scene load_steps=14 format=3 uid="uid://0mq636bbf6c"]
+
+[ext_resource type="Script" uid="uid://k250t2wduodj" path="res://game/minijuegos/cepillar/cepillar.gd" id="1_ry835"]
+[ext_resource type="Texture2D" uid="uid://clwprn2q5r16r" path="res://game/assets/sprite/personajes/Asteroide.png" id="2_4ojmt"]
+[ext_resource type="Script" uid="uid://b6wkubc24v4xj" path="res://game/minijuegos/cepillar/asteroideCepillable.gd" id="2_p6kxp"]
+[ext_resource type="Texture2D" uid="uid://ck0am4ypah8w8" path="res://game/assets/sprite/UI/mancha.png" id="3_70mem"]
+[ext_resource type="Texture2D" uid="uid://c21jmdfw77wiw" path="res://game/assets/sprite/UI/Cepillo.png" id="3_cah6m"]
+[ext_resource type="Texture2D" uid="uid://ct6bqmc74e2dq" path="res://game/assets/sprite/UI/hilodental.png" id="5_p6kxp"]
+[ext_resource type="Script" uid="uid://b683cpjbmbc5b" path="res://game/minijuegos/cepillar/HerramientaArrastrable.gd" id="5_q76mo"]
+[ext_resource type="Texture2D" uid="uid://dalbfbck876ix" path="res://game/assets/sprite/UI/enjuague.png" id="6_q76mo"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ry835"]
+size = Vector2(456, 665)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_seytd"]
+radius = 241.03319
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qk7k4"]
+size = Vector2(140.5, 85)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6n0rt"]
+size = Vector2(142, 158.25)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2q01c"]
+size = Vector2(135.5, 196)
 
 [node name="Cepillar" type="Node2D"]
+script = ExtResource("1_ry835")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="fondo" type="Sprite2D" parent="."]
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="ZonaInicialHerramientas" type="Area2D" parent="."]
 
-[node name="Sprite2D" type="Sprite2D" parent="Area2D"]
+[node name="Sprite2D" type="Sprite2D" parent="ZonaInicialHerramientas"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ZonaInicialHerramientas"]
+position = Vector2(228, 366.5)
+shape = SubResource("RectangleShape2D_ry835")
 
-[node name="ColorRect" type="ColorRect" parent="Area2D"]
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="Asteroide" type="Area2D" parent="."]
+script = ExtResource("2_p6kxp")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="Spriteateroide" type="Sprite2D" parent="Asteroide"]
+position = Vector2(615, 367)
+scale = Vector2(0.740625, 0.67986107)
+texture = ExtResource("2_4ojmt")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer"]
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Asteroide"]
+position = Vector2(646, 363)
+shape = SubResource("CircleShape2D_seytd")
 
-[node name="TextureButton" type="TextureButton" parent="CanvasLayer/HBoxContainer"]
-layout_mode = 2
+[node name="Suciedad" type="Sprite2D" parent="Asteroide"]
+position = Vector2(644.5, 216.25)
+scale = Vector2(4.4240003, 1.4360001)
+texture = ExtResource("3_70mem")
 
-[node name="TextureButton2" type="TextureButton" parent="CanvasLayer/HBoxContainer"]
-layout_mode = 2
+[node name="heramientas" type="Node2D" parent="."]
+
+[node name="Cepillo" type="Area2D" parent="heramientas"]
+position = Vector2(7, 615)
+script = ExtResource("5_q76mo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="heramientas/Cepillo"]
+position = Vector2(145, -0.5)
+shape = SubResource("RectangleShape2D_qk7k4")
+
+[node name="Sprite2D" type="Sprite2D" parent="heramientas/Cepillo"]
+position = Vector2(228, 1.999939)
+scale = Vector2(0.5487805, 0.4858657)
+texture = ExtResource("3_cah6m")
+
+[node name="HiloDental" type="Area2D" parent="heramientas"]
+position = Vector2(0, 172)
+script = ExtResource("5_q76mo")
+
+[node name="Sprite2D" type="Sprite2D" parent="heramientas/HiloDental"]
+position = Vector2(160, 0)
+scale = Vector2(0.37109378, 0.3828125)
+texture = ExtResource("5_p6kxp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="heramientas/HiloDental"]
+position = Vector2(159, 6)
+shape = SubResource("RectangleShape2D_6n0rt")
+
+[node name="Enjuague" type="Area2D" parent="heramientas"]
+position = Vector2(-1, 379)
+script = ExtResource("5_q76mo")
+
+[node name="Sprite2D" type="Sprite2D" parent="heramientas/Enjuague"]
+position = Vector2(155, 38)
+scale = Vector2(0.36328125, 0.3984375)
+texture = ExtResource("6_q76mo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="heramientas/Enjuague"]
+position = Vector2(149, 33)
+shape = SubResource("RectangleShape2D_2q01c")
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="ProgresoLimpieza" type="ProgressBar" parent="UI"]
+offset_left = 479.0
+offset_top = 11.0
+offset_right = 837.0
+offset_bottom = 38.0
+
+[node name="TextoInstrucciones" type="Label" parent="UI"]
+offset_left = 439.0
+offset_top = 59.0
+offset_right = 863.0
+offset_bottom = 82.0
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(641, 360)

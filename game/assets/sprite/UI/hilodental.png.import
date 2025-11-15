@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dalbfbck876ix"
-path="res://.godot/imported/1041199.png-8281bc17ccd7dbfd2e223e51892128ed.ctex"
+uid="uid://ct6bqmc74e2dq"
+path="res://.godot/imported/hilodental.png-80199d45c33423854ccbce5365ef0ba9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://game/assets/sprite/UI/1041199.png"
-dest_files=["res://.godot/imported/1041199.png-8281bc17ccd7dbfd2e223e51892128ed.ctex"]
+source_file="res://game/assets/sprite/UI/hilodental.png"
+dest_files=["res://.godot/imported/hilodental.png-80199d45c33423854ccbce5365ef0ba9.ctex"]
 
 [params]
 
