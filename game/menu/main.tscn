@@ -25,15 +25,15 @@ texture = ExtResource("2_my0by")
 [node name="Button (Iniciar)" type="Button" parent="CanvasLayer/Control"]
 layout_mode = 0
 offset_left = 6.0
-offset_top = 298.0
+offset_top = 293.0
 offset_right = 613.0
-offset_bottom = 712.0
+offset_bottom = 717.0
 text = "boton iniciar"
 
 [node name="Button (Modo Accesible)" type="Button" parent="CanvasLayer/Control"]
 layout_mode = 0
 offset_left = 666.0
-offset_top = 294.0
+offset_top = 292.0
 offset_right = 1276.0
 offset_bottom = 715.0
 text = "Boton Accesibilidad"

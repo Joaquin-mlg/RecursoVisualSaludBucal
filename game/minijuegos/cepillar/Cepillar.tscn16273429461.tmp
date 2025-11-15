@@ -1,0 +1,98 @@
+[gd_scene load_steps=11 format=3 uid="uid://0mq636bbf6c"]
+
+[ext_resource type="Script" uid="uid://byistplerky75" path="res://game/scripts/cepillar.gd" id="1_boqrm"]
+[ext_resource type="Texture2D" uid="uid://clwprn2q5r16r" path="res://game/assets/sprite/personajes/Asteroide.png" id="2_4ojmt"]
+[ext_resource type="Texture2D" uid="uid://c21jmdfw77wiw" path="res://game/assets/sprite/UI/Cepillo.png" id="3_cah6m"]
+[ext_resource type="Texture2D" uid="uid://dalbfbck876ix" path="res://game/assets/sprite/UI/1041199.png" id="4_781ag"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_cah6m"]
+radius = 299.5145
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ry835"]
+size = Vector2(159.7558, 137.2857)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_70mem"]
+size = Vector2(160.93506, 128.28574)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p6kxp"]
+size = Vector2(161.5477, 119.57141)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cah6m"]
+size = Vector2(181.65523, 118.98182)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_781ag"]
+size = Vector2(184.71838, 476.32718)
+
+[node name="Cepillar" type="Node2D"]
+script = ExtResource("1_boqrm")
+
+[node name="Asteroide" type="Node2D" parent="."]
+position = Vector2(650.00006, 406)
+scale = Vector2(0.84804696, 0.7777778)
+
+[node name="Sprite2D" type="Sprite2D" parent="Asteroide"]
+texture = ExtResource("2_4ojmt")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Asteroide"]
+position = Vector2(38.912865, -36)
+shape = SubResource("CircleShape2D_cah6m")
+
+[node name="Suciedad1" type="ColorRect" parent="Asteroide"]
+offset_left = 155.65167
+offset_top = -228.85715
+offset_right = 306.65167
+offset_bottom = -93.85715
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Asteroide/Suciedad1"]
+position = Vector2(69.877686, 58.642853)
+scale = Vector2(0.9999999, 1)
+shape = SubResource("RectangleShape2D_ry835")
+
+[node name="Suciedad2" type="ColorRect" parent="Asteroide"]
+offset_left = -226.40265
+offset_top = -209.57144
+offset_right = -71.40265
+offset_bottom = -97.57144
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Asteroide/Suciedad2"]
+position = Vector2(70.46753, 54.142883)
+scale = Vector2(0.9999999, 1)
+shape = SubResource("RectangleShape2D_70mem")
+
+[node name="Suciedad3" type="ColorRect" parent="Asteroide"]
+offset_left = -158.0102
+offset_top = 38.57141
+offset_right = -1.0101929
+offset_bottom = 152.57141
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Asteroide/Suciedad3"]
+position = Vector2(86.66962, 57.214294)
+scale = Vector2(0.9999998, 1)
+shape = SubResource("RectangleShape2D_p6kxp")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+
+[node name="Cepillo" type="Node2D" parent="."]
+position = Vector2(185, 390)
+rotation = 1.553343
+
+[node name="Sprite2D" type="Sprite2D" parent="Cepillo"]
+texture = ExtResource("3_cah6m")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Cepillo"]
+position = Vector2(-134.62906, -6.7855377)
+shape = SubResource("RectangleShape2D_cah6m")
+
+[node name="Enjuague" type="Node2D" parent="."]
+position = Vector2(1130.9999, 396.00003)
+scale = Vector2(0.6582031, 0.6269531)
+
+[node name="Sprite2D" type="Sprite2D" parent="Enjuague"]
+texture = ExtResource("4_781ag")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enjuague"]
+position = Vector2(3.0388184, -10.076355)
+scale = Vector2(1.0000001, 1)
+shape = SubResource("RectangleShape2D_781ag")
+
+[node name="Timer" type="Timer" parent="."]

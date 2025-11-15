@@ -1,28 +1,45 @@
-[gd_scene load_steps=6 format=3 uid="uid://ddt4ihh27dja4"]
+[gd_scene load_steps=7 format=3 uid="uid://ddt4ihh27dja4"]
 
 [ext_resource type="Script" uid="uid://o4brvc8yk4qm" path="res://game/scripts/player_esquivar.gd" id="1_2e0mf"]
+[ext_resource type="Script" uid="uid://dkbgkal4tfsbt" path="res://game/scripts/esquivar.gd" id="1_w25gl"]
 [ext_resource type="Texture2D" uid="uid://b3wypn3gtie8x" path="res://game/assets/sprite/personajes/ardilla.png" id="2_1x4i7"]
 [ext_resource type="Script" uid="uid://db3866gmeyjs1" path="res://game/scripts/spawner.gd" id="2_6omkn"]
 [ext_resource type="PackedScene" uid="uid://dmvx4dofooko4" path="res://game/minijuegos/esquivar/asteroide.tscn" id="3_qjfgf"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_qjfgf"]
-radius = 10.761555
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1x4i7"]
+size = Vector2(24.91597, 12.436968)
 
 [node name="Esquivar" type="Node2D"]
+script = ExtResource("1_w25gl")
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+top_level = true
+offset_left = 262.0
+offset_top = 27.0
+offset_right = 887.0
+offset_bottom = 54.0
 
 [node name="Player" type="CharacterBody2D" parent="."]
 script = ExtResource("1_2e0mf")
 
 [node name="Sprite2D" type="Sprite2D" parent="Player"]
-position = Vector2(2, 628)
-scale = Vector2(0.44959348, 0.44842407)
+position = Vector2(-5.000004, 629.625)
+scale = Vector2(0.4065041, 0.43911183)
 texture = ExtResource("2_1x4i7")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
-position = Vector2(-8, 631)
+position = Vector2(-30.125002, 628)
 scale = Vector2(5.95, 5.95)
-shape = SubResource("CircleShape2D_qjfgf")
+shape = SubResource("RectangleShape2D_1x4i7")
 
 [node name="Spawner" type="Node2D" parent="."]
+position = Vector2(-4, 58)
 script = ExtResource("2_6omkn")
 asteroide_scene = ExtResource("3_qjfgf")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
