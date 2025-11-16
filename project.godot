@@ -48,6 +48,15 @@ ui_right={
 ]
 }
 
+[layer_names]
+
+2d_physics/layer_1="AsteroidePrincipal"
+2d_physics/layer_2="CepilloHerramienta"
+2d_physics/layer_3="RocasObjetivo"
+2d_physics/layer_4="AreaEnjuague"
+2d_physics/layer_5="EnjuagueTool"
+2d_physics/layer_6="HiloDentalTool"
+
 [rendering]
 
 renderer/rendering_method="mobile"
