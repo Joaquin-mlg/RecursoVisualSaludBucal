@@ -27,4 +27,3 @@ func _on_next_pressed():
 		sprite.texture = imagenes[indice]
 	else:
 		get_tree().change_scene_to_file("res://game/minijuegos/cepillar/Cepillar.tscn")
- 
