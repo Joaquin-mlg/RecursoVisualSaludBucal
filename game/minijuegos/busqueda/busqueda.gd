@@ -105,13 +105,20 @@ func verificar_victoria():
 	var cartas_activas = 0
 	for hijo in grid.get_children():
 		# Contamos solo las cartas (ignoramos el botón especial)
+		# Asumimos que 'esta_bloqueada' es true cuando ya se encontró la pareja
 		if hijo.has_method("reiniciar") and not hijo.esta_bloqueada:
 			cartas_activas += 1
 			
+	# Si ya no hay cartas activas (cartas_activas es 0), ganaste
 	if cartas_activas == 0:
 		print("Ganaste")
-		# Aquí llamas a tu cambio de escena o fin del minijuego
-
+		
+		# OPCIONAL: Un pequeño tiempo de espera para que el jugador vea la última pareja
+		await get_tree().create_timer(1.0).timeout 
+		
+		# Cambio de escena
+		get_tree().change_scene_to_file("res://game/historia/Historia4.tscn")
+		
 func _on_boton_especial_pressed():
 	if bloqueo_input: return
 	

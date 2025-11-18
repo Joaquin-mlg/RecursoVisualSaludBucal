@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="RecursoVisual"
-run/main_scene="uid://cgyu886cvgwbc"
+run/main_scene="uid://cfdarb01sjy2f"
 config/features=PackedStringArray("4.5", "Mobile")
 
 [display]

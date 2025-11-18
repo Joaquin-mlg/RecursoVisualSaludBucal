@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://dtxsejjypr6f3"]
+
+[ext_resource type="Script" uid="uid://jw8qcs43hqfp" path="res://game/historia/historia_4.gd" id="1_1af6a"]
+
+[node name="Historia4" type="Node2D"]
+script = ExtResource("1_1af6a")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+visible = false
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(1.251953, 0.97054887)
+
+[node name="TouchScreenButton" type="TouchScreenButton" parent="."]
+visible = false
