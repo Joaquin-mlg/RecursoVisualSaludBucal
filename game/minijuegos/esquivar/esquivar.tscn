@@ -23,12 +23,12 @@ offset_bottom = 54.0
 script = ExtResource("1_2e0mf")
 
 [node name="Sprite2D" type="Sprite2D" parent="Player"]
-position = Vector2(-5.000004, 629.625)
+position = Vector2(611, 653)
 scale = Vector2(0.4065041, 0.43911183)
 texture = ExtResource("2_1x4i7")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
-position = Vector2(-30.125002, 628)
+position = Vector2(605, 655)
 scale = Vector2(5.95, 5.95)
 shape = SubResource("RectangleShape2D_1x4i7")
 
