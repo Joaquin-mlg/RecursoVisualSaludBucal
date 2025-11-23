@@ -20,15 +20,16 @@ offset_right = 887.0
 offset_bottom = 54.0
 
 [node name="Player" type="CharacterBody2D" parent="."]
+position = Vector2(585, 0)
 script = ExtResource("1_2e0mf")
 
 [node name="Sprite2D" type="Sprite2D" parent="Player"]
-position = Vector2(611, 653)
+position = Vector2(32, 669.625)
 scale = Vector2(0.4065041, 0.43911183)
 texture = ExtResource("2_1x4i7")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
-position = Vector2(605, 655)
+position = Vector2(25.999939, 671.625)
 scale = Vector2(5.95, 5.95)
 shape = SubResource("RectangleShape2D_1x4i7")
 
