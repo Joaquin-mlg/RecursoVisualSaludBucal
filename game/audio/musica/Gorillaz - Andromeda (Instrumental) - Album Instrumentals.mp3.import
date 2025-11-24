@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://c2xf2jjchxmc3"
+path="res://.godot/imported/Gorillaz - Andromeda (Instrumental) - Album Instrumentals.mp3-421e943878b9a57853b81574784639a8.mp3str"
+
+[deps]
+
+source_file="res://game/audio/musica/Gorillaz - Andromeda (Instrumental) - Album Instrumentals.mp3"
+dest_files=["res://.godot/imported/Gorillaz - Andromeda (Instrumental) - Album Instrumentals.mp3-421e943878b9a57853b81574784639a8.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
