@@ -1,0 +1,60 @@
+[gd_scene load_steps=5 format=3 uid="uid://cr1qr7gpa0hu4"]
+
+[ext_resource type="Script" uid="uid://bbps2wycy5buf" path="res://game/minijuegos/clasificacion/clasificacion.gd" id="1_hl5oh"]
+[ext_resource type="PackedScene" uid="uid://b85icybulxr4f" path="res://game/minijuegos/clasificacion/ObjetoDental.tscn" id="2_v6t6k"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v6t6k"]
+size = Vector2(311.845, 720.75)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5w53b"]
+size = Vector2(346.5, 719)
+
+[node name="Clasificacion" type="Node2D"]
+script = ExtResource("1_hl5oh")
+objeto_scene = ExtResource("2_v6t6k")
+
+[node name="Fondo" type="TextureRect" parent="."]
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 4
+
+[node name="ZonaIzquierda" type="Area2D" parent="." groups=["zona_buena"]]
+
+[node name="ColorVisual" type="ColorRect" parent="ZonaIzquierda"]
+offset_right = 313.0
+offset_bottom = 716.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ZonaIzquierda"]
+position = Vector2(156, 360)
+shape = SubResource("RectangleShape2D_v6t6k")
+
+[node name="ZonaDerecha" type="Area2D" parent="." groups=["zona_mala"]]
+
+[node name="ColorRect" type="ColorRect" parent="ZonaDerecha"]
+offset_left = 921.0
+offset_top = -3.0
+offset_right = 1273.0
+offset_bottom = 716.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ZonaDerecha"]
+position = Vector2(1095.75, 355)
+shape = SubResource("RectangleShape2D_5w53b")
+
+[node name="ContenedorObjetos" type="Node2D" parent="."]
+
+[node name="PuntoAparicion" type="Marker2D" parent="ContenedorObjetos"]
+position = Vector2(627, 392)
+
+[node name="AudioNarrador" type="AudioStreamPlayer2D" parent="."]
+
+[node name="AudioFx" type="AudioStreamPlayer2D" parent="."]
+
+[node name="LabelPuntos" type="Label" parent="."]
+offset_left = 394.0
+offset_top = 13.0
+offset_right = 732.0
+offset_bottom = 36.0

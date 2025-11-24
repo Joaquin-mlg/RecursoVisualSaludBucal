@@ -11,13 +11,13 @@ config_version=5
 [application]
 
 config/name="RecursoVisual"
-run/main_scene="uid://dd6imh0vc83uv"
+run/main_scene="uid://cgyu886cvgwbc"
 config/features=PackedStringArray("4.5", "Mobile")
 
 [display]
 
-window/size/viewport_width=1280
-window/size/viewport_height=720
+window/size/viewport_width=1920
+window/size/viewport_height=1080
 window/stretch/mode="canvas_items"
 window/stretch/aspect="keep_width"
 

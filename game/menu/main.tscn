@@ -1,7 +1,12 @@
-[gd_scene load_steps=3 format=3 uid="uid://cgyu886cvgwbc"]
+[gd_scene load_steps=8 format=3 uid="uid://cgyu886cvgwbc"]
 
 [ext_resource type="Script" uid="uid://dffjij0a7n4gt" path="res://game/menu/main_menu.gd" id="1_8vd0o"]
-[ext_resource type="Texture2D" uid="uid://cr2trthfwjky5" path="res://game/assets/fondos/mainmenu.png" id="2_my0by"]
+[ext_resource type="Texture2D" uid="uid://ccx60ceky8s55" path="res://game/menu/fondo/FondoFinal.png" id="2_m5f1m"]
+[ext_resource type="Texture2D" uid="uid://cc1e6k4x84exy" path="res://game/menu/fondo/DienteTristeFinal.png" id="3_f6h2h"]
+[ext_resource type="Texture2D" uid="uid://cod301kr54s71" path="res://game/menu/fondo/AsteroideFinal.png" id="4_2kc8s"]
+[ext_resource type="Texture2D" uid="uid://bmqcg6lmk3lws" path="res://game/menu/fondo/AsteroideSucioFinal.png" id="5_ynley"]
+[ext_resource type="Texture2D" uid="uid://chxfnw857xbgs" path="res://game/menu/fondo/TITULO.png" id="6_4l37v"]
+[ext_resource type="Texture2D" uid="uid://8kx70uakxbph" path="res://game/menu/fondo/DienteFinal.png" id="7_pkofp"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_8vd0o")
@@ -18,24 +23,41 @@ offset_bottom = 40.0
 layout_mode = 0
 offset_left = -2.0
 offset_top = -2.0
-offset_right = 1281.0
-offset_bottom = 717.0
-texture = ExtResource("2_my0by")
+offset_right = 1901.0
+offset_bottom = 1085.0
+texture = ExtResource("2_m5f1m")
+
+[node name="DienteTristeFinal" type="Sprite2D" parent="CanvasLayer/Control"]
+position = Vector2(1695.0001, 243)
+scale = Vector2(0.27343738, 0.23828125)
+texture = ExtResource("3_f6h2h")
+
+[node name="AsteroideFinal" type="Sprite2D" parent="CanvasLayer/Control"]
+position = Vector2(1721, 854)
+texture = ExtResource("4_2kc8s")
+
+[node name="AsteroideSucioFinal" type="Sprite2D" parent="CanvasLayer/Control"]
+position = Vector2(254.00003, 292.00006)
+scale = Vector2(0.5654297, 0.39941406)
+texture = ExtResource("5_ynley")
 
 [node name="Button (Iniciar)" type="Button" parent="CanvasLayer/Control"]
 layout_mode = 0
-offset_left = 6.0
-offset_top = 293.0
-offset_right = 613.0
-offset_bottom = 717.0
+offset_left = 516.0
+offset_top = 391.0
+offset_right = 1348.0
+offset_bottom = 916.0
 text = "boton iniciar"
 
-[node name="Button (Modo Accesible)" type="Button" parent="CanvasLayer/Control"]
-layout_mode = 0
-offset_left = 666.0
-offset_top = 292.0
-offset_right = 1276.0
-offset_bottom = 715.0
-text = "Boton Accesibilidad"
+[node name="Titulo" type="Sprite2D" parent="CanvasLayer/Control"]
+position = Vector2(919.99994, 235)
+scale = Vector2(1.3222656, 1)
+texture = ExtResource("6_4l37v")
+
+[node name="DienteFinal" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(193.99998, 949.99994)
+rotation = -0.38920844
+scale = Vector2(0.35250938, 0.37258518)
+texture = ExtResource("7_pkofp")
 
 [connection signal="pressed" from="CanvasLayer/Control/Button (Iniciar)" to="." method="_on_button_iniciar_pressed"]
