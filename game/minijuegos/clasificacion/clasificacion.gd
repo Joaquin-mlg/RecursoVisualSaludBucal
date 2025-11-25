@@ -85,3 +85,4 @@ func juego_terminado():
 	print("FIN DEL JUEGO. Total: ", aciertos)
 	if label_puntos:
 		label_puntos.text = "¡Juego Terminado! Total: " + str(aciertos)
+		get_tree().change_scene_to_file("res://game/quiz/Quizz.tscn")
