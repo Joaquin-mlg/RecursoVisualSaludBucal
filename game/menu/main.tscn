@@ -1,15 +1,19 @@
-[gd_scene load_steps=11 format=3 uid="uid://cgyu886cvgwbc"]
+[gd_scene load_steps=15 format=3 uid="uid://cgyu886cvgwbc"]
 
 [ext_resource type="Script" uid="uid://dffjij0a7n4gt" path="res://game/menu/main_menu.gd" id="1_8vd0o"]
 [ext_resource type="Texture2D" uid="uid://ccx60ceky8s55" path="res://game/menu/fondo/FondoFinal.png" id="2_m5f1m"]
+[ext_resource type="Script" uid="uid://c7s1tehmws42i" path="res://game/menu/fondo_nebulosa.gd" id="3_4l37v"]
 [ext_resource type="Texture2D" uid="uid://cc1e6k4x84exy" path="res://game/menu/fondo/DienteTristeFinal.png" id="3_f6h2h"]
 [ext_resource type="Texture2D" uid="uid://cod301kr54s71" path="res://game/menu/fondo/AsteroideFinal.png" id="4_2kc8s"]
 [ext_resource type="Texture2D" uid="uid://bmqcg6lmk3lws" path="res://game/menu/fondo/AsteroideSucioFinal.png" id="5_ynley"]
 [ext_resource type="Texture2D" uid="uid://csqmrn2giirhi" path="res://game/menu/fondo/BotonIniciarFinal.png" id="6_f6h2h"]
 [ext_resource type="Texture2D" uid="uid://dts85qepupj2n" path="res://game/menu/fondo/TituloPrueba2.png" id="6_m5f1m"]
+[ext_resource type="Script" uid="uid://dc08fnbvg63ob" path="res://game/menu/TemblorCima.gd" id="6_w03ny"]
+[ext_resource type="Script" uid="uid://b1tfqla5kuef8" path="res://game/menu/AnimacioFlotar.gd" id="7_ncv3f"]
 [ext_resource type="Texture2D" uid="uid://8kx70uakxbph" path="res://game/menu/fondo/DienteFinal.png" id="7_pkofp"]
 [ext_resource type="AudioStream" uid="uid://djhel0xkxvkv0" path="res://game/audio/efectos/click_002.ogg" id="9_2kc8s"]
 [ext_resource type="AudioStream" uid="uid://c2xf2jjchxmc3" path="res://game/audio/musica/Gorillaz - Andromeda (Instrumental) - Album Instrumentals.mp3" id="9_ynley"]
+[ext_resource type="Script" uid="uid://ljubi6r8yhwy" path="res://game/menu/FlotarVertical.gd" id="11_ncv3f"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_8vd0o")
@@ -22,13 +26,11 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Control"]
-layout_mode = 0
-offset_left = -2.0
-offset_top = -2.0
-offset_right = 1901.0
-offset_bottom = 1085.0
+[node name="FondoNebulosa" type="Sprite2D" parent="CanvasLayer/Control"]
+position = Vector2(954, 560)
+scale = Vector2(1.2213541, 1.2101852)
 texture = ExtResource("2_m5f1m")
+script = ExtResource("3_4l37v")
 
 [node name="Button (Iniciar)" type="Button" parent="CanvasLayer/Control"]
 texture_repeat = 1
@@ -46,10 +48,12 @@ icon_alignment = 1
 position = Vector2(1695.0001, 243)
 scale = Vector2(0.27343738, 0.23828125)
 texture = ExtResource("3_f6h2h")
+script = ExtResource("6_w03ny")
 
 [node name="AsteroideFinal" type="Sprite2D" parent="CanvasLayer/Control"]
 position = Vector2(1721, 854)
 texture = ExtResource("4_2kc8s")
+script = ExtResource("7_ncv3f")
 
 [node name="AsteroideSucioFinal" type="Sprite2D" parent="CanvasLayer/Control"]
 position = Vector2(254.00003, 292.00006)
@@ -66,6 +70,7 @@ position = Vector2(193.99998, 949.99994)
 rotation = -0.38920844
 scale = Vector2(0.35250938, 0.37258518)
 texture = ExtResource("7_pkofp")
+script = ExtResource("11_ncv3f")
 
 [node name="MusicaFondo" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("9_ynley")
