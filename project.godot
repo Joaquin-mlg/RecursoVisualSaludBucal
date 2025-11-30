@@ -11,8 +11,13 @@ config_version=5
 [application]
 
 config/name="RecursoVisual"
-run/main_scene="uid://cgyu886cvgwbc"
+run/main_scene="uid://du6g012gxiym4"
 config/features=PackedStringArray("4.5", "Mobile")
+
+[autoload]
+
+GlobalSettings="*res://game/config/GlobalSettings.gd"
+Transicion="*res://game/config/Transicion.tscn"
 
 [display]
 

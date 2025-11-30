@@ -1,0 +1,78 @@
+[gd_scene load_steps=7 format=3 uid="uid://cknub2h7cv3tj"]
+
+[ext_resource type="Script" uid="uid://cj6bf2lo63rbv" path="res://game/menu/ajustes.gd" id="1_pxmix"]
+[ext_resource type="Texture2D" uid="uid://ccx60ceky8s55" path="res://game/menu/fondo/FondoFinal.png" id="2_q0yxy"]
+[ext_resource type="Script" uid="uid://c7s1tehmws42i" path="res://game/menu/fondo_nebulosa.gd" id="3_2uhmv"]
+[ext_resource type="Texture2D" uid="uid://chu0h1d12tr34" path="res://game/menu/fondo/BotonAltoContraste.png" id="4_qu63r"]
+[ext_resource type="Texture2D" uid="uid://bbrv6wefv2syq" path="res://game/menu/fondo/BotonAltoContrasteBACIO.png" id="5_qu63r"]
+[ext_resource type="Texture2D" uid="uid://cm07d8y0b4urv" path="res://game/menu/fondo/Boton Guardar.png" id="6_6ekh6"]
+
+[node name="Raiz" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_pxmix")
+
+[node name="Fondo" type="Sprite2D" parent="."]
+position = Vector2(995.00006, 574.00006)
+scale = Vector2(1.1791667, 1.2037038)
+texture = ExtResource("2_q0yxy")
+script = ExtResource("3_2uhmv")
+
+[node name="OrgVertical" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 355.0
+offset_top = 176.0
+offset_right = -726.48645
+offset_bottom = -317.919
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.48, 1.48)
+alignment = 1
+
+[node name="TamBotones" type="Label" parent="OrgVertical"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Tamaño de los botones"
+
+[node name="SliderTamBotones" type="HSlider" parent="OrgVertical"]
+layout_mode = 2
+
+[node name="VelocidadJuego" type="Label" parent="OrgVertical"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Velocidad de Juego"
+
+[node name="SliderVelocidad" type="HSlider" parent="OrgVertical"]
+layout_mode = 2
+value = 5.0
+rounded = true
+tick_count = 5
+
+[node name="ModoAltoContraste" type="CheckBox" parent="OrgVertical"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+size_flags_stretch_ratio = 1.65
+theme_override_font_sizes/font_size = 30
+theme_override_icons/checked = ExtResource("4_qu63r")
+theme_override_icons/unchecked = ExtResource("5_qu63r")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="Volver_Guardar" type="Button" parent="OrgVertical"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+icon = ExtResource("6_6ekh6")
+flat = true
+icon_alignment = 1
+
+[connection signal="pressed" from="OrgVertical/Volver_Guardar" to="." method="_on_volver_guardar_pressed"]

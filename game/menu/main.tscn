@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://cgyu886cvgwbc"]
+[gd_scene load_steps=21 format=3 uid="uid://cgyu886cvgwbc"]
 
 [ext_resource type="Script" uid="uid://dffjij0a7n4gt" path="res://game/menu/main_menu.gd" id="1_8vd0o"]
 [ext_resource type="Texture2D" uid="uid://ccx60ceky8s55" path="res://game/menu/fondo/FondoFinal.png" id="2_m5f1m"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://cc1e6k4x84exy" path="res://game/menu/fondo/DienteTristeFinal.png" id="3_f6h2h"]
 [ext_resource type="Texture2D" uid="uid://cod301kr54s71" path="res://game/menu/fondo/AsteroideFinal.png" id="4_2kc8s"]
 [ext_resource type="Texture2D" uid="uid://dgn7uedfbr6q3" path="res://game/menu/fondo/Boton jugar.png" id="4_i0bnr"]
+[ext_resource type="Script" uid="uid://bjwqe54tunied" path="res://game/menu/BotonAnimado.gd" id="5_7ggvv"]
 [ext_resource type="Texture2D" uid="uid://bmqcg6lmk3lws" path="res://game/menu/fondo/AsteroideSucioFinal.png" id="5_ynley"]
 [ext_resource type="Texture2D" uid="uid://dts85qepupj2n" path="res://game/menu/fondo/TituloPrueba2.png" id="6_m5f1m"]
 [ext_resource type="Script" uid="uid://dc08fnbvg63ob" path="res://game/menu/TemblorCima.gd" id="6_w03ny"]
@@ -15,6 +16,10 @@
 [ext_resource type="AudioStream" uid="uid://c2xf2jjchxmc3" path="res://game/audio/musica/Gorillaz - Andromeda (Instrumental) - Album Instrumentals.mp3" id="9_ynley"]
 [ext_resource type="Texture2D" uid="uid://dwiqn2ekh71hy" path="res://game/menu/fondo/Luna en el aire 2.png" id="11_i0bnr"]
 [ext_resource type="Script" uid="uid://ljubi6r8yhwy" path="res://game/menu/FlotarVertical.gd" id="11_ncv3f"]
+[ext_resource type="Texture2D" uid="uid://cf63h1erwbboq" path="res://game/menu/fondo/Boton salir.png" id="13_hwh0l"]
+[ext_resource type="Script" uid="uid://y18uh1qrc5i4" path="res://game/menu/button_(salir).gd" id="14_04ecv"]
+[ext_resource type="Texture2D" uid="uid://bl325ck8fv1xw" path="res://game/menu/fondo/Boton Configuracion.png" id="17_b6aqi"]
+[ext_resource type="Script" uid="uid://b7ofysbel30au" path="res://game/menu/button_(configuracion).gd" id="18_7mbcl"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_8vd0o")
@@ -38,13 +43,14 @@ texture_repeat = 1
 layout_direction = 2
 layout_mode = 0
 offset_left = 584.0
-offset_top = 516.0
-offset_right = 1311.0
-offset_bottom = 863.0
+offset_top = 456.0
+offset_right = 1459.0
+offset_bottom = 871.0
 icon = ExtResource("4_i0bnr")
 flat = true
 icon_alignment = 1
 expand_icon = true
+script = ExtResource("5_7ggvv")
 
 [node name="DienteTristeFinal" type="Sprite2D" parent="CanvasLayer/Control"]
 position = Vector2(1695.0001, 243)
@@ -53,7 +59,9 @@ texture = ExtResource("3_f6h2h")
 script = ExtResource("6_w03ny")
 
 [node name="AsteroideFinal" type="Sprite2D" parent="CanvasLayer/Control"]
-position = Vector2(1721, 854)
+position = Vector2(1846, 582)
+rotation = -0.12915437
+scale = Vector2(0.6591797, 0.5439453)
 texture = ExtResource("4_2kc8s")
 script = ExtResource("7_ncv3f")
 
@@ -68,14 +76,38 @@ scale = Vector2(1.3876954, 1)
 texture = ExtResource("6_m5f1m")
 
 [node name="Luna" type="Sprite2D" parent="CanvasLayer/Control"]
-position = Vector2(398.61914, 690.8422)
+position = Vector2(295.99997, 622.00006)
 scale = Vector2(0.31971073, 0.3323997)
 texture = ExtResource("11_i0bnr")
 script = ExtResource("11_ncv3f")
 
+[node name="Button (salir)" type="Button" parent="CanvasLayer/Control"]
+layout_mode = 0
+offset_left = 38.0
+offset_top = 826.0
+offset_right = 533.0
+offset_bottom = 1044.0
+icon = ExtResource("13_hwh0l")
+flat = true
+expand_icon = true
+script = ExtResource("14_04ecv")
+sfx_click = ExtResource("9_2kc8s")
+
+[node name="Button (configuracion)" type="Button" parent="CanvasLayer/Control"]
+layout_mode = 0
+offset_left = 1398.0
+offset_top = 808.0
+offset_right = 1877.0
+offset_bottom = 1058.0
+icon = ExtResource("17_b6aqi")
+flat = true
+expand_icon = true
+script = ExtResource("18_7mbcl")
+escena_ajustes = "uid://cknub2h7cv3tj"
+
 [node name="DienteFinal" type="Sprite2D" parent="CanvasLayer"]
-position = Vector2(193.99998, 949.99994)
-rotation = -0.38920844
+position = Vector2(1002, 962)
+rotation = 0.25830874
 scale = Vector2(0.35250938, 0.37258518)
 texture = ExtResource("7_pkofp")
 script = ExtResource("11_ncv3f")
