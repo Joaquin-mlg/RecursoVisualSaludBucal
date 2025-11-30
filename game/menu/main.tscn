@@ -1,18 +1,19 @@
-[gd_scene load_steps=15 format=3 uid="uid://cgyu886cvgwbc"]
+[gd_scene load_steps=16 format=3 uid="uid://cgyu886cvgwbc"]
 
 [ext_resource type="Script" uid="uid://dffjij0a7n4gt" path="res://game/menu/main_menu.gd" id="1_8vd0o"]
 [ext_resource type="Texture2D" uid="uid://ccx60ceky8s55" path="res://game/menu/fondo/FondoFinal.png" id="2_m5f1m"]
 [ext_resource type="Script" uid="uid://c7s1tehmws42i" path="res://game/menu/fondo_nebulosa.gd" id="3_4l37v"]
 [ext_resource type="Texture2D" uid="uid://cc1e6k4x84exy" path="res://game/menu/fondo/DienteTristeFinal.png" id="3_f6h2h"]
 [ext_resource type="Texture2D" uid="uid://cod301kr54s71" path="res://game/menu/fondo/AsteroideFinal.png" id="4_2kc8s"]
+[ext_resource type="Texture2D" uid="uid://dgn7uedfbr6q3" path="res://game/menu/fondo/Boton jugar.png" id="4_i0bnr"]
 [ext_resource type="Texture2D" uid="uid://bmqcg6lmk3lws" path="res://game/menu/fondo/AsteroideSucioFinal.png" id="5_ynley"]
-[ext_resource type="Texture2D" uid="uid://csqmrn2giirhi" path="res://game/menu/fondo/BotonIniciarFinal.png" id="6_f6h2h"]
 [ext_resource type="Texture2D" uid="uid://dts85qepupj2n" path="res://game/menu/fondo/TituloPrueba2.png" id="6_m5f1m"]
 [ext_resource type="Script" uid="uid://dc08fnbvg63ob" path="res://game/menu/TemblorCima.gd" id="6_w03ny"]
 [ext_resource type="Script" uid="uid://b1tfqla5kuef8" path="res://game/menu/AnimacioFlotar.gd" id="7_ncv3f"]
 [ext_resource type="Texture2D" uid="uid://8kx70uakxbph" path="res://game/menu/fondo/DienteFinal.png" id="7_pkofp"]
 [ext_resource type="AudioStream" uid="uid://djhel0xkxvkv0" path="res://game/audio/efectos/click_002.ogg" id="9_2kc8s"]
 [ext_resource type="AudioStream" uid="uid://c2xf2jjchxmc3" path="res://game/audio/musica/Gorillaz - Andromeda (Instrumental) - Album Instrumentals.mp3" id="9_ynley"]
+[ext_resource type="Texture2D" uid="uid://dwiqn2ekh71hy" path="res://game/menu/fondo/Luna en el aire 2.png" id="11_i0bnr"]
 [ext_resource type="Script" uid="uid://ljubi6r8yhwy" path="res://game/menu/FlotarVertical.gd" id="11_ncv3f"]
 
 [node name="Main" type="Node2D"]
@@ -36,13 +37,14 @@ script = ExtResource("3_4l37v")
 texture_repeat = 1
 layout_direction = 2
 layout_mode = 0
-offset_left = 290.0
-offset_top = 349.0
-offset_right = 1630.0
-offset_bottom = 1029.0
-icon = ExtResource("6_f6h2h")
+offset_left = 584.0
+offset_top = 516.0
+offset_right = 1311.0
+offset_bottom = 863.0
+icon = ExtResource("4_i0bnr")
 flat = true
 icon_alignment = 1
+expand_icon = true
 
 [node name="DienteTristeFinal" type="Sprite2D" parent="CanvasLayer/Control"]
 position = Vector2(1695.0001, 243)
@@ -64,6 +66,12 @@ texture = ExtResource("5_ynley")
 position = Vector2(1002, 422)
 scale = Vector2(1.3876954, 1)
 texture = ExtResource("6_m5f1m")
+
+[node name="Luna" type="Sprite2D" parent="CanvasLayer/Control"]
+position = Vector2(398.61914, 690.8422)
+scale = Vector2(0.31971073, 0.3323997)
+texture = ExtResource("11_i0bnr")
+script = ExtResource("11_ncv3f")
 
 [node name="DienteFinal" type="Sprite2D" parent="CanvasLayer"]
 position = Vector2(193.99998, 949.99994)
