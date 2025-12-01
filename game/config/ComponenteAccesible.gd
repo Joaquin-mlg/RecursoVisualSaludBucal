@@ -1,20 +1,21 @@
 class_name AccesibilidadUI extends Control
-# Al poner class_name, puedes buscar este nodo en el buscador de nodos
 
 func _ready():
-	# Conectarse a la señal del cerebro global
+	# Configurar el pivote en el centro para que crezca bonito
+	# Esto asume que el nodo tiene un tamaño definido.
+	pivot_offset = size / 2
+	
 	GlobalSettings.configuracion_cambiada.connect(aplicar_cambios)
-	# Aplicar cambios apenas nace el objeto
 	aplicar_cambios()
 
 func aplicar_cambios():
-	# 1. Ajustar Escala (Tamaño)
-	# Usamos scale en lugar de size para no romper el layout container si es posible
-	# Asegúrate de que el Pivot Offset de tus botones esté en el centro
-	scale = Vector2(GlobalSettings.tamanio_botones, GlobalSettings.tamanio_botones)
+	# 1. Ajustar Escala usando el valor TRADUCIDO (ej. 1.2)
+	var escala = GlobalSettings.tamanio_actual
+	scale = Vector2(escala, escala)
 	
-	# 2. Ajustar Colores (Alto Contraste)
-	if GlobalSettings.modo_alto_contraste:
-		modulate = Color(1.5, 1.5, 0, 1) # Amarillo brillante (ejemplo)
+	# 2. Ajustar Colores
+	if GlobalSettings.alto_contraste_activo:
+		# Modo Alto Contraste (Amarillo sobre Negro es estándar accesibilidad)
+		modulate = Color(1.5, 1.5, 0, 1) 
 	else:
-		modulate = Color(1, 1, 1, 1) # Color original
+		modulate = Color(1, 1, 1, 1)

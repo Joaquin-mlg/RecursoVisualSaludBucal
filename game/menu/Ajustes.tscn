@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://cknub2h7cv3tj"]
+[gd_scene load_steps=13 format=3 uid="uid://cknub2h7cv3tj"]
 
 [ext_resource type="Script" uid="uid://cj6bf2lo63rbv" path="res://game/menu/ajustes.gd" id="1_pxmix"]
 [ext_resource type="Texture2D" uid="uid://ccx60ceky8s55" path="res://game/menu/fondo/FondoFinal.png" id="2_q0yxy"]
@@ -6,6 +6,46 @@
 [ext_resource type="Texture2D" uid="uid://chu0h1d12tr34" path="res://game/menu/fondo/BotonAltoContraste.png" id="4_qu63r"]
 [ext_resource type="Texture2D" uid="uid://bbrv6wefv2syq" path="res://game/menu/fondo/BotonAltoContrasteBACIO.png" id="5_qu63r"]
 [ext_resource type="Texture2D" uid="uid://cm07d8y0b4urv" path="res://game/menu/fondo/Boton Guardar.png" id="6_6ekh6"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6ekh6"]
+content_margin_top = 10.0
+content_margin_bottom = 10.0
+bg_color = Color(0, 0, 0, 0.5019608)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jk43q"]
+content_margin_top = 10.0
+content_margin_bottom = 10.0
+bg_color = Color(0.023529412, 0.7372549, 0.8862745, 0.96862745)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b4gdk"]
+content_margin_top = 10.0
+content_margin_bottom = 10.0
+bg_color = Color(0.050980393, 0.76862746, 0.9254902, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xe37k"]
+content_margin_top = 10.0
+content_margin_bottom = 10.0
+bg_color = Color(0, 0, 0, 0.5019608)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2jccr"]
+bg_color = Color(0.05882353, 0.7137255, 0.8117647, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wc3hg"]
+bg_color = Color(0.05882353, 0.7137255, 0.8117647, 1)
+corner_radius_top_left = 10
+corner_radius_bottom_right = 10
 
 [node name="Raiz" type="Control"]
 layout_mode = 3
@@ -22,15 +62,27 @@ scale = Vector2(1.1791667, 1.2037038)
 texture = ExtResource("2_q0yxy")
 script = ExtResource("3_2uhmv")
 
+[node name="Volver_Guardar" type="Button" parent="."]
+layout_mode = 0
+offset_left = 627.0
+offset_top = 721.0
+offset_right = 1157.0
+offset_bottom = 961.0
+theme_override_font_sizes/font_size = 30
+icon = ExtResource("6_6ekh6")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
 [node name="OrgVertical" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 355.0
-offset_top = 176.0
-offset_right = -726.48645
-offset_bottom = -317.919
+offset_left = 369.0
+offset_top = 111.0
+offset_right = -712.48645
+offset_bottom = -611.56757
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(1.48, 1.48)
@@ -43,6 +95,16 @@ text = "Tamaño de los botones"
 
 [node name="SliderTamBotones" type="HSlider" parent="OrgVertical"]
 layout_mode = 2
+theme_override_styles/slider = SubResource("StyleBoxFlat_6ekh6")
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_jk43q")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_b4gdk")
+min_value = 1.0
+max_value = 4.0
+value = 1.0
+rounded = true
+tick_count = 4
+ticks_on_borders = true
+ticks_position = 3
 
 [node name="VelocidadJuego" type="Label" parent="OrgVertical"]
 layout_mode = 2
@@ -51,9 +113,16 @@ text = "Velocidad de Juego"
 
 [node name="SliderVelocidad" type="HSlider" parent="OrgVertical"]
 layout_mode = 2
-value = 5.0
+theme_override_styles/slider = SubResource("StyleBoxFlat_xe37k")
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_2jccr")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_wc3hg")
+min_value = 1.0
+max_value = 4.0
+value = 4.0
 rounded = true
-tick_count = 5
+tick_count = 4
+ticks_on_borders = true
+ticks_position = 3
 
 [node name="ModoAltoContraste" type="CheckBox" parent="OrgVertical"]
 custom_minimum_size = Vector2(100, 100)
@@ -68,11 +137,4 @@ flat = true
 icon_alignment = 1
 expand_icon = true
 
-[node name="Volver_Guardar" type="Button" parent="OrgVertical"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 30
-icon = ExtResource("6_6ekh6")
-flat = true
-icon_alignment = 1
-
-[connection signal="pressed" from="OrgVertical/Volver_Guardar" to="." method="_on_volver_guardar_pressed"]
+[connection signal="pressed" from="Volver_Guardar" to="." method="_on_volver_guardar_pressed"]

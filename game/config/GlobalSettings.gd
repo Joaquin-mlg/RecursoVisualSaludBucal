@@ -1,21 +1,41 @@
 # GlobalSettings.gd
 extends Node
 
-# Señal para avisar a todos los objetos que se actualicen
 signal configuracion_cambiada
 
-# Variables de configuración (Valores por defecto)
-var tamanio_botones: float = 1.0 # 1.0 es normal, 1.5 es grande
-var velocidad_juego: float = 1.0 # 1.0 es normal, 0.5 es cámara lenta
-var modo_alto_contraste: bool = false # Para cambiar colores
+# --- DEFINICIÓN DE LOS PASOS (LA TRADUCCIÓN) ---
+# Paso 1 (Default), Paso 2, Paso 3, Paso 4
+const OPCIONES_TAMANIO = [1.0, 1.2, 1.4, 1.6] 
+# Velocidad: Normal, un poco lento, más lento, muy lento (ideal accesibilidad)
+const OPCIONES_VELOCIDAD = [1.0, 0.8, 0.6, 0.5] 
 
-func actualizar_configuracion(nuevo_tamanio, nueva_velocidad, alto_contraste):
-	tamanio_botones = nuevo_tamanio
-	velocidad_juego = nueva_velocidad
-	modo_alto_contraste = alto_contraste
+# --- VARIABLES PÚBLICAS (Lo que usan los objetos) ---
+var tamanio_actual: float = 1.0 
+var velocidad_actual: float = 1.0
+var alto_contraste_activo: bool = false
+
+# --- VARIABLES PARA GUARDAR (Los índices 1-4 de los sliders) ---
+var indice_tamanio_guardado: int = 1
+var indice_velocidad_guardado: int = 1
+
+func _ready():
+	# Valores por defecto al arrancar
+	actualizar_configuracion(1, 1, false)
+
+# Esta función recibe los valores DEL SLIDER (1, 2, 3 o 4)
+func actualizar_configuracion(paso_tam: int, paso_vel: int, alto_contraste: bool):
+	# 1. Guardamos los índices para que el menú sepa dónde poner el slider al volver
+	indice_tamanio_guardado = paso_tam
+	indice_velocidad_guardado = paso_vel
+	alto_contraste_activo = alto_contraste
 	
-	# 1. Aplicar velocidad inmediatamente (esto afecta a todo el motor)
-	Engine.time_scale = velocidad_juego
+	# 2. TRADUCCIÓN: Convertimos el paso (1-4) en valor real
+	# Restamos 1 porque los Arrays empiezan en 0
+	tamanio_actual = OPCIONES_TAMANIO[paso_tam - 1]
+	velocidad_actual = OPCIONES_VELOCIDAD[paso_vel - 1]
 	
-	# 2. Avisar a la interfaz que se redibuje
+	# 3. Aplicar lógica de motor
+	Engine.time_scale = velocidad_actual
+	
+	# 4. Avisar a todos
 	emit_signal("configuracion_cambiada")
