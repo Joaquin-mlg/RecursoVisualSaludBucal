@@ -38,10 +38,10 @@ script = ExtResource("3_4l37v")
 texture_repeat = 1
 layout_direction = 2
 layout_mode = 0
-offset_left = 584.0
-offset_top = 456.0
-offset_right = 1459.0
-offset_bottom = 871.0
+offset_left = 557.0
+offset_top = 547.0
+offset_right = 1432.0
+offset_bottom = 962.0
 icon = ExtResource("4_i0bnr")
 flat = true
 icon_alignment = 1
@@ -74,7 +74,7 @@ texture = ExtResource("5_ynley")
 script = ExtResource("10_04ecv")
 
 [node name="TituloPrueba2" type="Sprite2D" parent="CanvasLayer/Control"]
-position = Vector2(1002, 422)
+position = Vector2(986.99994, 342)
 scale = Vector2(1.3876954, 1)
 texture = ExtResource("6_m5f1m")
 
@@ -113,7 +113,7 @@ flat = true
 expand_icon = true
 
 [node name="DienteFinal" type="Sprite2D" parent="CanvasLayer"]
-position = Vector2(1002, 962)
+position = Vector2(997.99994, 1008)
 rotation = 0.25830874
 scale = Vector2(0.35250938, 0.37258518)
 texture = ExtResource("7_pkofp")

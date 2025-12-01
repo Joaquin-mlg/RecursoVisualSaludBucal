@@ -1,69 +1,77 @@
-extends CharacterBody2D # ¡Correcto!
+extends CharacterBody2D
 
-@export var speed := 350.0 # Velocidad adecuada para CharacterBody2D
+# Velocidad BASE. Esta se multiplicará por la configuración global.
+@export var velocidad_base := 400.0 
 
-# Variable de estado para almacenar la dirección de movimiento deseada por toque
-# -1.0 = Izquierda, 1.0 = Derecha, 0.0 = Detenido
+# Variable para el touch
 var target_direction: float = 0.0 
+# Guardamos el tamaño del jugador para los cálculos de borde
+var mitad_ancho_jugador: float = 0.0
 
-# Función para configurar el jugador (llamada una vez al inicio)
 func _ready():
-	# **AGREGADO:** Asegura que el jugador esté en el grupo "player"
 	add_to_group("player")
 	
-# Función para manejar entradas táctiles (TOUCH SCREEN)
-# Esta función es crucial para la accesibilidad en Android.
+	# --- 1. APARECER EN LA MITAD DE LA PANTALLA ---
+	var tamanio_pantalla = get_viewport_rect().size
+	
+	# Centrar en X (Ancho / 2)
+	position.x = tamanio_pantalla.x / 2
+	
+	# Fijar altura en Y (Opcional: Para que aparezca abajo y no arriba a la izquierda)
+	# Le restamos 150 pixeles desde el fondo para que no quede pegado al piso
+	position.y = tamanio_pantalla.y - 150 
+	
+	# --- 2. CALCULAR TAMAÑO DEL JUGADOR UNA SOLA VEZ ---
+	# Hacemos esto aquí para no recalcularlo en cada frame (optimización)
+	if $CollisionShape2D:
+		var shape = $CollisionShape2D.shape
+		if shape is CircleShape2D:
+			mitad_ancho_jugador = shape.radius
+		elif shape is RectangleShape2D:
+			mitad_ancho_jugador = shape.size.x / 2.0
+		else:
+			# Valor por defecto si no hay forma (40 pixeles aprox)
+			mitad_ancho_jugador = 40.0
+
 func _input(event):
-	# Solo procesamos eventos táctiles en la pantalla (para celular)
 	if event is InputEventScreenTouch:
 		var screen_width = get_viewport_rect().size.x
-		
 		if event.is_pressed():
-			# Toque inicial: Determinar la dirección
-			# Si la posición del toque está en la mitad izquierda de la pantalla
+			# Lógica simple: Izquierda o Derecha según donde toques
 			if event.position.x < screen_width / 2:
-				# Mover a la izquierda
 				target_direction = -1.0
 			else:
-				# Mover a la derecha
 				target_direction = 1.0
 		else:
-			# El toque ha terminado: Detener el movimiento táctil
 			target_direction = 0.0
 
-
 func _physics_process(delta):
-	# 1. Determinar la dirección de movimiento con prioridad:
-	var final_direction: float = 0.0
+	# --- 3. INTEGRACIÓN CON GLOBAL SETTINGS ---
+	# Multiplicamos la velocidad base por la velocidad actual de la configuración (0.5, 0.8, 1.0)
+	var velocidad_real = velocidad_base * GlobalSettings.velocidad_actual
 	
-	# Prioridad 1: Input táctil (si el usuario está tocando la pantalla)
+	var direccion_final: float = 0.0
+	
+	# Prioridad al Touch, sino Teclado
 	if target_direction != 0.0:
-		final_direction = target_direction
+		direccion_final = target_direction
 	else:
-		# Prioridad 2: Input de teclado/virtual (para la opción Web/PC si se exporta)
-		final_direction = Input.get_axis("ui_left", "ui_right")
+		direccion_final = Input.get_axis("ui_left", "ui_right")
 	
-	
-	# 2. Calcular la nueva velocidad horizontal
-	velocity.x = final_direction * speed
-	
-	# 3. La gravedad no se aplica en este minijuego, la velocidad vertical se mantiene en 0
+	# Moverse
+	velocity.x = direccion_final * velocidad_real
 	velocity.y = 0 
 	
-	# 4. Mueve el cuerpo del personaje con Godot Physics
 	move_and_slide()
 	
-	# 5. Limitar al jugador a los bordes de la pantalla (para que no salga)
-	var screen_width = get_viewport_rect().size.x
-	var player_extent = 0.0
+	# --- 4. RESTRICCION DE BORDES (CLAMP) ---
+	var ancho_pantalla = get_viewport_rect().size.x
 	
-	# Verificación segura del CollisionShape para evitar errores si no existe
-	if $CollisionShape2D and $CollisionShape2D.shape:
-		# Intentar obtener el tamaño del shape para el clamp correcto
-		if $CollisionShape2D.shape is CircleShape2D:
-			player_extent = $CollisionShape2D.shape.radius
-		elif $CollisionShape2D.shape is RectangleShape2D:
-			player_extent = $CollisionShape2D.shape.size.x / 2.0
-	
-	# Usar player_extent para el límite (0 + extent, width - extent)
-	position.x = clamp(position.x, player_extent, screen_width - player_extent)
+	# Clamp asegura que position.x nunca sea menor al mínimo ni mayor al máximo
+	# Minimo: 0 + mitad del jugador (para que no se corte el sprite)
+	# Maximo: Ancho pantalla - mitad del jugador
+	position.x = clamp(
+		position.x, 
+		mitad_ancho_jugador, 
+		ancho_pantalla - mitad_ancho_jugador
+	)
