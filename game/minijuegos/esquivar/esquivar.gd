@@ -1,6 +1,6 @@
 extends Node2D
 
-@export var duration := 5.0  # tiempo total del minijuego
+@export var duration := 15.0  # tiempo total del minijuego
 
 @onready var progress_bar = $ProgressBar
 @onready var timer = $Timer

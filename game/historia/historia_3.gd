@@ -26,4 +26,4 @@ func _on_next_pressed():
 	if indice < imagenes.size():
 		sprite.texture = imagenes[indice]
 	else:
-		get_tree().change_scene_to_file("res://game/minijuegos/minijuegos/clasificacion/Clasificacion.tscn")
+		get_tree().change_scene_to_file("res://game/minijuegos/clasificacion/Clasificacion.tscn")

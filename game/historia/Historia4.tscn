@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://dtxsejjypr6f3"]
+[gd_scene load_steps=3 format=3 uid="uid://dtxsejjypr6f3"]
 
 [ext_resource type="Script" uid="uid://jw8qcs43hqfp" path="res://game/historia/historia_4.gd" id="1_1af6a"]
+[ext_resource type="Texture2D" uid="uid://cna8gjtii1tk" path="res://game/assets/fondos/Historia4_1.png" id="2_700hu"]
 
 [node name="Historia4" type="Node2D"]
 script = ExtResource("1_1af6a")
@@ -9,7 +10,9 @@ script = ExtResource("1_1af6a")
 visible = false
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(1.251953, 0.97054887)
+position = Vector2(6, 1)
+scale = Vector2(1.5283203, 1.6088858)
+texture = ExtResource("2_700hu")
 
 [node name="TouchScreenButton" type="TouchScreenButton" parent="."]
 visible = false

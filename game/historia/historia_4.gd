@@ -18,11 +18,11 @@ func _unhandled_input(event):
 		if indice < imagenes.size():
 			sprite.texture = imagenes[indice]
 		else:
-			get_tree().change_scene_to_file("res://game/minijuegos/busqueda/quizz.tscn")
+			get_tree().change_scene_to_file("res://game/quiz/Quizz.tscn")
 
 func _on_next_pressed():
 	indice += 1
 	if indice < imagenes.size():
 		sprite.texture = imagenes[indice]
 	else:
-		get_tree().change_scene_to_file("res://game/minijuegos/busqueda/quizz.tscn")
+		get_tree().change_scene_to_file("res://game/quiz/Quizz.tscn")
