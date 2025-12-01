@@ -53,7 +53,7 @@ func _on_volver_guardar_pressed():
 			check_contraste.button_pressed
 		)
 		# Usamos tu transición bonita si quieres, o el cambio normal
-		get_tree().change_scene_to_file("res://game/menu/main.tscn")
+		Transicion.cambiar_escena("res://game/menu/main.tscn")
 	else:
 		print("Volviendo sin cambios...")
-		get_tree().change_scene_to_file("res://game/menu/main.tscn")
+		Transicion.cambiar_escena("res://game/menu/main.tscn")

@@ -80,8 +80,19 @@ func _on_objeto_clasificado(es_correcto: bool):
 		# NO avanzamos el indice_actual.
 		# NO llamamos a iniciar_ronda().
 		# El objeto se queda en pantalla (regresó al centro por su propio script)
-
+func cargar_siguiente_escena():
+	# 2. Cargar la nueva escena
+	var siguiente_escena_ruta = "res://game/historia/Historia4.tscn"
+	
+	# IMPORTANTE: Reemplaza la ruta de arriba con la ubicación real de tu archivo.
+	
+	print("¡Minijuego Completado! Cargando: " + siguiente_escena_ruta)
+	
+	# Usa get_tree().change_scene_to_file() para cambiar a la nueva escena
+	get_tree().change_scene_to_file(siguiente_escena_ruta)
+	
 func juego_terminado():
 	print("FIN DEL JUEGO. Total: ", aciertos)
 	if label_puntos:
 		label_puntos.text = "¡Juego Terminado! Total: " + str(aciertos)
+		cargar_siguiente_escena()

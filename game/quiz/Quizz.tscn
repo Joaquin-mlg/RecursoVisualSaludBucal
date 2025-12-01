@@ -26,20 +26,20 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -442.0
-offset_top = -123.0
-offset_right = 687.0
-offset_bottom = 130.0
+offset_left = -459.0
+offset_top = -275.0
+offset_right = 670.0
+offset_bottom = -22.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/normal_font_size = 32
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 0
-offset_left = 81.0
-offset_top = 446.0
-offset_right = 1190.0
-offset_bottom = 670.0
+offset_left = 506.0
+offset_top = 494.0
+offset_right = 1615.0
+offset_bottom = 718.0
 
 [node name="BotonA" type="Button" parent="VBoxContainer"]
 layout_mode = 2
