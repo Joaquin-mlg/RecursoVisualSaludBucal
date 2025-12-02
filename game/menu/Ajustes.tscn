@@ -82,7 +82,7 @@ anchor_bottom = 1.0
 offset_left = 369.0
 offset_top = 111.0
 offset_right = -712.48645
-offset_bottom = -611.56757
+offset_bottom = -549.4054
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(1.48, 1.48)
@@ -94,6 +94,7 @@ theme_override_font_sizes/font_size = 30
 text = "Tamaño de los botones"
 
 [node name="SliderTamBotones" type="HSlider" parent="OrgVertical"]
+custom_minimum_size = Vector2(0, 80)
 layout_mode = 2
 theme_override_styles/slider = SubResource("StyleBoxFlat_6ekh6")
 theme_override_styles/grabber_area = SubResource("StyleBoxFlat_jk43q")
@@ -112,6 +113,7 @@ theme_override_font_sizes/font_size = 30
 text = "Velocidad de Juego"
 
 [node name="SliderVelocidad" type="HSlider" parent="OrgVertical"]
+custom_minimum_size = Vector2(0, 80)
 layout_mode = 2
 theme_override_styles/slider = SubResource("StyleBoxFlat_xe37k")
 theme_override_styles/grabber_area = SubResource("StyleBoxFlat_2jccr")
