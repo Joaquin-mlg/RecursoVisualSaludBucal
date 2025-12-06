@@ -1,10 +1,10 @@
 extends Area2D
 
-@export var speed := 100.0
+@export var speed := 150.0
 
 func _physics_process(delta):
 	position.y += speed * delta
-	if position.y >= 900: 
+	if position.y >= 1000: 
 		queue_free()
 
 func _on_body_entered(body: Node2D) -> void:

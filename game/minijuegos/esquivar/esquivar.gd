@@ -68,4 +68,4 @@ func _on_timer_timeout() -> void:
 	GlobalSettings.registrar_partida("Esquivar Asteroides (Victoria)", puntaje_final, tiempo_jugado, errores)
 	
 	# Cambiamos a la siguiente historia
-	get_tree().change_scene_to_file("res://game/historia/Historia2.tscn")
+	Transicion.cambiar_escena("res://game/historia/Historia2.tscn")

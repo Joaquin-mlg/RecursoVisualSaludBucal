@@ -51,11 +51,6 @@ offset_right = 1842.0
 offset_bottom = 953.0
 theme_override_constants/separation = 25
 
-[node name="BtnWhatsapp" type="Button" parent="VBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 33
-text = "Enviar a Whatsapp"
-
 [node name="BtnCorreo" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 33
@@ -65,6 +60,11 @@ text = "Enviar a correo electronico"
 layout_mode = 2
 theme_override_font_sizes/font_size = 33
 text = "Copiar al portapapeles"
+
+[node name="BtnWhatsapp" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 33
+text = "Enviar a Whatsapp"
 
 [node name="BtnSalir" type="Button" parent="VBoxContainer"]
 layout_mode = 2

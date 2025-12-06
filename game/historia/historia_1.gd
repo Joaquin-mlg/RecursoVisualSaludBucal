@@ -1,68 +1,54 @@
 extends Node2D
 
 # Referencias
-@onready var sprite = $Sprite2D
-@onready var telon_negro = $TelonNegro
+# @onready var sprite = $Sprite2D  <-- YA NO SE USA
+@onready var video_player = $VideoStreamPlayer # Asegúrate de que el nodo se llame así
 @onready var audio_narrador = $AudioStreamPlayer2D
 
-var imagenes = [
-	preload("res://game/assets/fondos/historia1_1.png"),
-	preload("res://game/assets/fondos/historia1_2.png"),
-	preload("res://game/assets/fondos/historia1_3.png"),
-	preload("res://game/assets/fondos/historia1_4.png")
-]
-var indice = 0
-var input_habilitado = false 
+# Variable para evitar saltos dobles
+var historia_terminada = false
 
 func _ready():
-	print("--- INICIANDO HISTORIA ---")
-	sprite.texture = imagenes[indice]
+	print("--- INICIANDO VIDEO HISTORIA ---")
 	
-	# Configurar telón
-	telon_negro.color = Color.BLACK
-	telon_negro.visible = true
-	telon_negro.modulate.a = 1.0
-	# IMPORTANTE: Aseguramos por código que el telón no bloquee clicks
-	telon_negro.mouse_filter = Control.MOUSE_FILTER_IGNORE 
 	
+	# Conectar la señal de cuando el video termina
+	# Esto llama a la función terminar_historia automáticamente al final del video
+	video_player.finished.connect(terminar_historia)
+	
+	# Si el video tiene su propio audio, quizás quieras detener el audio_narrador separado
+	# Si el video es mudo y usas el audio aparte:
 	if audio_narrador.stream:
 		audio_narrador.play()
 	
-	# Espera inicial
-	await get_tree().create_timer(5.0).timeout
-	
-	# Fade In
-	var tween = create_tween()
-	tween.tween_property(telon_negro, "modulate:a", 0.0, 2.0)
-	
-	await tween.finished
-	input_habilitado = true
-	print(">>> INPUT HABILITADO: Ya puedes hacer click <<<")
+	# Comenzar el video (puedes cargarlo aquí o en el inspector)
+	# video_player.stream = load("res://ruta/a/tu_video.ogv") 
+	video_player.play()
 
-func avanzar_historia():
-	# Depuración: Ver por qué no avanza
-	if not input_habilitado:
-		print("Click ignorado: Aún está la intro o transición.")
+func terminar_historia():
+	if historia_terminada:
+		return
+		
+	historia_terminada = true
+	print("Fin de historia, cambiando escena...")
+	
+	# Opcional: Vibrar al terminar si es un salto manual
+	if OS.has_feature("mobile"):
+		Input.vibrate_handheld(50)
+		
+	Transicion.cambiar_escena("res://game/minijuegos/esquivar/Esquivar.tscn")
+
+func _input(event):
+	# Permitir saltar el video (Skip)
+	if historia_terminada:
 		return
 
-	print("Avanzando historia...") # Si ves esto, el click funcionó
-	indice += 1
-	
-	if indice < imagenes.size():
-		sprite.texture = imagenes[indice]
-		if OS.has_feature("mobile"):
-			Input.vibrate_handheld(50)
-	else:
-		print("Fin de historia, cambiando escena...")
-		get_tree().change_scene_to_file("res://game/minijuegos/esquivar/Esquivar.tscn")
-
-# CAMBIO AQUÍ: Usamos _input en vez de _unhandled_input
-func _input(event):
-	# Detectar click izquierdo o toque de pantalla
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
-			avanzar_historia()
+			print("Jugador saltó el video.")
+			terminar_historia()
 			
 	elif event is InputEventScreenTouch:
 		if event.pressed:
-			avanzar_historia()
+			print("Jugador saltó el video.")
+			terminar_historia()

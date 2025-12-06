@@ -1,24 +1,25 @@
 [gd_scene load_steps=3 format=3 uid="uid://du6g012gxiym4"]
 
 [ext_resource type="Script" uid="uid://bftgu7wop7ckk" path="res://game/historia/historia_1.gd" id="1_8282d"]
-[ext_resource type="Texture2D" uid="uid://gwmma54hhqat" path="res://game/assets/fondos/historia1_1.png" id="2_n1d65"]
+[ext_resource type="VideoStream" uid="uid://c7obvx8c4fb3j" path="res://game/assets/videos/Acto1.ogv" id="2_n1d65"]
 
 [node name="Historia1" type="Node2D"]
 script = ExtResource("1_8282d")
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-visible = false
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -2.0
+offset_top = -0.99993896
+offset_right = 1918.0
+offset_bottom = 1079.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.035, 1.035)
+stream = ExtResource("2_n1d65")
+autoplay = true
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(964.1599, 539.58)
-scale = Vector2(1.4919374, 1.5011666)
-texture = ExtResource("2_n1d65")
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 
 [node name="TouchScreenButton" type="TouchScreenButton" parent="."]
-visible = false
-
-[node name="TelonNegro" type="ColorRect" parent="."]
-visible = false
-offset_right = 1935.0
-offset_bottom = 1086.0
-color = Color(0, 0, 0, 1)

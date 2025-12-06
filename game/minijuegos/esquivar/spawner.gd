@@ -9,5 +9,5 @@ func _process(delta):
 	if timer >= spawn_rate:
 		timer = 0.0
 		var a = asteroide_scene.instantiate()
-		a.position = Vector2(randi_range(50, 1230), -50)
+		a.position = Vector2(randi_range(50, 1920), -50)
 		get_tree().current_scene.add_child(a)
