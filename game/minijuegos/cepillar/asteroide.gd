@@ -10,13 +10,15 @@ extends Area2D
 
 # --- Lógica del Cepillo (Suciedad) ---
 const VELOCIDAD_LIMPIEZA = 0.2 
-const PROGRESO_TOTAL_ASTEROIDE = 50.0 
-var suciedad_restante = 1.0 # 1.0 = 100% Suciedad (transparencia del sprite)
+# CAMBIO AQUÍ: Ahora vale 35%
+const PROGRESO_TOTAL_ASTEROIDE = 35.0 
+var suciedad_restante = 1.0 
 
 # --- Lógica del Enjuague Bucal ---
-const PROGRESO_TOTAL_ENJUAGUE = 40.0 
+# CAMBIO AQUÍ: Ahora vale 35%
+const PROGRESO_TOTAL_ENJUAGUE = 35.0 
 const VELOCIDAD_ENJUAGUE = 0.8
-var opacidad_actual = 1.0 # 1.0 = Oscuro; 0.0 = Claro
+var opacidad_actual = 1.0
 
 # ---------------------------------------------
 # 2. FUNCIONES DE INICIALIZACIÓN Y CEPILLO

@@ -3,9 +3,9 @@ extends Node2D
 @export var objeto_scene: PackedScene 
 
 @onready var spawn_point = $ContenedorObjetos/PuntoAparicion
-@onready var audio_narrador = $AudioNarrador # Asegúrate de tener estos nodos o comentarlos
-@onready var audio_fx = $AudioFX
-@onready var label_puntos = $LabelPuntos # Referencia a la Label que acabamos de crear
+@onready var label_puntos = $LabelPuntos 
+# Audio (Opcionales, usa si tienes los nodos)
+@onready var audio_fx = $AudioFX 
 
 var lista_objetos = [
 	{"nombre": "Cepillo Dental", "es_bueno": true, "texture_path": "res://game/assets/sprite/UI/Cepillo.png"},
@@ -18,12 +18,17 @@ var lista_objetos = [
 
 var indice_actual = 0
 var aciertos = 0
+# --- VARIABLES NUEVAS PARA REPORTE ---
+var errores = 0
+var tiempo_inicio = 0
 
 func _ready():
 	randomize()
 	lista_objetos.shuffle()
 	
-	# Inicializar texto
+	# Guardar hora de inicio
+	tiempo_inicio = Time.get_ticks_msec()
+	
 	if label_puntos:
 		label_puntos.text = "Aciertos: 0"
 	
@@ -41,7 +46,7 @@ func spawn_objeto_actual():
 	if objeto_scene == null:
 		print("ERROR: Asigna la escena ObjetoDental")
 		return
-
+		
 	var nuevo_objeto = objeto_scene.instantiate()
 	var datos = lista_objetos[indice_actual]
 	
@@ -50,49 +55,54 @@ func spawn_objeto_actual():
 	
 	nuevo_objeto.configurar(datos)
 	nuevo_objeto.connect("objeto_clasificado", _on_objeto_clasificado)
-	
-	print("JUEGO: Apareció " + datos["nombre"])
 
 func _on_objeto_clasificado(es_correcto: bool):
 	if es_correcto:
-		# --- CASO DE ÉXITO ---
+		# --- ÉXITO ---
 		print("¡Correcto!")
 		aciertos += 1
 		
-		# Actualizar Label en pantalla
-		if label_puntos:
-			label_puntos.text = "Aciertos: " + str(aciertos)
+		# Feedback Visual/Sonoro
+		if label_puntos: label_puntos.text = "Aciertos: " + str(aciertos)
+		# if audio_fx: audio_fx.play_exito() 
+		if OS.has_feature("mobile"): Input.vibrate_handheld(50) # Vibración corta
 		
-		# Aquí: Reproducir sonido de éxito (DING)
-		
-		# Avanzamos al siguiente objeto
 		indice_actual += 1
-		
-		# Esperamos un poco antes de que aparezca el siguiente
-		await get_tree().create_timer(1.0).timeout
+		await get_tree().create_timer(0.8).timeout
 		iniciar_ronda()
 		
 	else:
-		# --- CASO DE ERROR ---
-		print("Incorrecto. Intenta de nuevo.")
+		# --- ERROR ---
+		print("Incorrecto.")
+		errores += 1 # Sumamos error al reporte
 		
-		# Aquí: Reproducir sonido de error (BUZZ)
-		# NO avanzamos el indice_actual.
-		# NO llamamos a iniciar_ronda().
-		# El objeto se queda en pantalla (regresó al centro por su propio script)
-func cargar_siguiente_escena():
-	# 2. Cargar la nueva escena
-	var siguiente_escena_ruta = "res://game/historia/Historia4.tscn"
-	
-	# IMPORTANTE: Reemplaza la ruta de arriba con la ubicación real de tu archivo.
-	
-	print("¡Minijuego Completado! Cargando: " + siguiente_escena_ruta)
-	
-	# Usa get_tree().change_scene_to_file() para cambiar a la nueva escena
-	get_tree().change_scene_to_file(siguiente_escena_ruta)
-	
+		# Feedback de Error
+		# if audio_fx: audio_fx.play_error()
+		if OS.has_feature("mobile"): Input.vibrate_handheld(300) # Vibración larga
+		
+		# El objeto se queda ahí para que el niño intente de nuevo
+
 func juego_terminado():
-	print("FIN DEL JUEGO. Total: ", aciertos)
-	if label_puntos:
-		label_puntos.text = "¡Juego Terminado! Total: " + str(aciertos)
-		cargar_siguiente_escena()
+	print("FIN DEL JUEGO.")
+	
+	# --- GENERAR REPORTE ---
+	var tiempo_fin = Time.get_ticks_msec()
+	var segundos_totales = (tiempo_fin - tiempo_inicio) / 1000
+	
+	# Calculamos puntaje: 100 pts por acierto - 10 pts por cada error
+	# Aseguramos que no sea negativo con max(0, ...)
+	var puntaje_final = max(0, (aciertos * 100) - (errores * 10))
+	
+	GlobalSettings.registrar_partida(
+		"Clasificación de Alimentos", 
+		puntaje_final, 
+		int(segundos_totales), 
+		errores
+	)
+	
+	cargar_siguiente_escena()
+
+func cargar_siguiente_escena():
+	var siguiente_escena_ruta = "res://game/historia/Historia4.tscn"
+	print("Cargando: " + siguiente_escena_ruta)
+	get_tree().change_scene_to_file(siguiente_escena_ruta)

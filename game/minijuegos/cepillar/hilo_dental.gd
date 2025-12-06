@@ -41,6 +41,10 @@ func regresar_suavemente():
 
 # Detección de Colisión (debe estar conectada la señal 'area_entered' al script)
 func _on_area_entered(area):
-	# Llama a la función de daño de la roca
+	print("Toqué algo llamado: " + area.name) # DEBUG 1
+	
 	if area.is_in_group("rocas"):
+		print("¡Es una roca! Intentando dañar...") # DEBUG 2
 		area.recibir_dano_hilo_dental()
+	else:
+		print("Pero no está en el grupo 'rocas'") # DEBUG 3

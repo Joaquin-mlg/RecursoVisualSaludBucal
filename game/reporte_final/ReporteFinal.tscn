@@ -1,0 +1,72 @@
+[gd_scene load_steps=2 format=3 uid="uid://bpohxb42v1feu"]
+
+[ext_resource type="Script" uid="uid://ywdm44qqpk4e" path="res://game/reporte_final/reporte_final.gd" id="1_f6gm6"]
+
+[node name="MenuReporte" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_f6gm6")
+
+[node name="Titulo" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -883.77185
+offset_top = -535.5
+offset_right = 894.0
+offset_bottom = -324.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 80
+text = "Reporte de mision"
+
+[node name="VistaPrevia" type="TextEdit" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -908.0
+offset_top = -320.0
+offset_right = 876.0
+offset_bottom = 64.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 30
+editable = false
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 55.0
+offset_top = 662.0
+offset_right = 1842.0
+offset_bottom = 953.0
+theme_override_constants/separation = 25
+
+[node name="BtnWhatsapp" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 33
+text = "Enviar a Whatsapp"
+
+[node name="BtnCorreo" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 33
+text = "Enviar a correo electronico"
+
+[node name="BtnCopiar" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 33
+text = "Copiar al portapapeles"
+
+[node name="BtnSalir" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 33
+text = "Salir"
