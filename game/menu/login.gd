@@ -1,17 +1,13 @@
 extends Control
-
 # REFERENCIAS
 @onready var input_nombre = $InputNombre
 @onready var label_error = $LabelError # Opcional, si creaste el label de error
-
 # Ruta a tu menú principal
 var escena_menu = "res://game/menu/main.tscn"
-
 func _ready():
 	# Opcional: Limpiar el texto de error al iniciar
 	if label_error:
 		label_error.text = ""
-
 func _on_boton_continuar_pressed():
 	# 1. Obtener el texto quitando espacios al inicio y final
 	var nombre = input_nombre.text.strip_edges()

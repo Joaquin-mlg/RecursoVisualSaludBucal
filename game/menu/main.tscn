@@ -130,6 +130,13 @@ texture = ExtResource("7_pkofp")
 [node name="Node" type="Node" parent="CanvasLayer/DienteFinal"]
 script = ExtResource("10_04ecv")
 
+[node name="Button (nombre)" type="Button" parent="CanvasLayer"]
+offset_left = 1374.0
+offset_top = 436.0
+offset_right = 1537.0
+offset_bottom = 511.0
+text = "Cambiar nombre"
+
 [node name="MusicaFondo" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("9_ynley")
 
@@ -140,3 +147,4 @@ volume_db = 12.0
 [connection signal="pressed" from="CanvasLayer/Control/Button (Iniciar)" to="." method="_on_button_iniciar_pressed"]
 [connection signal="pressed" from="CanvasLayer/Control/Button (salir)" to="." method="_on_button_salir_pressed"]
 [connection signal="pressed" from="CanvasLayer/Control/Button (configuracion)" to="." method="_on_button_configuracion_pressed"]
+[connection signal="pressed" from="CanvasLayer/Button (nombre)" to="." method="_on_button_nombre_pressed"]

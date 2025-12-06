@@ -4,7 +4,7 @@ extends Node2D
 @export_group("Navegación")
 @export_file("*.tscn") var escena_juego = "res://game/historia/Historia1.tscn"
 @export_file("*.tscn") var escena_ajustes = "res://game/menu/Ajustes.tscn"
-
+@export_file("*.tscn") var escena_login = "res://game/menu/Login.tscn"
 # --- REFERENCIAS ---
 @export_group("Referencias")
 # ARRASTRA AQUÍ TUS 3 BOTONES EN EL INSPECTOR
@@ -117,3 +117,8 @@ func _actualizar_saludo():
 		else:
 			# Por si acaso alguien entra directo al menú sin pasar por Login
 			label_saludo.text = "Hola, Viajero"
+
+func _on_button_nombre_pressed() -> void:
+	# Opcional: Si quieres que al volver se borre el nombre anterior, descomenta esto:
+	GlobalSettings.nombre_jugador = "" 
+	_ir_a_escena(escena_login, "Regresando al Login...")
