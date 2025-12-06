@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://dmvx4dofooko4"]
 
 [ext_resource type="Script" uid="uid://u4g3foick4h3" path="res://game/minijuegos/esquivar/asteroide.gd" id="1_fc85a"]
-[ext_resource type="Texture2D" uid="uid://clwprn2q5r16r" path="res://game/assets/sprite/personajes/Asteroide.png" id="2_ha7y2"]
+[ext_resource type="Texture2D" uid="uid://bfmac714ovpr0" path="res://game/assets/sprite/personajes/EsquivarAsteroide_Juego 1.png" id="2_ha7y2"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ha7y2"]
 radius = 115.15642
@@ -10,8 +10,8 @@ radius = 115.15642
 script = ExtResource("1_fc85a")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(-8.200005, -5.0000114)
-scale = Vector2(0.21125, 0.2333333)
+position = Vector2(1.500006, 0.50000286)
+scale = Vector2(0.47333333, 0.47777787)
 texture = ExtResource("2_ha7y2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

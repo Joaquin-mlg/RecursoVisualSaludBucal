@@ -1,16 +1,52 @@
-[gd_scene load_steps=7 format=3 uid="uid://ddt4ihh27dja4"]
+[gd_scene load_steps=13 format=3 uid="uid://ddt4ihh27dja4"]
 
 [ext_resource type="Script" uid="uid://o4brvc8yk4qm" path="res://game/minijuegos/esquivar/player_esquivar.gd" id="1_2e0mf"]
 [ext_resource type="Script" uid="uid://dkbgkal4tfsbt" path="res://game/minijuegos/esquivar/esquivar.gd" id="1_w25gl"]
 [ext_resource type="Script" uid="uid://db3866gmeyjs1" path="res://game/minijuegos/esquivar/spawner.gd" id="2_6omkn"]
+[ext_resource type="Texture2D" uid="uid://cgmjrhgctjyyc" path="res://game/minijuegos/esquivar/Assets/parallax1.png" id="2_bffs2"]
+[ext_resource type="Texture2D" uid="uid://btyvgpr41fn8r" path="res://game/minijuegos/esquivar/Assets/parallax3.png" id="2_i6tjx"]
+[ext_resource type="Script" uid="uid://cqemp1tuq6ij3" path="res://game/minijuegos/esquivar/fondo.gd" id="2_xi4py"]
+[ext_resource type="Texture2D" uid="uid://cep5wlx221n6b" path="res://game/minijuegos/esquivar/Assets/parallax4.png" id="3_isa2x"]
 [ext_resource type="PackedScene" uid="uid://dmvx4dofooko4" path="res://game/minijuegos/esquivar/asteroide.tscn" id="3_qjfgf"]
 [ext_resource type="Texture2D" uid="uid://drblgyndbo07" path="res://game/minijuegos/esquivar/Assets/Nave_Espacial.png" id="3_w25gl"]
+[ext_resource type="Texture2D" uid="uid://buba14gftggme" path="res://game/minijuegos/esquivar/Assets/parallax2.png" id="4_xi4py"]
+[ext_resource type="AudioStream" uid="uid://ggu3pxaxewhx" path="res://game/audio/musica/Juego 1_Nave.mp3" id="6_lagwc"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_lagwc"]
 radius = 16.807566
 
 [node name="Esquivar" type="Node2D"]
 script = ExtResource("1_w25gl")
+
+[node name="Fondo" type="Node2D" parent="."]
+script = ExtResource("2_xi4py")
+
+[node name="ParallaxInfinite" type="Parallax2D" parent="Fondo"]
+repeat_size = Vector2(0, 1080)
+autoscroll = Vector2(0, 150)
+repeat_times = 2
+
+[node name="SpriteEspacio" type="Sprite2D" parent="Fondo/ParallaxInfinite"]
+texture_filter = 1
+texture_repeat = 3
+position = Vector2(882.74994, 570)
+scale = Vector2(1.3518878, 0.565407)
+texture = ExtResource("3_isa2x")
+
+[node name="Intro" type="Node2D" parent="Fondo"]
+visible = false
+
+[node name="Ciudad" type="Sprite2D" parent="Fondo/Intro"]
+position = Vector2(886, 503)
+texture = ExtResource("2_bffs2")
+
+[node name="Transicion" type="Sprite2D" parent="Fondo/Intro"]
+position = Vector2(899, -1170)
+texture = ExtResource("4_xi4py")
+
+[node name="Espacio" type="Sprite2D" parent="Fondo/Intro"]
+position = Vector2(953, -2828)
+texture = ExtResource("2_i6tjx")
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
 top_level = true
@@ -42,5 +78,11 @@ asteroide_scene = ExtResource("3_qjfgf")
 wait_time = 5.0
 one_shot = true
 autostart = true
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_lagwc")
+volume_db = -11.106
+pitch_scale = 0.96
+autoplay = true
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

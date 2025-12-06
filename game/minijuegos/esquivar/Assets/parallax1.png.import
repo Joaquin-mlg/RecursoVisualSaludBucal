@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cv45c7r31gx6a"
-path="res://.godot/imported/espaciofondo1.jpg-80bbc2847cc609fc9070fe2f1d774378.ctex"
+uid="uid://cgmjrhgctjyyc"
+path="res://.godot/imported/parallax1.png-fbfc428f3cce369ee829ae87296887f4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://game/assets/fondos/espaciofondo1.jpg"
-dest_files=["res://.godot/imported/espaciofondo1.jpg-80bbc2847cc609fc9070fe2f1d774378.ctex"]
+source_file="res://game/minijuegos/esquivar/Assets/parallax1.png"
+dest_files=["res://.godot/imported/parallax1.png-fbfc428f3cce369ee829ae87296887f4.ctex"]
 
 [params]
 
