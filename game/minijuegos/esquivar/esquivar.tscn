@@ -29,23 +29,27 @@ repeat_times = 2
 [node name="SpriteEspacio" type="Sprite2D" parent="Fondo/ParallaxInfinite"]
 texture_filter = 1
 texture_repeat = 3
-position = Vector2(882.74994, 570)
-scale = Vector2(1.3518878, 0.565407)
+position = Vector2(891, 762.9995)
+scale = Vector2(1.6653646, 0.565407)
 texture = ExtResource("3_isa2x")
 
 [node name="Intro" type="Node2D" parent="Fondo"]
-visible = false
-
-[node name="Ciudad" type="Sprite2D" parent="Fondo/Intro"]
-position = Vector2(886, 503)
-texture = ExtResource("2_bffs2")
 
 [node name="Transicion" type="Sprite2D" parent="Fondo/Intro"]
-position = Vector2(899, -1170)
+position = Vector2(888, -1170)
 texture = ExtResource("4_xi4py")
 
+[node name="Ciudad" type="Sprite2D" parent="Fondo/Intro"]
+position = Vector2(886, 279.00003)
+scale = Vector2(1, 1.264151)
+texture = ExtResource("2_bffs2")
+
 [node name="Espacio" type="Sprite2D" parent="Fondo/Intro"]
-position = Vector2(953, -2828)
+texture_filter = 1
+texture_repeat = 2
+position = Vector2(884, -2799.9998)
+rotation = 3.1415927
+scale = Vector2(1, 0.93816036)
 texture = ExtResource("2_i6tjx")
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
