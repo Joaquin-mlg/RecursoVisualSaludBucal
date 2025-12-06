@@ -39,3 +39,34 @@ func actualizar_configuracion(paso_tam: int, paso_vel: int, alto_contraste: bool
 	
 	# 4. Avisar a todos
 	emit_signal("configuracion_cambiada")
+	# --- DATOS DE LA SESIÓN ---
+var nombre_jugador: String = "Anonimo"
+var reporte_sesion: Array = [] # Aquí guardaremos diccionarios con los datos
+
+# Función para registrar lo que pasó en un minijuego
+func registrar_partida(nombre_juego: String, puntaje: int, tiempo_seg: int, errores: int):
+	var datos_partida = {
+		"juego": nombre_juego,
+		"puntaje": puntaje,
+		"tiempo": tiempo_seg,
+		"errores": errores,
+		"fecha": Time.get_datetime_string_from_system()
+	}
+	reporte_sesion.append(datos_partida)
+	print("Partida registrada: ", datos_partida)
+
+# Función para formatear el reporte final en texto
+func generar_texto_reporte() -> String:
+	var texto = "REPORTE DE SESIÓN\n"
+	texto += "Jugador: " + nombre_jugador + "\n"
+	texto += "Total juegos jugados: " + str(reporte_sesion.size()) + "\n"
+	texto += "-----------------------------------\n"
+	
+	for partida in reporte_sesion:
+		texto += "Juego: " + partida["juego"] + "\n"
+		texto += " - Puntaje: " + str(partida["puntaje"]) + "\n"
+		texto += " - Tiempo: " + str(partida["tiempo"]) + "s\n"
+		texto += " - Errores: " + str(partida["errores"]) + "\n"
+		texto += "-----------------------------------\n"
+		
+	return texto

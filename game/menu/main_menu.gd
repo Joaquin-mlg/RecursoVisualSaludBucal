@@ -11,13 +11,15 @@ extends Node2D
 @export var lista_botones: Array[Button] 
 @onready var musica_fondo = $MusicaFondo
 @onready var sfx_click = $SFXClick
-
+@export_group("Referencias UI") # <--- Nuevo grupo para ordenar
+@export var label_saludo: Label # <--- ARRASTRA AQUÍ TU NUEVO LABEL EN EL INSPECTOR
 # --- CONFIGURACIÓN VISUAL (Animación) ---
 @export_group("Animación Botones")
 @export var factor_crecimiento: float = 1.1
 @export var tiempo_animacion: float = 0.1
 
 func _ready():
+	_actualizar_saludo()
 	# 1. Música
 	if musica_fondo and not musica_fondo.playing:
 		musica_fondo.play()
@@ -105,3 +107,13 @@ func _ir_a_escena(ruta: String, mensaje: String):
 func _feedback_sonoro():
 	if sfx_click: sfx_click.play()
 	if OS.has_feature("mobile"): Input.vibrate_handheld(50)
+
+func _actualizar_saludo():
+	# Verificamos si asignaste el Label para que no de error
+	if label_saludo:
+		# Verificamos si hay un nombre guardado
+		if GlobalSettings.nombre_jugador != "":
+			label_saludo.text = "Hola, " + GlobalSettings.nombre_jugador
+		else:
+			# Por si acaso alguien entra directo al menú sin pasar por Login
+			label_saludo.text = "Hola, Viajero"

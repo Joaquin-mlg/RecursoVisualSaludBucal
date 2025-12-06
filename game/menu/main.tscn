@@ -16,9 +16,10 @@
 [ext_resource type="Texture2D" uid="uid://cf63h1erwbboq" path="res://game/menu/fondo/Boton salir.png" id="13_hwh0l"]
 [ext_resource type="Texture2D" uid="uid://bl325ck8fv1xw" path="res://game/menu/fondo/Boton Configuracion.png" id="17_b6aqi"]
 
-[node name="Main" type="Node2D" node_paths=PackedStringArray("lista_botones")]
+[node name="Main" type="Node2D" node_paths=PackedStringArray("lista_botones", "label_saludo")]
 script = ExtResource("1_8vd0o")
 lista_botones = [NodePath("CanvasLayer/Control/Button (Iniciar)"), NodePath("CanvasLayer/Control/Button (configuracion)"), NodePath("CanvasLayer/Control/Button (salir)")]
+label_saludo = NodePath("CanvasLayer/LabelSaludo")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -111,6 +112,14 @@ offset_bottom = 1058.0
 icon = ExtResource("17_b6aqi")
 flat = true
 expand_icon = true
+
+[node name="LabelSaludo" type="Label" parent="CanvasLayer"]
+offset_left = 654.0
+offset_top = 387.0
+offset_right = 1370.0
+offset_bottom = 551.0
+theme_override_font_sizes/font_size = 60
+horizontal_alignment = 1
 
 [node name="DienteFinal" type="Sprite2D" parent="CanvasLayer"]
 position = Vector2(997.99994, 1008)
