@@ -85,7 +85,7 @@ shape = SubResource("RectangleShape2D_p6kxp")
 
 [node name="Suciedad" type="Sprite2D" parent="Asteroide"]
 position = Vector2(759.7444, 229.07346)
-scale = Vector2(0.23314045, 0.16079536)
+scale = Vector2(0.183, 0.126)
 texture = ExtResource("8_witjg")
 
 [node name="Rocas" type="Node2D" parent="Asteroide"]

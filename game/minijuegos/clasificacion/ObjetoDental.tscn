@@ -9,6 +9,7 @@ radius = 143.17122
 script = ExtResource("1_ieqvw")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.165, 0.165)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(7, 1)

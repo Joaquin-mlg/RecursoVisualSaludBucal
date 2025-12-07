@@ -1,7 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://cr1qr7gpa0hu4"]
+[gd_scene load_steps=9 format=3 uid="uid://cr1qr7gpa0hu4"]
 
 [ext_resource type="Script" uid="uid://bbps2wycy5buf" path="res://game/minijuegos/clasificacion/clasificacion.gd" id="1_hl5oh"]
 [ext_resource type="PackedScene" uid="uid://b85icybulxr4f" path="res://game/minijuegos/clasificacion/ObjetoDental.tscn" id="2_v6t6k"]
+[ext_resource type="Texture2D" uid="uid://c3p2rq86diftu" path="res://game/minijuegos/clasificacion/Assets/FondoAlgodonAzucar.png" id="3_pbppu"]
+[ext_resource type="Script" uid="uid://c7s1tehmws42i" path="res://game/menu/fondo_nebulosa.gd" id="4_iqmub"]
+[ext_resource type="Texture2D" uid="uid://dy5w6k1h7lv15" path="res://game/minijuegos/clasificacion/Assets/Luna de pie.png" id="5_iqmub"]
+[ext_resource type="Texture2D" uid="uid://dj4xpnw6oqndo" path="res://game/minijuegos/clasificacion/Assets/ArdillaMala.png" id="6_7oav6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v6t6k"]
 size = Vector2(311.845, 720.75)
@@ -15,27 +19,19 @@ scale = Vector2(1.147, 1.147)
 script = ExtResource("1_hl5oh")
 objeto_scene = ExtResource("2_v6t6k")
 
-[node name="Fondo" type="TextureRect" parent="."]
-anchors_preset = 11
-anchor_left = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 0
-grow_vertical = 2
-scale = Vector2(1.147, 1.147)
-size_flags_horizontal = 4
-metadata/_edit_use_anchors_ = true
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(842.1971, 431.56064)
+scale = Vector2(0.78286123, 0.7554514)
+texture = ExtResource("3_pbppu")
+script = ExtResource("4_iqmub")
 
 [node name="ZonaIzquierda" type="Area2D" parent="." groups=["zona_buena"]]
 scale = Vector2(1.147, 1.147)
 
-[node name="ColorVisual" type="ColorRect" parent="ZonaIzquierda"]
-offset_left = -23.563234
-offset_top = -47.886574
-offset_right = 289.43677
-offset_bottom = 668.1134
-scale = Vector2(1.147, 1.147)
-metadata/_edit_use_anchors_ = true
+[node name="Sprite2D" type="Sprite2D" parent="ZonaIzquierda"]
+position = Vector2(177.01889, 584.90314)
+scale = Vector2(0.3931228, 0.40655595)
+texture = ExtResource("5_iqmub")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ZonaIzquierda" groups=["zona_buena"]]
 position = Vector2(156, 360)
@@ -45,13 +41,10 @@ shape = SubResource("RectangleShape2D_v6t6k")
 [node name="ZonaDerecha" type="Area2D" parent="." groups=["zona_mala"]]
 scale = Vector2(1.147, 1.147)
 
-[node name="ColorRect" type="ColorRect" parent="ZonaDerecha"]
-offset_left = 1026.1409
-offset_top = -47.886574
-offset_right = 1378.1409
-offset_bottom = 671.1134
-scale = Vector2(1.147, 1.147)
-metadata/_edit_use_anchors_ = true
+[node name="Sprite2D" type="Sprite2D" parent="ZonaDerecha"]
+position = Vector2(1238.97, 615.94824)
+scale = Vector2(0.28677306, 0.27845442)
+texture = ExtResource("6_7oav6")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ZonaDerecha" groups=["zona_mala"]]
 position = Vector2(1228.9235, 364.655)

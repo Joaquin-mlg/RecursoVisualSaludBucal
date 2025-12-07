@@ -7,13 +7,16 @@ extends Node2D
 # Audio (Opcionales, usa si tienes los nodos)
 @onready var audio_fx = $AudioFX 
 
+# --- CONFIGURACIÓN DE TAMAÑO ---
+# Define aquí qué tan grande quieres que se vean los objetos (en píxeles)
+
 var lista_objetos = [
-	{"nombre": "Cepillo Dental", "es_bueno": true, "texture_path": "res://game/assets/sprite/UI/Cepillo.png"},
-	{"nombre": "Enjuague Bucal", "es_bueno": true, "texture_path": "res://game/assets/sprite/UI/enjuague.png"},
-	{"nombre": "Hilo Dental", "es_bueno": true, "texture_path": "res://game/assets/sprite/UI/hilodental.png"},
-	{"nombre": "Caramelo Pegajoso", "es_bueno": false, "texture_path": "res://game/assets/sprite/UI/caramelo.png"},
-	{"nombre": "Nuez Dura", "es_bueno": false, "texture_path": "res://game/assets/sprite/UI/chicle.png"},
-	{"nombre": "Chocolate", "es_bueno": false, "texture_path": "res://game/assets/sprite/UI/chocolate.png"}
+	{"nombre": "Cepillo Dental", "es_bueno": true, "texture_path": "res://game/minijuegos/cepillar/assets/CEPILLO INICIAL .png"},
+	{"nombre": "Enjuague Bucal", "es_bueno": true, "texture_path": "res://game/minijuegos/clasificacion/Assets/EnjuagueClasifiacion.png"},
+	{"nombre": "Hilo Dental", "es_bueno": true, "texture_path": "res://game/minijuegos/cepillar/assets/HiloDentalFinal.png"},
+	{"nombre": "Caramelo Pegajoso", "es_bueno": false, "texture_path": "res://game/minijuegos/clasificacion/Assets/Chupete.png"},
+	{"nombre": "Nuez Dura", "es_bueno": false, "texture_path": "res://game/minijuegos/clasificacion/Assets/Chicles.png"},
+	{"nombre": "Chocolate", "es_bueno": false, "texture_path": "res://game/minijuegos/clasificacion/Assets/Chocolate.png"}
 ]
 
 var indice_actual = 0
@@ -49,6 +52,15 @@ func spawn_objeto_actual():
 		
 	var nuevo_objeto = objeto_scene.instantiate()
 	var datos = lista_objetos[indice_actual]
+	
+	# -----------------------------------------------------------
+	# LÓGICA DE RE-ESCALADO AUTOMÁTICO
+	# -----------------------------------------------------------
+	# 1. Cargamos la textura temporalmente para saber cuánto mide originalmente
+	var textura_temp = load(datos["texture_path"])
+	
+
+	# -----------------------------------------------------------
 	
 	nuevo_objeto.position = spawn_point.position
 	$ContenedorObjetos.add_child(nuevo_objeto)
