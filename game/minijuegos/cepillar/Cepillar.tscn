@@ -1,57 +1,68 @@
-[gd_scene load_steps=21 format=3 uid="uid://0mq636bbf6c"]
+[gd_scene load_steps=27 format=3 uid="uid://0mq636bbf6c"]
 
-[ext_resource type="Texture2D" uid="uid://c08dj74ktjtg7" path="res://game/assets/fondos/CajaHerramientas.png" id="1_q76mo"]
 [ext_resource type="Script" uid="uid://k250t2wduodj" path="res://game/minijuegos/cepillar/cepillar.gd" id="1_ry835"]
-[ext_resource type="Texture2D" uid="uid://clwprn2q5r16r" path="res://game/assets/sprite/personajes/Asteroide.png" id="2_4ojmt"]
+[ext_resource type="Texture2D" uid="uid://t2r4prdkfif2" path="res://game/minijuegos/cepillar/assets/CajaHerramientas.png" id="2_2q01c"]
+[ext_resource type="Texture2D" uid="uid://bh8ok5jakiv0n" path="res://game/minijuegos/cepillar/assets/fondoPlanetAlgodon.png" id="2_a5j87"]
+[ext_resource type="Texture2D" uid="uid://cod301kr54s71" path="res://game/menu/fondo/AsteroideFinal.png" id="2_sh8yq"]
+[ext_resource type="Script" uid="uid://c7s1tehmws42i" path="res://game/menu/fondo_nebulosa.gd" id="3_2mj7n"]
 [ext_resource type="Script" uid="uid://2b1tq2vybfau" path="res://game/minijuegos/cepillar/asteroide.gd" id="3_6n0rt"]
-[ext_resource type="Texture2D" uid="uid://ck0am4ypah8w8" path="res://game/assets/sprite/UI/mancha.png" id="3_70mem"]
-[ext_resource type="Texture2D" uid="uid://c21jmdfw77wiw" path="res://game/assets/sprite/UI/Cepillo.png" id="3_cah6m"]
 [ext_resource type="Script" uid="uid://dk14gq4uokmas" path="res://game/minijuegos/cepillar/rocas.gd" id="3_p6kxp"]
-[ext_resource type="Texture2D" uid="uid://ds0ai1x55ekxa" path="res://game/assets/animaciones/RocaIntacta.png" id="4_p6kxp"]
-[ext_resource type="Texture2D" uid="uid://ct6bqmc74e2dq" path="res://game/assets/sprite/UI/hilodental.png" id="5_p6kxp"]
 [ext_resource type="Script" uid="uid://dopncrntbmlvp" path="res://game/minijuegos/cepillar/hilo_dental.gd" id="5_q76mo"]
-[ext_resource type="Texture2D" uid="uid://dalbfbck876ix" path="res://game/assets/sprite/UI/enjuague.png" id="6_q76mo"]
+[ext_resource type="Texture2D" uid="uid://c47p5s320e8ej" path="res://game/minijuegos/cepillar/assets/AsteroideTriste.png" id="6_bdevt"]
+[ext_resource type="Script" uid="uid://c1puq5komhe5w" path="res://game/config/EfectoIdle.gd" id="7_8i4xa"]
 [ext_resource type="Script" uid="uid://cpqsca52t0qhh" path="res://game/minijuegos/cepillar/cepillo.gd" id="8_2q01c"]
+[ext_resource type="Texture2D" uid="uid://c1jwh32en4tun" path="res://game/minijuegos/cepillar/assets/Nebulosa.png" id="8_witjg"]
+[ext_resource type="Script" uid="uid://ceqcf0glmie0q" path="res://game/minijuegos/cepillar/satelite.gd" id="9_witjg"]
+[ext_resource type="Texture2D" uid="uid://b3xcxps7y5wpr" path="res://game/minijuegos/cepillar/assets/SateliteIntacto.png" id="10_8i4xa"]
+[ext_resource type="Texture2D" uid="uid://by24c27od4bwp" path="res://game/minijuegos/cepillar/assets/CEPILLO INICIAL .png" id="11_2mj7n"]
+[ext_resource type="Texture2D" uid="uid://cx6add5inmm1e" path="res://game/minijuegos/cepillar/assets/RocaIntacta.png" id="11_8i4xa"]
 [ext_resource type="Script" uid="uid://cdr6if5tlbedu" path="res://game/minijuegos/cepillar/enjuague.gd" id="12_2q01c"]
+[ext_resource type="Texture2D" uid="uid://kkfa6vfnis4r" path="res://game/minijuegos/cepillar/assets/HiloDentalFinal.png" id="13_bdevt"]
+[ext_resource type="Texture2D" uid="uid://51vjnjavmoxm" path="res://game/minijuegos/cepillar/assets/EnjuagueBucal.png" id="15_8i4xa"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ry835"]
-size = Vector2(303, 761.5)
+size = Vector2(290, 778)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p6kxp"]
 size = Vector2(457, 133.5)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_p6kxp"]
-radius = 341.35464
+radius = 330.26593
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_a5j87"]
-radius = 220.22716
+radius = 249.61165
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qk7k4"]
-size = Vector2(140.5, 85)
+size = Vector2(192.25, 171.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6n0rt"]
-size = Vector2(142, 158.25)
+size = Vector2(175, 184)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2q01c"]
-size = Vector2(135.5, 196)
+size = Vector2(113.75, 182)
 
 [node name="Cepillar" type="Node2D" groups=["nivel_cepillar"]]
 position = Vector2(322, 180)
 script = ExtResource("1_ry835")
+textura_asteroide_feliz = ExtResource("2_sh8yq")
 
 [node name="fondo" type="Sprite2D" parent="."]
+position = Vector2(702, 387.5)
+scale = Vector2(0.8197675, 0.80533856)
+texture = ExtResource("2_a5j87")
+script = ExtResource("3_2mj7n")
 
 [node name="ZonaInicialHerramientas" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 0
 
 [node name="Sprite2D" type="Sprite2D" parent="ZonaInicialHerramientas"]
-position = Vector2(26.99997, 365)
-scale = Vector2(0.87343746, 1.5083333)
-texture = ExtResource("1_q76mo")
+position = Vector2(28.438726, 356.20697)
+scale = Vector2(2.203234, 1.7632557)
+texture = ExtResource("2_2q01c")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ZonaInicialHerramientas"]
-position = Vector2(38, 431.25)
+position = Vector2(27, 350)
 shape = SubResource("RectangleShape2D_ry835")
 
 [node name="Asteroide" type="Area2D" parent="."]
@@ -61,18 +72,21 @@ collision_mask = 2
 script = ExtResource("3_6n0rt")
 
 [node name="Spriteateroide" type="Sprite2D" parent="Asteroide"]
-position = Vector2(724, 365)
-scale = Vector2(0.740625, 0.67986107)
-texture = ExtResource("2_4ojmt")
+position = Vector2(767.09265, 408.94565)
+scale = Vector2(1.3397192, 1.2633667)
+texture = ExtResource("6_bdevt")
+script = ExtResource("7_8i4xa")
+velocidad = 1.335
+amplitud = 7.715
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Asteroide"]
 position = Vector2(769.00006, 230)
 shape = SubResource("RectangleShape2D_p6kxp")
 
 [node name="Suciedad" type="Sprite2D" parent="Asteroide"]
-position = Vector2(762, 232.99998)
-scale = Vector2(4.4240003, 1.4360001)
-texture = ExtResource("3_70mem")
+position = Vector2(759.7444, 229.07346)
+scale = Vector2(0.23314045, 0.16079536)
+texture = ExtResource("8_witjg")
 
 [node name="Rocas" type="Node2D" parent="Asteroide"]
 light_mask = 8
@@ -83,11 +97,12 @@ scale = Vector2(0.21093749, 0.26388887)
 [node name="Roca1" type="Area2D" parent="Asteroide/Rocas" groups=["rocas"]]
 collision_layer = 4
 collision_mask = 32
-script = ExtResource("3_p6kxp")
+script = ExtResource("9_witjg")
 
 [node name="Sprite2D" type="Sprite2D" parent="Asteroide/Rocas/Roca1"]
-scale = Vector2(0.99999994, 0.99999994)
-texture = ExtResource("4_p6kxp")
+position = Vector2(20.690918, 1.1011963)
+scale = Vector2(0.5710856, 0.5950011)
+texture = ExtResource("10_8i4xa")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Asteroide/Rocas/Roca1"]
 position = Vector2(42.666992, 11.368652)
@@ -100,12 +115,12 @@ collision_mask = 32
 script = ExtResource("3_p6kxp")
 
 [node name="Sprite2D" type="Sprite2D" parent="Asteroide/Rocas/Roca2"]
-position = Vector2(761.05566, 784.4212)
-scale = Vector2(1.0786813, 0.8105263)
-texture = ExtResource("4_p6kxp")
+position = Vector2(661.6438, 845.63696)
+scale = Vector2(0.6498512, 0.50047344)
+texture = ExtResource("11_8i4xa")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Asteroide/Rocas/Roca2"]
-position = Vector2(772.7411, 750.3161)
+position = Vector2(652.55615, 844.42633)
 scale = Vector2(0.99999994, 0.99999994)
 shape = SubResource("CircleShape2D_p6kxp")
 
@@ -115,12 +130,12 @@ collision_mask = 32
 script = ExtResource("3_p6kxp")
 
 [node name="Sprite2D" type="Sprite2D" parent="Asteroide/Rocas/Roca3"]
-position = Vector2(2313.4814, 98.52649)
-scale = Vector2(0.99999994, 0.99999994)
-texture = ExtResource("4_p6kxp")
+position = Vector2(2281.4336, 138.10364)
+scale = Vector2(0.5021745, 0.42559764)
+texture = ExtResource("11_8i4xa")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Asteroide/Rocas/Roca3"]
-position = Vector2(2365.63, 109.89502)
+position = Vector2(2309.5432, 103.48124)
 scale = Vector2(0.99999994, 0.99999994)
 shape = SubResource("CircleShape2D_p6kxp")
 
@@ -129,7 +144,7 @@ collision_layer = 8
 collision_mask = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Asteroide/AreaEnjuague"]
-position = Vector2(771, 395)
+position = Vector2(773.16296, 407.02872)
 shape = SubResource("CircleShape2D_a5j87")
 
 [node name="UI" type="CanvasLayer" parent="."]
@@ -162,14 +177,14 @@ position = Vector2(37, 640)
 collision_layer = 2
 script = ExtResource("8_2q01c")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="heramientas/Cepillo"]
-position = Vector2(-40, 0)
-shape = SubResource("RectangleShape2D_qk7k4")
-
 [node name="Sprite2D" type="Sprite2D" parent="heramientas/Cepillo"]
-position = Vector2(11, 4)
-scale = Vector2(0.42723578, 0.4858657)
-texture = ExtResource("3_cah6m")
+position = Vector2(-18, -298)
+scale = Vector2(0.17767866, 0.15754552)
+texture = ExtResource("11_2mj7n")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="heramientas/Cepillo"]
+position = Vector2(-7.125, -283.74997)
+shape = SubResource("RectangleShape2D_qk7k4")
 
 [node name="HiloDental" type="Area2D" parent="heramientas" groups=["herramientas"]]
 position = Vector2(0, 172)
@@ -178,12 +193,12 @@ collision_mask = 4
 script = ExtResource("5_q76mo")
 
 [node name="Sprite2D" type="Sprite2D" parent="heramientas/HiloDental"]
-position = Vector2(29.999939, 0)
-scale = Vector2(0.37109378, 0.3828125)
-texture = ExtResource("5_p6kxp")
+position = Vector2(30.000015, -84.00001)
+scale = Vector2(0.18171296, 0.1517857)
+texture = ExtResource("13_bdevt")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="heramientas/HiloDental"]
-position = Vector2(31, 6)
+position = Vector2(20.5, -80)
 shape = SubResource("RectangleShape2D_6n0rt")
 
 [node name="Enjuague" type="Area2D" parent="heramientas" groups=["herramientas"]]
@@ -193,12 +208,12 @@ collision_mask = 8
 script = ExtResource("12_2q01c")
 
 [node name="Sprite2D" type="Sprite2D" parent="heramientas/Enjuague"]
-position = Vector2(19, 34)
-scale = Vector2(0.36328125, 0.3984375)
-texture = ExtResource("6_q76mo")
+position = Vector2(28.000015, 232.49997)
+scale = Vector2(0.6935867, 0.53457)
+texture = ExtResource("15_8i4xa")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="heramientas/Enjuague"]
-position = Vector2(13, 29)
+position = Vector2(33.875, 230)
 shape = SubResource("RectangleShape2D_2q01c")
 
 [connection signal="area_entered" from="Asteroide/Rocas/Roca3" to="Asteroide/Rocas/Roca3" method="_on_area_entered"]

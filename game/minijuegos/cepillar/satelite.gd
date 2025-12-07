@@ -10,9 +10,9 @@ const PROGRESO_POR_GOLPE = 3.0
 # Al romperse (después del 3er golpe) suma el 1% restante para completar el 10%
 const PROGRESO_POR_ELIMINACION = 1.0
 # (Tus constantes de texturas se mantienen igual...)
-const TEXTURA_INTACTA = preload("res://game/minijuegos/cepillar/assets/RocaIntacta.png")
-const TEXTURA_DANADA_LIGERO = preload("res://game/minijuegos/cepillar/assets/RocaDañada.png")
-const TEXTURA_DANADA_GRAVE = preload("res://game/minijuegos/cepillar/assets/RocaMuyDañada.png")
+const TEXTURA_INTACTA = preload("res://game/minijuegos/cepillar/assets/SateliteIntacto.png")
+const TEXTURA_DANADA_LIGERO = preload("res://game/minijuegos/cepillar/assets/SateliteGolapeadoROCA1.png")
+const TEXTURA_DANADA_GRAVE = preload("res://game/minijuegos/cepillar/assets/SateliteRoto.png")
 
 @onready var sprite_roca = $Sprite2D
 

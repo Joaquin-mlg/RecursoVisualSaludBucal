@@ -10,9 +10,11 @@ script = ExtResource("1_fdht1")
 
 [node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="."]
 offset_left = 2.000122
-offset_right = 2.000122
+offset_right = 1998.1722
+offset_bottom = 1167.4641
+scale = Vector2(1.045, 1.045)
 stream = ExtResource("2_vvrcj")
-volume_db = -11.999999
+volume_db = -11.999997
 autoplay = true
 
 [node name="TouchScreenButton" type="TouchScreenButton" parent="."]

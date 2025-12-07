@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c08dj74ktjtg7"
-path="res://.godot/imported/CajaHerramientas.png-2e16932b1c49980b53ad89ab0287f5ef.ctex"
+uid="uid://issuhvims7e1"
+path="res://.godot/imported/SateliteGolapeadoROCA1.png-1d33b921dd2122bddb990a5f6f5bf4d8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://game/assets/fondos/CajaHerramientas.png"
-dest_files=["res://.godot/imported/CajaHerramientas.png-2e16932b1c49980b53ad89ab0287f5ef.ctex"]
+source_file="res://game/minijuegos/cepillar/assets/SateliteGolapeadoROCA1.png"
+dest_files=["res://.godot/imported/SateliteGolapeadoROCA1.png-1d33b921dd2122bddb990a5f6f5bf4d8.ctex"]
 
 [params]
 
