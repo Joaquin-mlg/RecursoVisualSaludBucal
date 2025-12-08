@@ -1,57 +1,134 @@
-[gd_scene load_steps=2 format=3 uid="uid://dd6imh0vc83uv"]
+[gd_scene load_steps=7 format=3 uid="uid://dd6imh0vc83uv"]
 
 [ext_resource type="Script" uid="uid://doh0tqbpj6itt" path="res://game/minijuegos/quiz/quizz_controller.gd" id="1_w8r81"]
+[ext_resource type="Texture2D" uid="uid://dl2r0vfyvkgkj" path="res://game/minijuegos/quiz/Assets/FondoNave.png" id="2_3yt00"]
+[ext_resource type="Script" uid="uid://c7s1tehmws42i" path="res://game/menu/fondo_nebulosa.gd" id="3_iyt34"]
+[ext_resource type="Texture2D" uid="uid://ch417fc0ft8t" path="res://game/minijuegos/quiz/Assets/lunasentada.png" id="4_iyt34"]
+[ext_resource type="Texture2D" uid="uid://dpo4aer71obh0" path="res://game/minijuegos/quiz/Assets/ContenedorPregunta.png" id="5_4mxj7"]
+[ext_resource type="Texture2D" uid="uid://4nbwkn0mm3p1" path="res://game/minijuegos/quiz/Assets/Contenedor pregunta.png" id="5_fgqrm"]
 
-[node name="Quizz" type="Control"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="Quizz" type="Node2D"]
 script = ExtResource("1_w8r81")
 
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(1015, 548)
+scale = Vector2(0.79338235, 0.7908163)
+texture = ExtResource("2_3yt00")
+script = ExtResource("3_iyt34")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(87.00001, 846)
+scale = Vector2(0.40406978, 0.47265622)
+texture = ExtResource("4_iyt34")
+script = ExtResource("3_iyt34")
+
 [node name="Panel" type="Panel" parent="."]
-layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="PreguntaLabel" type="RichTextLabel" parent="."]
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(506, 483)
+
+[node name="CajonPreguntas" type="TextureRect" parent="."]
+offset_left = -455.0
+offset_top = -18.0
+offset_right = 2483.0
+offset_bottom = 454.0
+texture = ExtResource("5_4mxj7")
+expand_mode = 1
+
+[node name="PreguntaLabel" type="RichTextLabel" parent="CajonPreguntas"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -459.0
-offset_top = -275.0
-offset_right = 670.0
-offset_bottom = -22.0
+offset_left = -579.0
+offset_top = -119.0
+offset_right = 550.0
+offset_bottom = 134.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/normal_font_size = 55
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="BotonA" type="TextureRect" parent="."]
+offset_left = 288.0
+offset_top = 328.0
+offset_right = 1752.0
+offset_bottom = 745.0
+mouse_filter = 2
+texture = ExtResource("5_fgqrm")
+expand_mode = 1
+
+[node name="Hitbox" type="Button" parent="BotonA"]
 layout_mode = 0
-offset_left = 506.0
-offset_top = 494.0
-offset_right = 1615.0
-offset_bottom = 718.0
+offset_left = 1.0
+offset_top = 134.0
+offset_right = 1455.0
+offset_bottom = 291.0
+flat = true
 
-[node name="BotonA" type="Button" parent="VBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 60
+[node name="Label" type="Label" parent="BotonA/Hitbox"]
+layout_mode = 0
+offset_left = 75.0
+offset_top = 39.0
+offset_right = 1400.0
+offset_bottom = 121.0
+theme_override_font_sizes/font_size = 50
+horizontal_alignment = 1
 
-[node name="BotonB" type="Button" parent="VBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 60
+[node name="BotonB" type="TextureRect" parent="."]
+offset_left = 295.0
+offset_top = 552.0
+offset_right = 1759.0
+offset_bottom = 969.0
+mouse_filter = 2
+texture = ExtResource("5_fgqrm")
+expand_mode = 1
 
-[node name="BotonC" type="Button" parent="VBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 60
+[node name="Hitbox" type="Button" parent="BotonB"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 134.0
+offset_right = 1458.0
+offset_bottom = 291.0
+flat = true
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="VBoxContainer"]
-position = Vector2(0, -11)
+[node name="Label" type="Label" parent="BotonB/Hitbox"]
+layout_mode = 0
+offset_left = 62.0
+offset_top = 33.0
+offset_right = 1404.0
+offset_bottom = 119.0
+theme_override_font_sizes/font_size = 50
+horizontal_alignment = 1
+
+[node name="BotonC" type="TextureRect" parent="."]
+offset_left = 292.0
+offset_top = 775.0
+offset_right = 1756.0
+offset_bottom = 1192.0
+mouse_filter = 2
+texture = ExtResource("5_fgqrm")
+expand_mode = 1
+
+[node name="Hitbox" type="Button" parent="BotonC"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 134.0
+offset_right = 1452.0
+offset_bottom = 291.0
+flat = true
+
+[node name="Label" type="Label" parent="BotonC/Hitbox"]
+layout_mode = 0
+offset_left = 43.0
+offset_top = 28.0
+offset_right = 1395.0
+offset_bottom = 120.0
+theme_override_font_sizes/font_size = 50
+horizontal_alignment = 1

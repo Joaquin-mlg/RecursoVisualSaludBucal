@@ -1,23 +1,35 @@
-extends Control
+extends Node2D
 
 # --- REFERENCIAS UI ---
-@onready var label_pregunta: RichTextLabel = $PreguntaLabel
-@onready var btn_opcion_a: Button = $VBoxContainer/BotonA
-@onready var btn_opcion_b: Button = $VBoxContainer/BotonB
-@onready var btn_opcion_c: Button = $VBoxContainer/BotonC
+@onready var label_pregunta: RichTextLabel = $CajonPreguntas/PreguntaLabel
+
+# Referenciamos al PADRE (la imagen visual) para cambiar colores
+@onready var visual_a: TextureRect = $BotonA
+@onready var visual_b: TextureRect = $BotonB
+@onready var visual_c: TextureRect = $BotonC
+
+# Referenciamos al HIJO (el botón invisible) para detectar el clic
+@onready var btn_a: Button = $BotonA/Hitbox
+@onready var btn_b: Button = $BotonB/Hitbox
+@onready var btn_c: Button = $BotonC/Hitbox
+
+@onready var label_a: Label = $BotonA/Hitbox/Label
+@onready var label_b: Label = $BotonB/Hitbox/Label
+@onready var label_c: Label = $BotonC/Hitbox/Label
+
 @onready var audio_player = $AudioStreamPlayer2D 
 
-# --- VARIABLES DE REPORTE ---
+# --- VARIABLES ---
 var aciertos: int = 0
 var errores: int = 0
 var tiempo_inicio: int = 0
 
 var preguntas: Array = [
-	{ "texto": "¿Cómo retiramos la suciedad de los asteroides dentales?", "opciones": ["Con un cepillo espacial", "Con un caramelo", "Con un láser"], "correcta": 0 },
-	{ "texto": "¿Qué usamos para fortalecer el escudo de los planetas?", "opciones": ["Pasta con flúor", "Chocolate derretido", "Jugo de limón"], "correcta": 0 },
-	{ "texto": "¿Cuándo debemos limpiar la galaxia de nuestra boca?", "opciones": ["Solo en Navidad", "Después de comer", "Cuando duela"], "correcta": 1 },
-	{ "texto": "¿Qué usamos para limpiar entre los meteoritos?", "opciones": ["Hilo dental", "Cuerda de saltar", "Un lápiz"], "correcta": 0 },
-	{ "texto": "¿Quién es el comandante que revisa nuestra salud?", "opciones": ["El Dentista", "El Panadero", "Un Robot"], "correcta": 0 }
+	{ "texto": "¿Cómo retiramos la suciedad de los asteroides?", "opciones": ["Con enjuague bucal", "Con un caramelo", "Con un láser"], "correcta": 0 },
+	{ "texto": "¿Qué usamos para quitar el polvo de los planetas?", "opciones": ["cepillo de dientes", "Chocolate derretido", "Jugo de limón"], "correcta": 0 },
+	{ "texto": "¿Cuándo debemos limpiar nuestros dientes?", "opciones": ["Solo en Navidad", "Después de comer", "Cuando duela"], "correcta": 1 },
+	{ "texto": "¿Qué usamos para quitar asteroides y satelites pegados?", "opciones": ["Hilo dental", "Cuerda de saltar", "Un lápiz"], "correcta": 0 },
+	{ "texto": "¿Que le gusta a Astillin la ardilla de las caries", "opciones": ["Chocolate", "Cepillos", "capas rojas"], "correcta": 0 }
 ]
 
 var indice_actual: int = 0
@@ -27,10 +39,11 @@ var quiz_terminado: bool = false
 func _ready():
 	tiempo_inicio = Time.get_ticks_msec()
 	
-	# Conexiones
-	btn_opcion_a.pressed.connect(func(): _verificar_respuesta(0, btn_opcion_a))
-	btn_opcion_b.pressed.connect(func(): _verificar_respuesta(1, btn_opcion_b))
-	btn_opcion_c.pressed.connect(func(): _verificar_respuesta(2, btn_opcion_c))
+	# Conectamos la señal del botón invisible (Hitbox)
+	# Pasamos como argumentos: el índice y EL NODO VISUAL (el padre) para pintarlo
+	btn_a.pressed.connect(func(): _verificar_respuesta(0, btn_a, visual_a))
+	btn_b.pressed.connect(func(): _verificar_respuesta(1, btn_b, visual_b))
+	btn_c.pressed.connect(func(): _verificar_respuesta(2, btn_c, visual_c))
 	
 	_aplicar_accesibilidad()
 	cargar_pregunta()
@@ -38,7 +51,10 @@ func _ready():
 func _aplicar_accesibilidad():
 	var escala = GlobalSettings.tamanio_actual
 	label_pregunta.scale = Vector2(escala, escala)
-	$VBoxContainer.scale = Vector2(escala, escala)
+	# Escalamos los contenedores visuales
+	visual_a.scale = Vector2(escala, escala)
+	visual_b.scale = Vector2(escala, escala)
+	visual_c.scale = Vector2(escala, escala)
 
 func cargar_pregunta():
 	if indice_actual >= preguntas.size():
@@ -48,19 +64,24 @@ func cargar_pregunta():
 	pregunta_actual = preguntas[indice_actual]
 	
 	label_pregunta.text = pregunta_actual["texto"]
-	btn_opcion_a.text = "A) " + pregunta_actual["opciones"][0]
-	btn_opcion_b.text = "B) " + pregunta_actual["opciones"][1]
-	btn_opcion_c.text = "C) " + pregunta_actual["opciones"][2]
+	
+	# Asignamos texto a los labels que están dentro de las hitboxes
+	label_a.text = "A) " + pregunta_actual["opciones"][0]
+	label_b.text = "B) " + pregunta_actual["opciones"][1]
+	label_c.text = "C) " + pregunta_actual["opciones"][2]
 	
 	_resetear_botones()
 
-func _verificar_respuesta(indice_seleccionado: int, boton_presionado: Button):
+# AHORA RECIBE 3 ARGUMENTOS: Indice, El Botón (para bloquearlo), La Imagen (para pintarla)
+func _verificar_respuesta(indice_seleccionado: int, boton_presionado: Button, imagen_visual: TextureRect):
 	if quiz_terminado: return
 	
 	if indice_seleccionado == pregunta_actual["correcta"]:
 		print("¡Correcto!")
 		aciertos += 1
-		boton_presionado.modulate = Color.GREEN
+		# Pintamos la imagen visual, no el botón invisible
+		imagen_visual.modulate = Color.GREEN
+		
 		if OS.has_feature("mobile"): Input.vibrate_handheld(50)
 		
 		_bloquear_todos_botones()
@@ -71,36 +92,31 @@ func _verificar_respuesta(indice_seleccionado: int, boton_presionado: Button):
 	else:
 		print("Incorrecto")
 		errores += 1
+		# Bloqueamos el botón invisible
 		boton_presionado.disabled = true 
-		boton_presionado.modulate = Color.RED
+		# Pintamos la imagen visual de rojo
+		imagen_visual.modulate = Color.RED
+		
 		if OS.has_feature("mobile"): Input.vibrate_handheld(300)
 
 func finalizar_quiz():
 	quiz_terminado = true
-	print("Quiz terminado. Guardando y cambiando de escena...")
-	
-	# 1. GUARDAR DATOS EN LA LIBRETA
 	var tiempo_fin = Time.get_ticks_msec()
 	var segundos_totales = (tiempo_fin - tiempo_inicio) / 1000
 	var puntaje_final = aciertos * 20 
 	
-	GlobalSettings.registrar_partida(
-		"Quiz Espacial Final", 
-		puntaje_final, 
-		int(segundos_totales), 
-		errores
-	)
-	
-	# 2. CAMBIAR A LA ESCENA DEL REPORTE FINAL
-	# ¡Crea esta escena y pon la ruta correcta aquí!
+	GlobalSettings.registrar_partida("Quiz Espacial Final", puntaje_final, int(segundos_totales), errores)
 	get_tree().change_scene_to_file("res://game/reporte_final/ReporteFinal.tscn")
 
 func _resetear_botones():
-	for btn in [btn_opcion_a, btn_opcion_b, btn_opcion_c]:
+	# Reseteamos lógica (botones) y visuales (imágenes)
+	for btn in [btn_a, btn_b, btn_c]:
 		btn.disabled = false
-		btn.modulate = Color(1, 1, 1)
+	
+	for visual in [visual_a, visual_b, visual_c]:
+		visual.modulate = Color(1, 1, 1)
 
 func _bloquear_todos_botones():
-	btn_opcion_a.disabled = true
-	btn_opcion_b.disabled = true
-	btn_opcion_c.disabled = true
+	btn_a.disabled = true
+	btn_b.disabled = true
+	btn_c.disabled = true
