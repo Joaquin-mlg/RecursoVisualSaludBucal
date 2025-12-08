@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="RecursoVisual"
-run/main_scene="uid://bpohxb42v1feu"
+run/main_scene="uid://gbe3nm3hwfva"
 config/features=PackedStringArray("4.5", "Mobile")
 
 [autoload]
