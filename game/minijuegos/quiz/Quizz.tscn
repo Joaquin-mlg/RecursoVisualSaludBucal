@@ -22,13 +22,6 @@ scale = Vector2(0.40406978, 0.47265622)
 texture = ExtResource("4_iyt34")
 script = ExtResource("3_iyt34")
 
-[node name="Panel" type="Panel" parent="."]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 position = Vector2(506, 483)
 

@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://bpohxb42v1feu"]
+[gd_scene load_steps=4 format=3 uid="uid://bpohxb42v1feu"]
 
 [ext_resource type="Script" uid="uid://ywdm44qqpk4e" path="res://game/reporte_final/reporte_final.gd" id="1_f6gm6"]
+[ext_resource type="Texture2D" uid="uid://dmbilf2h5rskm" path="res://game/reporte_final/Assets/FondoLunaDespertando.png" id="2_elfpd"]
+[ext_resource type="Script" uid="uid://c7s1tehmws42i" path="res://game/menu/fondo_nebulosa.gd" id="3_dheew"]
 
 [node name="MenuReporte" type="Control"]
 layout_mode = 3
@@ -11,6 +13,17 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_f6gm6")
 
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(974, 540)
+scale = Vector2(0.8066176, 0.73915815)
+texture = ExtResource("2_elfpd")
+script = ExtResource("3_dheew")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 0
+offset_right = 1930.0
+offset_bottom = 1081.0
+
 [node name="Titulo" type="Label" parent="."]
 layout_mode = 1
 anchors_preset = 8
@@ -18,7 +31,7 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -883.77185
+offset_left = -937.0
 offset_top = -535.5
 offset_right = 894.0
 offset_bottom = -324.0
