@@ -1,57 +1,56 @@
 extends Node
 
-# Señal para avisar a todos los objetos que se actualicen
-signal configuracion_cambiada
+# --- SEÑALES ---
+# Esta señal avisa al sistema viejo (AccesibilidadUI)
+signal configuracion_cambiada 
+# Esta señal avisa a los botones nuevos para cambiar PNGs
+signal high_contrast_changed(is_enabled: bool)
 
-# ---------------------------------------------
-# 1. CONFIGURACIÓN (ACCESIBILIDAD)
-# ---------------------------------------------
+# --- VARIABLES ---
+const OPCIONES_TAMANIO = [1.0, 1.1, 1.2, 1.3]
+const OPCIONES_VELOCIDAD = [1.0, 0.8, 0.6, 0.5]
 
-# Definición de pasos (La traducción)
-const OPCIONES_TAMANIO = [1.0, 1.2, 1.4, 1.6] 
-const OPCIONES_VELOCIDAD = [1.0, 0.8, 0.6, 0.5] 
-
-# Variables Públicas (Lo que usan los objetos)
-var tamanio_actual: float = 1.0 
+var tamanio_actual: float = 1.0
 var velocidad_actual: float = 1.0
-var alto_contraste_activo: bool = false
 
-# Variables para guardar (Los índices 1-4 de los sliders)
+# UNIFICACIÓN: Usaremos solo esta variable para todo
+var alto_contraste_activo: bool = false 
+
 var indice_tamanio_guardado: int = 1
 var indice_velocidad_guardado: int = 1
 
-# ---------------------------------------------
-# 2. DATOS DE LA SESIÓN (REPORTE)
-# ---------------------------------------------
-
+# --- REPORTE (Sin cambios, lo dejo igual) ---
 var nombre_jugador: String = "Anonimo"
-var reporte_sesion: Array = [] # Aquí guardaremos diccionarios con los datos
-
-# ---------------------------------------------
-# 3. FUNCIONES DEL SISTEMA
-# ---------------------------------------------
+var reporte_sesion: Array = []
 
 func _ready():
-	# Valores por defecto al arrancar
 	actualizar_configuracion(1, 1, false)
 
-# Esta función recibe los valores DEL SLIDER (1, 2, 3 o 4)
+# --- FUNCIÓN UNIFICADA PARA EL CHECKBOX ---
+func set_high_contrast(enabled: bool):
+	alto_contraste_activo = enabled
+	
+	# 1. Avisamos a los botones de texturas (Tus nuevos botones)
+	high_contrast_changed.emit(alto_contraste_activo)
+	
+	# 2. Avisamos a la UI general (Tu sistema antiguo de escalas)
+	configuracion_cambiada.emit()
+
+# --- FUNCIÓN PARA LOS SLIDERS Y CARGA ---
 func actualizar_configuracion(paso_tam: int, paso_vel: int, alto_contraste: bool):
-	# 1. Guardamos los índices
 	indice_tamanio_guardado = paso_tam
 	indice_velocidad_guardado = paso_vel
+	
+	# Actualizamos la variable maestra
 	alto_contraste_activo = alto_contraste
 	
-	# 2. TRADUCCIÓN: Convertimos el paso (1-4) en valor real
 	tamanio_actual = OPCIONES_TAMANIO[paso_tam - 1]
 	velocidad_actual = OPCIONES_VELOCIDAD[paso_vel - 1]
-	
-	# 3. Aplicar lógica de motor (Velocidad global del juego)
 	Engine.time_scale = velocidad_actual
 	
-	# 4. Avisar a todos
-	emit_signal("configuracion_cambiada")
-
+	# Emitimos ambas señales para que TODO se actualice
+	configuracion_cambiada.emit()
+	high_contrast_changed.emit(alto_contraste_activo)
 # ---------------------------------------------
 # 4. FUNCIONES DE REGISTRO (LA LIBRETA)
 # ---------------------------------------------

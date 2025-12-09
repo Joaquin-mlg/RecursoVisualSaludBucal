@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://csqmrn2giirhi"
-path="res://.godot/imported/BotonIniciarFinal.png-cbbde7506834401075cd0677e36cf104.ctex"
+uid="uid://c7kudpp4g3mlg"
+path="res://.godot/imported/BotonInicioAC.png-a4e9018c5bcfb88dd9296f1dc76bc1f4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://game/menu/fondo/BotonIniciarFinal.png"
-dest_files=["res://.godot/imported/BotonIniciarFinal.png-cbbde7506834401075cd0677e36cf104.ctex"]
+source_file="res://game/config/AssetsAC/BotonInicioAC.png"
+dest_files=["res://.godot/imported/BotonInicioAC.png-a4e9018c5bcfb88dd9296f1dc76bc1f4.ctex"]
 
 [params]
 

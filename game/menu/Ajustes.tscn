@@ -1,11 +1,19 @@
-[gd_scene load_steps=13 format=3 uid="uid://cknub2h7cv3tj"]
+[gd_scene load_steps=21 format=3 uid="uid://cknub2h7cv3tj"]
 
 [ext_resource type="Script" uid="uid://cj6bf2lo63rbv" path="res://game/menu/ajustes.gd" id="1_pxmix"]
 [ext_resource type="Texture2D" uid="uid://ccx60ceky8s55" path="res://game/menu/fondo/FondoFinal.png" id="2_q0yxy"]
+[ext_resource type="Texture2D" uid="uid://bya6mqv7agr5g" path="res://game/menu/fondo/boton-Atrás.png" id="2_q8h2j"]
 [ext_resource type="Script" uid="uid://c7s1tehmws42i" path="res://game/menu/fondo_nebulosa.gd" id="3_2uhmv"]
+[ext_resource type="Texture2D" uid="uid://dslibc52le8n3" path="res://game/config/AssetsAC/BotonAtrasAC.png" id="3_6er48"]
 [ext_resource type="Texture2D" uid="uid://chu0h1d12tr34" path="res://game/menu/fondo/BotonAltoContraste.png" id="4_qu63r"]
 [ext_resource type="Texture2D" uid="uid://bbrv6wefv2syq" path="res://game/menu/fondo/BotonAltoContrasteBACIO.png" id="5_qu63r"]
+[ext_resource type="Script" uid="uid://ccl5pkso3yx6h" path="res://game/config/AcceisbileIconBtn.gd" id="5_xe37k"]
+[ext_resource type="Texture2D" uid="uid://dmgc44besbjii" path="res://game/config/AssetsAC/BotonGuardarAC.png" id="6_2jccr"]
 [ext_resource type="Texture2D" uid="uid://cm07d8y0b4urv" path="res://game/menu/fondo/Boton Guardar.png" id="6_6ekh6"]
+[ext_resource type="Script" uid="uid://jd5eygdu31h2" path="res://game/menu/modo_alto_contraste.gd" id="7_jk43q"]
+[ext_resource type="Script" uid="uid://bitmpin1jlyik" path="res://game/menu/AccessibleSlider.gd" id="9_6er48"]
+[ext_resource type="Texture2D" uid="uid://bjwo8olwmbfaf" path="res://game/config/AssetsAC/BotonAltoContraste.png" id="10_wc3hg"]
+[ext_resource type="Texture2D" uid="uid://bjqd7o4w81630" path="res://game/config/AssetsAC/BotonAltoContrasteBACIO.png" id="11_q2a4r"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6ekh6"]
 content_margin_top = 10.0
@@ -55,6 +63,10 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_pxmix")
+volver_normal = ExtResource("2_q8h2j")
+volver_ac = ExtResource("3_6er48")
+guardar_normal = ExtResource("6_6ekh6")
+guardar_ac = ExtResource("6_2jccr")
 
 [node name="Fondo" type="Sprite2D" parent="."]
 position = Vector2(995.00006, 574.00006)
@@ -64,15 +76,17 @@ script = ExtResource("3_2uhmv")
 
 [node name="Volver_Guardar" type="Button" parent="."]
 layout_mode = 0
-offset_left = 627.0
-offset_top = 721.0
-offset_right = 1157.0
-offset_bottom = 961.0
+offset_left = 737.0
+offset_top = 737.0
+offset_right = 1267.0
+offset_bottom = 977.0
 theme_override_font_sizes/font_size = 30
-icon = ExtResource("6_6ekh6")
 flat = true
 icon_alignment = 1
 expand_icon = true
+script = ExtResource("5_xe37k")
+normal_icon = ExtResource("6_6ekh6")
+high_contrast_icon = ExtResource("6_2jccr")
 
 [node name="OrgVertical" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -106,6 +120,7 @@ rounded = true
 tick_count = 4
 ticks_on_borders = true
 ticks_position = 3
+script = ExtResource("9_6er48")
 
 [node name="VelocidadJuego" type="Label" parent="OrgVertical"]
 layout_mode = 2
@@ -125,6 +140,7 @@ rounded = true
 tick_count = 4
 ticks_on_borders = true
 ticks_position = 3
+script = ExtResource("9_6er48")
 
 [node name="ModoAltoContraste" type="CheckBox" parent="OrgVertical"]
 custom_minimum_size = Vector2(100, 100)
@@ -135,8 +151,15 @@ size_flags_stretch_ratio = 1.65
 theme_override_font_sizes/font_size = 30
 theme_override_icons/checked = ExtResource("4_qu63r")
 theme_override_icons/unchecked = ExtResource("5_qu63r")
+icon = ExtResource("5_qu63r")
 flat = true
 icon_alignment = 1
 expand_icon = true
+script = ExtResource("7_jk43q")
+normal_checked = ExtResource("4_qu63r")
+normal_unchecked = ExtResource("5_qu63r")
+ac_checked = ExtResource("10_wc3hg")
+ac_unchecked = ExtResource("11_q2a4r")
 
 [connection signal="pressed" from="Volver_Guardar" to="." method="_on_volver_guardar_pressed"]
+[connection signal="toggled" from="OrgVertical/ModoAltoContraste" to="OrgVertical/ModoAltoContraste" method="_on_toggled"]

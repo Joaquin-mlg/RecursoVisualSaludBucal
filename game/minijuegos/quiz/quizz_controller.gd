@@ -106,8 +106,7 @@ func finalizar_quiz():
 	var puntaje_final = aciertos * 20 
 	
 	GlobalSettings.registrar_partida("Quiz Espacial Final", puntaje_final, int(segundos_totales), errores)
-	get_tree().change_scene_to_file("res://game/reporte_final/ReporteFinal.tscn")
-
+	Transicion.cambiar_escena("res://game/historia/Historia5.tscn")
 func _resetear_botones():
 	# Reseteamos lógica (botones) y visuales (imágenes)
 	for btn in [btn_a, btn_b, btn_c]:

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://5sdfk7dfqo6m"
-path="res://.godot/imported/BotonAltoConstrateVacio.png-3347fa4a3af2376442567cae7d28e5a8.ctex"
+uid="uid://bjqd7o4w81630"
+path="res://.godot/imported/BotonAltoContrasteBACIO.png-e748f43d9c0742981b4a0e5b676d3417.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://game/menu/fondo/BotonAltoConstrateVacio.png"
-dest_files=["res://.godot/imported/BotonAltoConstrateVacio.png-3347fa4a3af2376442567cae7d28e5a8.ctex"]
+source_file="res://game/config/AssetsAC/BotonAltoContrasteBACIO.png"
+dest_files=["res://.godot/imported/BotonAltoContrasteBACIO.png-e748f43d9c0742981b4a0e5b676d3417.ctex"]
 
 [params]
 

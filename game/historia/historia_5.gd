@@ -9,7 +9,7 @@ extends Node2D
 var historia_terminada = false
 
 func _ready():
-	print("--- INICIANDO VIDEO HISTORIA 3 ---")
+	print("--- INICIANDO VIDEO HISTORIA 5 ---")
 	
 	# Configurar telón inicial (si copiaste el nodo TelonNegro a esta escena)
 	
@@ -25,14 +25,14 @@ func terminar_historia():
 		return
 		
 	historia_terminada = true
-	print("Fin de historia 3, cambiando a Cepillar...")
+	print("Fin de historia 5, cambiando a quizz...")
 	
 	if OS.has_feature("mobile"):
 		Input.vibrate_handheld(50)
 		
 	# Usamos Transicion como en tu código "bueno", apuntando a Cepillar
 	# Si en esta escena no tienes el autoload Transicion, usa get_tree().change_scene_to_file(...)
-	Transicion.cambiar_escena("res://game/minijuegos/clasificacion/Clasificacion.tscn")
+	Transicion.cambiar_escena("res://game/reporte_final/ReporteFinal.tscn")
 
 func _input(event):
 	# Permitir saltar el video (Skip)
