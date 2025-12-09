@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://cknub2h7cv3tj"]
+[gd_scene load_steps=26 format=3 uid="uid://cknub2h7cv3tj"]
 
 [ext_resource type="Script" uid="uid://cj6bf2lo63rbv" path="res://game/menu/ajustes.gd" id="1_pxmix"]
 [ext_resource type="Texture2D" uid="uid://ccx60ceky8s55" path="res://game/menu/fondo/FondoFinal.png" id="2_q0yxy"]
@@ -10,8 +10,13 @@
 [ext_resource type="Script" uid="uid://ccl5pkso3yx6h" path="res://game/config/AcceisbileIconBtn.gd" id="5_xe37k"]
 [ext_resource type="Texture2D" uid="uid://dmgc44besbjii" path="res://game/config/AssetsAC/BotonGuardarAC.png" id="6_2jccr"]
 [ext_resource type="Texture2D" uid="uid://cm07d8y0b4urv" path="res://game/menu/fondo/Boton Guardar.png" id="6_6ekh6"]
+[ext_resource type="AudioStream" uid="uid://da70gfayff7ee" path="res://game/audio/narraciones/SliderTamanio.mp3" id="6_a2oec"]
 [ext_resource type="Script" uid="uid://jd5eygdu31h2" path="res://game/menu/modo_alto_contraste.gd" id="7_jk43q"]
+[ext_resource type="AudioStream" uid="uid://jtadm3ncyjf5" path="res://game/audio/narraciones/SliderVelocidad.mp3" id="7_pqgu1"]
+[ext_resource type="AudioStream" uid="uid://da4tf0dmh16r3" path="res://game/audio/narraciones/AltoContraste.mp3" id="8_va7k5"]
 [ext_resource type="Script" uid="uid://bitmpin1jlyik" path="res://game/menu/AccessibleSlider.gd" id="9_6er48"]
+[ext_resource type="AudioStream" uid="uid://xv0775qfkfx7" path="res://game/audio/narraciones/Guardar.mp3" id="9_pnqje"]
+[ext_resource type="AudioStream" uid="uid://3s4prjfm45o3" path="res://game/audio/narraciones/Regresa-a-la-pantall_1.mp3" id="9_pqgu1"]
 [ext_resource type="Texture2D" uid="uid://bjwo8olwmbfaf" path="res://game/config/AssetsAC/BotonAltoContraste.png" id="10_wc3hg"]
 [ext_resource type="Texture2D" uid="uid://bjqd7o4w81630" path="res://game/config/AssetsAC/BotonAltoContrasteBACIO.png" id="11_q2a4r"]
 
@@ -67,6 +72,11 @@ volver_normal = ExtResource("2_q8h2j")
 volver_ac = ExtResource("3_6er48")
 guardar_normal = ExtResource("6_6ekh6")
 guardar_ac = ExtResource("6_2jccr")
+audio_slider_tam = ExtResource("6_a2oec")
+audio_slider_vel = ExtResource("7_pqgu1")
+audio_check_ac = ExtResource("8_va7k5")
+audio_btn_volver = ExtResource("9_pqgu1")
+audio_btn_guardar = ExtResource("9_pnqje")
 
 [node name="Fondo" type="Sprite2D" parent="."]
 position = Vector2(995.00006, 574.00006)
@@ -80,6 +90,7 @@ offset_left = 737.0
 offset_top = 737.0
 offset_right = 1267.0
 offset_bottom = 977.0
+accessibility_name = "Boton Volver/Guardar"
 theme_override_font_sizes/font_size = 30
 flat = true
 icon_alignment = 1
@@ -110,6 +121,8 @@ text = "Tamaño de los botones"
 [node name="SliderTamBotones" type="HSlider" parent="OrgVertical"]
 custom_minimum_size = Vector2(0, 80)
 layout_mode = 2
+accessibility_name = "Slider de tamaño de botones"
+accessibility_description = "a la derecha aumenta el tamaño , a la derecha reduce"
 theme_override_styles/slider = SubResource("StyleBoxFlat_6ekh6")
 theme_override_styles/grabber_area = SubResource("StyleBoxFlat_jk43q")
 theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_b4gdk")
@@ -130,6 +143,8 @@ text = "Velocidad de Juego"
 [node name="SliderVelocidad" type="HSlider" parent="OrgVertical"]
 custom_minimum_size = Vector2(0, 80)
 layout_mode = 2
+accessibility_name = "Slider Velocidad de juego"
+accessibility_description = "Izquierda reduce, derecha aumenta"
 theme_override_styles/slider = SubResource("StyleBoxFlat_xe37k")
 theme_override_styles/grabber_area = SubResource("StyleBoxFlat_2jccr")
 theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_wc3hg")
@@ -148,6 +163,7 @@ layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 size_flags_stretch_ratio = 1.65
+accessibility_name = "Boton de alto contraste"
 theme_override_font_sizes/font_size = 30
 theme_override_icons/checked = ExtResource("4_qu63r")
 theme_override_icons/unchecked = ExtResource("5_qu63r")
@@ -160,6 +176,8 @@ normal_checked = ExtResource("4_qu63r")
 normal_unchecked = ExtResource("5_qu63r")
 ac_checked = ExtResource("10_wc3hg")
 ac_unchecked = ExtResource("11_q2a4r")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 
 [connection signal="pressed" from="Volver_Guardar" to="." method="_on_volver_guardar_pressed"]
 [connection signal="toggled" from="OrgVertical/ModoAltoContraste" to="OrgVertical/ModoAltoContraste" method="_on_toggled"]

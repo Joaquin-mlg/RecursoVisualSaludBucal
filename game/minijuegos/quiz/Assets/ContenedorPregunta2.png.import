@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://4nbwkn0mm3p1"
-path="res://.godot/imported/Contenedor pregunta.png-b14d6dd6b6d670d4d7e1664984102c91.ctex"
+uid="uid://bs8q465a18ss8"
+path="res://.godot/imported/ContenedorPregunta2.png-ce0a4fa6810c24e5cfe50bb811e3c152.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://game/minijuegos/quiz/Assets/Contenedor pregunta.png"
-dest_files=["res://.godot/imported/Contenedor pregunta.png-b14d6dd6b6d670d4d7e1664984102c91.ctex"]
+source_file="res://game/minijuegos/quiz/Assets/ContenedorPregunta2.png"
+dest_files=["res://.godot/imported/ContenedorPregunta2.png-ce0a4fa6810c24e5cfe50bb811e3c152.ctex"]
 
 [params]
 

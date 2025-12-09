@@ -1,14 +1,21 @@
-[gd_scene load_steps=7 format=3 uid="uid://dd6imh0vc83uv"]
+[gd_scene load_steps=12 format=3 uid="uid://dd6imh0vc83uv"]
 
 [ext_resource type="Script" uid="uid://doh0tqbpj6itt" path="res://game/minijuegos/quiz/quizz_controller.gd" id="1_w8r81"]
 [ext_resource type="Texture2D" uid="uid://dl2r0vfyvkgkj" path="res://game/minijuegos/quiz/Assets/FondoNave.png" id="2_3yt00"]
+[ext_resource type="Texture2D" uid="uid://mj8hyl4d7wn" path="res://game/config/AssetsAC/ContenedorRespuestaAC.png" id="2_v7cvu"]
 [ext_resource type="Script" uid="uid://c7s1tehmws42i" path="res://game/menu/fondo_nebulosa.gd" id="3_iyt34"]
+[ext_resource type="Texture2D" uid="uid://hdux6r5jqctu" path="res://game/config/AssetsAC/ContenedorPreguntaAC.png" id="3_vbapw"]
 [ext_resource type="Texture2D" uid="uid://ch417fc0ft8t" path="res://game/minijuegos/quiz/Assets/lunasentada.png" id="4_iyt34"]
-[ext_resource type="Texture2D" uid="uid://dpo4aer71obh0" path="res://game/minijuegos/quiz/Assets/ContenedorPregunta.png" id="5_4mxj7"]
-[ext_resource type="Texture2D" uid="uid://4nbwkn0mm3p1" path="res://game/minijuegos/quiz/Assets/Contenedor pregunta.png" id="5_fgqrm"]
+[ext_resource type="Script" uid="uid://dq2ngtdyxvr2" path="res://game/config/AccesibleTexture.gd" id="7_fgj2v"]
+[ext_resource type="Texture2D" uid="uid://bs8q465a18ss8" path="res://game/minijuegos/quiz/Assets/ContenedorPregunta2.png" id="7_vbapw"]
+[ext_resource type="Script" uid="uid://dwr0sdl0irisw" path="res://game/config/ControladorSonidos.gd" id="9_c5k03"]
+[ext_resource type="Texture2D" uid="uid://v326owdooiin" path="res://game/minijuegos/quiz/Assets/RespuestaA.png" id="9_fgj2v"]
+[ext_resource type="AudioStream" uid="uid://djhel0xkxvkv0" path="res://game/audio/efectos/click_002.ogg" id="10_fgj2v"]
 
 [node name="Quizz" type="Node2D"]
 script = ExtResource("1_w8r81")
+textura_boton_ac = ExtResource("2_v7cvu")
+textura_cajon_ac = ExtResource("3_vbapw")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(1015, 548)
@@ -26,12 +33,15 @@ script = ExtResource("3_iyt34")
 position = Vector2(506, 483)
 
 [node name="CajonPreguntas" type="TextureRect" parent="."]
-offset_left = -455.0
-offset_top = -18.0
-offset_right = 2483.0
-offset_bottom = 454.0
-texture = ExtResource("5_4mxj7")
+offset_left = -75.0
+offset_top = -2.0
+offset_right = 2172.0
+offset_bottom = 902.0
+texture = ExtResource("7_vbapw")
 expand_mode = 1
+script = ExtResource("7_fgj2v")
+normal_texture = ExtResource("7_vbapw")
+high_contrast_texture = ExtResource("3_vbapw")
 
 [node name="PreguntaLabel" type="RichTextLabel" parent="CajonPreguntas"]
 layout_mode = 1
@@ -40,88 +50,116 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -579.0
-offset_top = -119.0
-offset_right = 550.0
-offset_bottom = 134.0
+offset_left = -735.5
+offset_top = -391.0
+offset_right = 699.5
+offset_bottom = -138.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/normal_font_size = 55
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="BotonA" type="TextureRect" parent="."]
-offset_left = 288.0
-offset_top = 328.0
-offset_right = 1752.0
-offset_bottom = 745.0
+offset_left = -7.0
+offset_top = 19.0
+offset_right = 2100.0
+offset_bottom = 992.0
 mouse_filter = 2
-texture = ExtResource("5_fgqrm")
+texture = ExtResource("9_fgj2v")
 expand_mode = 1
+script = ExtResource("7_fgj2v")
+normal_texture = ExtResource("9_fgj2v")
+high_contrast_texture = ExtResource("2_v7cvu")
 
 [node name="Hitbox" type="Button" parent="BotonA"]
 layout_mode = 0
-offset_left = 1.0
-offset_top = 134.0
-offset_right = 1455.0
-offset_bottom = 291.0
+offset_left = 336.0
+offset_top = 424.0
+offset_right = 1790.0
+offset_bottom = 581.0
 flat = true
 
 [node name="Label" type="Label" parent="BotonA/Hitbox"]
+z_index = 2
 layout_mode = 0
-offset_left = 75.0
+offset_left = 57.0
 offset_top = 39.0
-offset_right = 1400.0
+offset_right = 1382.0
 offset_bottom = 121.0
 theme_override_font_sizes/font_size = 50
 horizontal_alignment = 1
 
 [node name="BotonB" type="TextureRect" parent="."]
-offset_left = 295.0
-offset_top = 552.0
-offset_right = 1759.0
-offset_bottom = 969.0
+offset_left = 12.0
+offset_top = 255.0
+offset_right = 2119.0
+offset_bottom = 1228.0
 mouse_filter = 2
-texture = ExtResource("5_fgqrm")
+texture = ExtResource("9_fgj2v")
 expand_mode = 1
+script = ExtResource("7_fgj2v")
+normal_texture = ExtResource("9_fgj2v")
+high_contrast_texture = ExtResource("2_v7cvu")
 
 [node name="Hitbox" type="Button" parent="BotonB"]
 layout_mode = 0
-offset_left = 1.0
-offset_top = 134.0
-offset_right = 1458.0
-offset_bottom = 291.0
+offset_left = 313.0
+offset_top = 411.0
+offset_right = 1770.0
+offset_bottom = 568.0
 flat = true
 
 [node name="Label" type="Label" parent="BotonB/Hitbox"]
+z_index = 2
 layout_mode = 0
-offset_left = 62.0
-offset_top = 33.0
-offset_right = 1404.0
-offset_bottom = 119.0
+offset_left = 55.0
+offset_top = 32.0
+offset_right = 1397.0
+offset_bottom = 118.0
 theme_override_font_sizes/font_size = 50
 horizontal_alignment = 1
 
 [node name="BotonC" type="TextureRect" parent="."]
-offset_left = 292.0
-offset_top = 775.0
-offset_right = 1756.0
-offset_bottom = 1192.0
+offset_left = 6.0
+offset_top = 484.0
+offset_right = 2113.0
+offset_bottom = 1457.0
 mouse_filter = 2
-texture = ExtResource("5_fgqrm")
+texture = ExtResource("9_fgj2v")
 expand_mode = 1
+script = ExtResource("7_fgj2v")
+normal_texture = ExtResource("9_fgj2v")
+high_contrast_texture = ExtResource("2_v7cvu")
 
 [node name="Hitbox" type="Button" parent="BotonC"]
-layout_mode = 0
-offset_left = 1.0
-offset_top = 134.0
-offset_right = 1452.0
-offset_bottom = 291.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 311.0
+offset_top = 419.0
+offset_right = -362.0
+offset_bottom = -420.0
+grow_horizontal = 2
+grow_vertical = 2
 flat = true
 
 [node name="Label" type="Label" parent="BotonC/Hitbox"]
-layout_mode = 0
-offset_left = 43.0
-offset_top = 28.0
-offset_right = 1395.0
-offset_bottom = 120.0
+z_index = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 338.0
+offset_top = 37.5
+offset_right = -380.0
+offset_bottom = -27.5
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_font_sizes/font_size = 50
 horizontal_alignment = 1
+
+[node name="Node" type="Node" parent="."]
+script = ExtResource("9_c5k03")
+sonido_click = ExtResource("10_fgj2v")

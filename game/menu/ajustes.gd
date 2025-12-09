@@ -1,3 +1,4 @@
+
 extends Control
 
 # Referencias a los Nodos de UI
@@ -6,12 +7,23 @@ extends Control
 @onready var check_contraste = $OrgVertical/ModoAltoContraste
 @onready var boton_accion = $Volver_Guardar 
 
-# --- NUEVO: CARGAMOS LAS 4 IMÁGENES NECESARIAS ---
+# --- NUEVO: REFERENCIA DE AUDIO ---
+@onready var audio_player = $AudioStreamPlayer 
+
+# --- IMÁGENES ALTO CONTRASTE ---
 @export_group("Iconos Boton Acción")
-@export var volver_normal: Texture2D  # Arrastra el "Atrás" normal
-@export var volver_ac: Texture2D      # Arrastra el "Atrás" amarillo/negro
-@export var guardar_normal: Texture2D # Arrastra el "Guardar" normal
-@export var guardar_ac: Texture2D     # Arrastra el "Guardar" amarillo/negro
+@export var volver_normal: Texture2D  
+@export var volver_ac: Texture2D      
+@export var guardar_normal: Texture2D 
+@export var guardar_ac: Texture2D     
+
+# --- AUDIOS NARRATIVOS (NUEVO) ---
+@export_group("Audios Accesibilidad")
+@export var audio_slider_tam: AudioStream   # "Desliza para cambiar el tamaño de los botones"
+@export var audio_slider_vel: AudioStream   # "Desliza para cambiar la velocidad del juego"
+@export var audio_check_ac: AudioStream     # "Casilla: Activar modo alto contraste"
+@export var audio_btn_volver: AudioStream   # "Botón: Volver al menú"
+@export var audio_btn_guardar: AudioStream  # "Botón: Guardar cambios"
 
 var hay_cambios = false
 
@@ -21,16 +33,42 @@ func _ready():
 	slider_velocidad.value = GlobalSettings.indice_velocidad_guardado
 	check_contraste.button_pressed = GlobalSettings.alto_contraste_activo
 	
-	# 2. Conectar señales
+	# 2. Conectar señales de lógica
 	slider_tamanio.value_changed.connect(_on_cambio_detectado.unbind(1))
 	slider_velocidad.value_changed.connect(_on_cambio_detectado.unbind(1))
 	check_contraste.toggled.connect(_on_cambio_detectado.unbind(1))
 	
-	boton_accion.pressed.connect(_on_volver_guardar_pressed)
+	# 3. Conectar señales de AUDIO (Hover / Dedo)
+	# Usamos funciones anónimas para los elementos fijos
+	slider_tamanio.mouse_entered.connect(func(): _reproducir_audio(audio_slider_tam))
+	slider_velocidad.mouse_entered.connect(func(): _reproducir_audio(audio_slider_vel))
+	check_contraste.mouse_entered.connect(func(): _reproducir_audio(audio_check_ac))
 	
-	# 3. Actualizar botón INMEDIATAMENTE al entrar
-	# Esto arregla tu problema: verificará si el AC está activo desde el inicio
+	# IMPORTANTE: El botón de acción es dinámico, usa una función especial
+	boton_accion.mouse_entered.connect(_reproducir_audio_accion_dinamico)
+	
+	# 4. Actualizar estado inicial visual
 	_actualizar_estado_boton()
+
+# --- FUNCIÓN DE AUDIO DINÁMICO ---
+func _reproducir_audio_accion_dinamico():
+	# Esta función decide qué audio tocar dependiendo si hay cambios o no
+	if hay_cambios:
+		_reproducir_audio(audio_btn_guardar)
+	else:
+		_reproducir_audio(audio_btn_volver)
+
+# --- FUNCIÓN GENERICA DE REPRODUCCIÓN ---
+func _reproducir_audio(stream: AudioStream):
+	if stream == null: return
+	
+	if audio_player.playing:
+		audio_player.stop()
+		
+	audio_player.stream = stream
+	audio_player.play()
+
+# --- LÓGICA VISUAL Y DE GUARDADO (IGUAL QUE ANTES) ---
 
 func _on_cambio_detectado():
 	# Preview visual inmediato del contraste
@@ -46,7 +84,6 @@ func _actualizar_estado_boton():
 	)
 	
 	# Detectar qué modo visual estamos viendo AHORA MISMO
-	# Usamos el estado del checkbox porque es lo que el usuario está viendo en pantalla
 	var usar_ac = check_contraste.button_pressed
 	
 	if hay_cambios:

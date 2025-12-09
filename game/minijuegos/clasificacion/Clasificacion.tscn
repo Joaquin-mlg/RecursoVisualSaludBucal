@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cr1qr7gpa0hu4"]
+[gd_scene load_steps=10 format=3 uid="uid://cr1qr7gpa0hu4"]
 
 [ext_resource type="Script" uid="uid://bbps2wycy5buf" path="res://game/minijuegos/clasificacion/clasificacion.gd" id="1_hl5oh"]
 [ext_resource type="PackedScene" uid="uid://b85icybulxr4f" path="res://game/minijuegos/clasificacion/ObjetoDental.tscn" id="2_v6t6k"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://c7s1tehmws42i" path="res://game/menu/fondo_nebulosa.gd" id="4_iqmub"]
 [ext_resource type="Texture2D" uid="uid://dy5w6k1h7lv15" path="res://game/minijuegos/clasificacion/Assets/Luna de pie.png" id="5_iqmub"]
 [ext_resource type="Texture2D" uid="uid://dj4xpnw6oqndo" path="res://game/minijuegos/clasificacion/Assets/ArdillaMala.png" id="6_7oav6"]
+[ext_resource type="AudioStream" uid="uid://bqqip5lhsqdqo" path="res://game/audio/musica/Juego 3_Dulces y Frutitas.mp3" id="7_qymbt"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v6t6k"]
 size = Vector2(311.845, 720.75)
@@ -63,6 +64,9 @@ scale = Vector2(1.147, 1.147)
 
 [node name="AudioFx" type="AudioStreamPlayer2D" parent="."]
 scale = Vector2(1.147, 1.147)
+stream = ExtResource("7_qymbt")
+volume_db = -10.065
+autoplay = true
 
 [node name="LabelPuntos" type="Label" parent="."]
 offset_left = 394.0

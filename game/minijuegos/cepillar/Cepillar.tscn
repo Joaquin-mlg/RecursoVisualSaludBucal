@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://0mq636bbf6c"]
+[gd_scene load_steps=28 format=3 uid="uid://0mq636bbf6c"]
 
 [ext_resource type="Script" uid="uid://k250t2wduodj" path="res://game/minijuegos/cepillar/cepillar.gd" id="1_ry835"]
 [ext_resource type="Texture2D" uid="uid://t2r4prdkfif2" path="res://game/minijuegos/cepillar/assets/CajaHerramientas.png" id="2_2q01c"]
@@ -19,6 +19,7 @@
 [ext_resource type="Script" uid="uid://cdr6if5tlbedu" path="res://game/minijuegos/cepillar/enjuague.gd" id="12_2q01c"]
 [ext_resource type="Texture2D" uid="uid://kkfa6vfnis4r" path="res://game/minijuegos/cepillar/assets/HiloDentalFinal.png" id="13_bdevt"]
 [ext_resource type="Texture2D" uid="uid://51vjnjavmoxm" path="res://game/minijuegos/cepillar/assets/EnjuagueBucal.png" id="15_8i4xa"]
+[ext_resource type="AudioStream" uid="uid://g6vi0nxvnmxf" path="res://game/audio/musica/Juego 2_Asteroide.mp3" id="20_walue"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ry835"]
 size = Vector2(290, 778)
@@ -215,6 +216,11 @@ texture = ExtResource("15_8i4xa")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="heramientas/Enjuague"]
 position = Vector2(33.875, 230)
 shape = SubResource("RectangleShape2D_2q01c")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("20_walue")
+volume_db = -10.097
+autoplay = true
 
 [connection signal="area_entered" from="Asteroide/Rocas/Roca3" to="Asteroide/Rocas/Roca3" method="_on_area_entered"]
 [connection signal="area_entered" from="heramientas/Cepillo" to="heramientas/Cepillo" method="_on_area_entered"]

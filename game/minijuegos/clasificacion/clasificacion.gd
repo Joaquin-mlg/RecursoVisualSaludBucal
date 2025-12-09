@@ -4,8 +4,10 @@ extends Node2D
 
 @onready var spawn_point = $ContenedorObjetos/PuntoAparicion
 @onready var label_puntos = $LabelPuntos 
-# Audio (Opcionales, usa si tienes los nodos)
-@onready var audio_fx = $AudioFX 
+
+# --- AUDIO ---
+# NUEVO: Referencia a la música de fondo
+@onready var musica_fondo = $AudioFx 
 
 # --- CONFIGURACIÓN DE TAMAÑO ---
 # Define aquí qué tan grande quieres que se vean los objetos (en píxeles)
@@ -35,6 +37,12 @@ func _ready():
 	if label_puntos:
 		label_puntos.text = "Aciertos: 0"
 	
+	# --- INICIAR MÚSICA DE FONDO ---
+	if musica_fondo:
+		musica_fondo.play()
+	else:
+		push_warning("No encontré el nodo AudioStreamPlayer para la música")
+	
 	await get_tree().create_timer(1.0).timeout
 	iniciar_ronda()
 
@@ -58,8 +66,7 @@ func spawn_objeto_actual():
 	# -----------------------------------------------------------
 	# 1. Cargamos la textura temporalmente para saber cuánto mide originalmente
 	var textura_temp = load(datos["texture_path"])
-	
-
+	# (Aquí parece que dejaste tu lógica pendiente, no la he tocado)
 	# -----------------------------------------------------------
 	
 	nuevo_objeto.position = spawn_point.position
@@ -97,12 +104,16 @@ func _on_objeto_clasificado(es_correcto: bool):
 func juego_terminado():
 	print("FIN DEL JUEGO.")
 	
+	# --- DETENER MÚSICA ---
+	# Detenemos la música para que no se mezcle con la siguiente escena
+	if musica_fondo:
+		musica_fondo.stop()
+	
 	# --- GENERAR REPORTE ---
 	var tiempo_fin = Time.get_ticks_msec()
 	var segundos_totales = (tiempo_fin - tiempo_inicio) / 1000
 	
 	# Calculamos puntaje: 100 pts por acierto - 10 pts por cada error
-	# Aseguramos que no sea negativo con max(0, ...)
 	var puntaje_final = max(0, (aciertos * 100) - (errores * 10))
 	
 	GlobalSettings.registrar_partida(
