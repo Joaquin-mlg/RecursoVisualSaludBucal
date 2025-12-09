@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://yrpxag81has8"
+path="res://.godot/imported/Enjuague bucal.mp3-06beb8f8ba4a7ea17d9ab7618092694f.mp3str"
+
+[deps]
+
+source_file="res://game/audio/narraciones/Enjuague bucal.mp3"
+dest_files=["res://.godot/imported/Enjuague bucal.mp3-06beb8f8ba4a7ea17d9ab7618092694f.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

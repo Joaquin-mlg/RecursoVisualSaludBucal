@@ -4,18 +4,20 @@
 [ext_resource type="Texture2D" uid="uid://dl2r0vfyvkgkj" path="res://game/minijuegos/quiz/Assets/FondoNave.png" id="2_3yt00"]
 [ext_resource type="Texture2D" uid="uid://mj8hyl4d7wn" path="res://game/config/AssetsAC/ContenedorRespuestaAC.png" id="2_v7cvu"]
 [ext_resource type="Script" uid="uid://c7s1tehmws42i" path="res://game/menu/fondo_nebulosa.gd" id="3_iyt34"]
-[ext_resource type="Texture2D" uid="uid://hdux6r5jqctu" path="res://game/config/AssetsAC/ContenedorPreguntaAC.png" id="3_vbapw"]
+[ext_resource type="AudioStream" uid="uid://bgf6tqmrjidbu" path="res://game/audio/narraciones/Mal.mp3" id="4_fgj2v"]
 [ext_resource type="Texture2D" uid="uid://ch417fc0ft8t" path="res://game/minijuegos/quiz/Assets/lunasentada.png" id="4_iyt34"]
+[ext_resource type="AudioStream" uid="uid://bi1w17bv6i2wb" path="res://game/audio/narraciones/MuybienM.mp3" id="4_t5glj"]
 [ext_resource type="Script" uid="uid://dq2ngtdyxvr2" path="res://game/config/AccesibleTexture.gd" id="7_fgj2v"]
 [ext_resource type="Texture2D" uid="uid://bs8q465a18ss8" path="res://game/minijuegos/quiz/Assets/ContenedorPregunta2.png" id="7_vbapw"]
-[ext_resource type="Script" uid="uid://dwr0sdl0irisw" path="res://game/config/ControladorSonidos.gd" id="9_c5k03"]
 [ext_resource type="Texture2D" uid="uid://v326owdooiin" path="res://game/minijuegos/quiz/Assets/RespuestaA.png" id="9_fgj2v"]
-[ext_resource type="AudioStream" uid="uid://djhel0xkxvkv0" path="res://game/audio/efectos/click_002.ogg" id="10_fgj2v"]
+[ext_resource type="Script" uid="uid://b4la3v425need" path="res://game/minijuegos/cepillar/controlador_mando.gd" id="12_umbdf"]
 
 [node name="Quizz" type="Node2D"]
 script = ExtResource("1_w8r81")
-textura_boton_ac = ExtResource("2_v7cvu")
-textura_cajon_ac = ExtResource("3_vbapw")
+textura_boton_ac = ExtResource("9_fgj2v")
+textura_cajon_ac = ExtResource("2_v7cvu")
+audio_acierto = ExtResource("4_fgj2v")
+audio_error = ExtResource("4_t5glj")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(1015, 548)
@@ -29,9 +31,6 @@ scale = Vector2(0.40406978, 0.47265622)
 texture = ExtResource("4_iyt34")
 script = ExtResource("3_iyt34")
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-position = Vector2(506, 483)
-
 [node name="CajonPreguntas" type="TextureRect" parent="."]
 offset_left = -75.0
 offset_top = -2.0
@@ -40,8 +39,6 @@ offset_bottom = 902.0
 texture = ExtResource("7_vbapw")
 expand_mode = 1
 script = ExtResource("7_fgj2v")
-normal_texture = ExtResource("7_vbapw")
-high_contrast_texture = ExtResource("3_vbapw")
 
 [node name="PreguntaLabel" type="RichTextLabel" parent="CajonPreguntas"]
 layout_mode = 1
@@ -63,16 +60,15 @@ vertical_alignment = 1
 [node name="BotonA" type="TextureRect" parent="."]
 offset_left = -7.0
 offset_top = 19.0
-offset_right = 2100.0
-offset_bottom = 992.0
+offset_right = 2085.0
+offset_bottom = 867.0
 mouse_filter = 2
 texture = ExtResource("9_fgj2v")
 expand_mode = 1
 script = ExtResource("7_fgj2v")
-normal_texture = ExtResource("9_fgj2v")
-high_contrast_texture = ExtResource("2_v7cvu")
 
 [node name="Hitbox" type="Button" parent="BotonA"]
+z_index = 1
 layout_mode = 0
 offset_left = 336.0
 offset_top = 424.0
@@ -83,10 +79,10 @@ flat = true
 [node name="Label" type="Label" parent="BotonA/Hitbox"]
 z_index = 2
 layout_mode = 0
-offset_left = 57.0
-offset_top = 39.0
-offset_right = 1382.0
-offset_bottom = 121.0
+offset_left = 166.0
+offset_top = 29.0
+offset_right = 1215.0
+offset_bottom = 98.0
 theme_override_font_sizes/font_size = 50
 horizontal_alignment = 1
 
@@ -95,14 +91,13 @@ offset_left = 12.0
 offset_top = 255.0
 offset_right = 2119.0
 offset_bottom = 1228.0
-mouse_filter = 2
+mouse_filter = 0
 texture = ExtResource("9_fgj2v")
 expand_mode = 1
 script = ExtResource("7_fgj2v")
-normal_texture = ExtResource("9_fgj2v")
-high_contrast_texture = ExtResource("2_v7cvu")
 
 [node name="Hitbox" type="Button" parent="BotonB"]
+z_index = 1
 layout_mode = 0
 offset_left = 313.0
 offset_top = 411.0
@@ -113,9 +108,9 @@ flat = true
 [node name="Label" type="Label" parent="BotonB/Hitbox"]
 z_index = 2
 layout_mode = 0
-offset_left = 55.0
-offset_top = 32.0
-offset_right = 1397.0
+offset_left = 283.0
+offset_top = 42.0
+offset_right = 1048.0
 offset_bottom = 118.0
 theme_override_font_sizes/font_size = 50
 horizontal_alignment = 1
@@ -129,10 +124,9 @@ mouse_filter = 2
 texture = ExtResource("9_fgj2v")
 expand_mode = 1
 script = ExtResource("7_fgj2v")
-normal_texture = ExtResource("9_fgj2v")
-high_contrast_texture = ExtResource("2_v7cvu")
 
 [node name="Hitbox" type="Button" parent="BotonC"]
+z_index = 1
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -160,6 +154,8 @@ grow_vertical = 2
 theme_override_font_sizes/font_size = 50
 horizontal_alignment = 1
 
-[node name="Node" type="Node" parent="."]
-script = ExtResource("9_c5k03")
-sonido_click = ExtResource("10_fgj2v")
+[node name="ControladorMando" type="Node" parent="."]
+script = ExtResource("12_umbdf")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(506, 483)

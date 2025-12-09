@@ -99,4 +99,15 @@ sonido_click = ExtResource("6_wf4yo")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer2D" parent="."]
 
+[node name="TecladoVirtual" type="GridContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.031000001
+anchor_bottom = 0.040000003
+offset_left = 94.0
+offset_top = 637.0
+offset_right = 482.47998
+offset_bottom = 912.8
+columns = 5
+
 [connection signal="pressed" from="BotonContinuar" to="." method="_on_boton_continuar_pressed"]

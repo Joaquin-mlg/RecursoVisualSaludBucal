@@ -46,30 +46,34 @@ func _input(event):
 			target_direction = 0.0
 
 func _physics_process(delta):
-	# --- 3. INTEGRACIÓN CON GLOBAL SETTINGS ---
-	# Multiplicamos la velocidad base por la velocidad actual de la configuración (0.5, 0.8, 1.0)
+	# --- 1. VELOCIDAD ---
+	# Multiplicamos la velocidad base por la configuración
 	var velocidad_real = velocidad_base * GlobalSettings.velocidad_actual
 	
-	var direccion_final: float = 0.0
+	# --- 2. DETECTAR INPUT (Fusión de Touch, Teclado y PS4) ---
+	var direccion_x: float = 0.0
 	
-	# Prioridad al Touch, sino Teclado
 	if target_direction != 0.0:
-		direccion_final = target_direction
+		# PRIORIDAD 1: Si estás tocando la pantalla (Touch)
+		direccion_x = target_direction
 	else:
-		direccion_final = Input.get_axis("ui_left", "ui_right")
+		# PRIORIDAD 2: Mando PS4 o Teclado
+		# "get_vector" es mejor que "get_axis" para mandos porque maneja mejor
+		# la zona muerta del stick.
+		var vector_input = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
+		
+		# Solo nos interesa el movimiento horizontal (.x)
+		direccion_x = vector_input.x
 	
-	# Moverse
-	velocity.x = direccion_final * velocidad_real
-	velocity.y = 0 
+	# --- 3. APLICAR MOVIMIENTO ---
+	velocity.x = direccion_x * velocidad_real
+	velocity.y = 0 # Mantenemos Y en 0 para que no se mueva arriba/abajo
 	
 	move_and_slide()
 	
 	# --- 4. RESTRICCION DE BORDES (CLAMP) ---
 	var ancho_pantalla = get_viewport_rect().size.x
 	
-	# Clamp asegura que position.x nunca sea menor al mínimo ni mayor al máximo
-	# Minimo: 0 + mitad del jugador (para que no se corte el sprite)
-	# Maximo: Ancho pantalla - mitad del jugador
 	position.x = clamp(
 		position.x, 
 		mitad_ancho_jugador, 

@@ -9,5 +9,11 @@ func _process(delta):
 	if timer >= spawn_rate:
 		timer = 0.0
 		var a = asteroide_scene.instantiate()
+		
+		# --- NUEVO: ETIQUETAR PARA EL RADAR ---
+		# Agregamos el asteroide al grupo "Enemigos" para que el Main lo detecte
+		a.add_to_group("Enemigos") 
+		# --------------------------------------
+		
 		a.position = Vector2(randi_range(50, 1920), -50)
 		get_tree().current_scene.add_child(a)

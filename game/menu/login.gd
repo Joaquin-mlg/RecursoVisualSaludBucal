@@ -3,102 +3,132 @@ extends Control
 # --- REFERENCIAS UI ---
 @onready var input_nombre = $InputNombre
 @onready var label_error = $LabelError
-# Asegúrate de que la ruta al botón sea correcta
-@onready var boton_continuar = $BotonContinuar 
+@onready var boton_continuar = $BotonContinuar
+@onready var teclado_container = $TecladoVirtual # <--- ¡TU NUEVO NODO!
 
-# --- NUEVO: REFERENCIA DE AUDIO ---
+# --- AUDIO ---
 @onready var audio_player = $AudioStreamPlayer 
 
-# --- AUDIOS DE ACCESIBILIDAD (Arrastra los mp3 aquí) ---
+# --- AUDIOS DE ACCESIBILIDAD ---
 @export_group("Narración Interfaz")
-@export var audio_hover_input: AudioStream   # Ej: "Caja de texto: Escribe tu nombre"
-@export var audio_hover_boton: AudioStream   # Ej: "Botón: Continuar"
+@export var audio_hover_input: AudioStream
+@export var audio_hover_boton: AudioStream
+@export var audio_tecla: AudioStream # <--- NUEVO: Sonido al moverte por las letras (ej: "bip")
 
 @export_group("Audios Errores")
-@export var audio_error_vacio: AudioStream   # "¡Ey! No has escrito nada."
-@export var audio_error_numeros: AudioStream # "No uses números, solo letras."
-@export var audio_exito: AudioStream         # "¡Genial! Vamos a jugar."
+@export var audio_error_vacio: AudioStream
+@export var audio_error_numeros: AudioStream
+@export var audio_exito: AudioStream
 
 var escena_menu = "res://game/menu/main.tscn"
+var alfabeto = "ABCDEFGHIJKLMNÑOPQRSTUVWXYZ" # Las letras que aparecerán
 
 func _ready():
-	# Limpieza inicial
-	if label_error:
-		label_error.text = ""
+	if label_error: label_error.text = ""
 	
-	# --- CONEXIONES DE AUDIO ---
-	# 1. Audio para la caja de texto
-	input_nombre.mouse_entered.connect(func(): _reproducir_audio(audio_hover_input))
+	# 1. CONEXIONES EXISTENTES
+	_conectar_nodo_accesible(input_nombre, audio_hover_input)
+	_conectar_nodo_accesible(boton_continuar, audio_hover_boton)
+
+	# --- CORRECCIÓN DEL ERROR ---
+	# Verificamos si el nodo existe antes de usarlo
+	if teclado_container == null:
+		print("🔴 ERROR CRÍTICO: No encuentro el nodo 'TecladoVirtual'.")
+		print("👉 SOLUCIÓN: Agrega un GridContainer a la escena y llámalo 'TecladoVirtual'.")
+		return # Detenemos aquí para que no explote
+
+	# 2. GENERAR TECLADO VIRTUAL AUTOMÁTICO
+	_generar_teclas()
+
+	# 3. AUTO-FOCUS
+	if teclado_container.get_child_count() > 0:
+		teclado_container.get_child(0).grab_focus()
+
+func _generar_teclas():
+	# Doble verificación de seguridad
+	if teclado_container == null: return
+
+	# Primero limpiamos por si acaso
+	for hijo in teclado_container.get_children():
+		hijo.queue_free()
 	
-	# 2. Audio para el botón continuar
-	boton_continuar.mouse_entered.connect(func(): _reproducir_audio(audio_hover_boton))
+	# Creamos botón por cada letra
+	for letra in alfabeto:
+		var btn = Button.new()
+		btn.text = letra
+		btn.custom_minimum_size = Vector2(50, 50) # Tamaño del botón
+		
+		# CONEXIÓN: Al pulsar, escribe la letra
+		btn.pressed.connect(func(): 
+			input_nombre.text += letra
+			_reproducir_audio(audio_tecla) # Feedback sonoro al pulsar
+		)
+		
+		# ACCESIBILIDAD: Al pasar el foco con el control, suena
+		btn.focus_entered.connect(func(): _reproducir_audio(audio_tecla))
+		btn.mouse_entered.connect(func(): _reproducir_audio(audio_tecla))
+		
+		# Agregamos al Grid
+		teclado_container.add_child(btn)
+	
+	# --- BOTÓN BORRAR (<-) ---
+	var btn_borrar = Button.new()
+	btn_borrar.text = "<-"
+	btn_borrar.modulate = Color.ORANGE
+	btn_borrar.custom_minimum_size = Vector2(50, 50)
+	btn_borrar.pressed.connect(_borrar_letra)
+	btn_borrar.focus_entered.connect(func(): _reproducir_audio(audio_tecla))
+	teclado_container.add_child(btn_borrar)
+	
+	# --- BOTÓN LISTO (OK) ---
+	var btn_ok = Button.new()
+	btn_ok.text = "OK"
+	btn_ok.modulate = Color.GREEN
+	btn_ok.custom_minimum_size = Vector2(50, 50)
+	# Al dar OK, saltamos al botón continuar
+	btn_ok.pressed.connect(func(): boton_continuar.grab_focus())
+	btn_ok.focus_entered.connect(func(): _reproducir_audio(audio_tecla))
+	teclado_container.add_child(btn_ok)
+
+func _borrar_letra():
+	var texto = input_nombre.text
+	if texto.length() > 0:
+		input_nombre.text = texto.left(-1) # Quita el último caracter
+
+# --- HELPERS ---
+func _conectar_nodo_accesible(nodo, audio):
+	if nodo and audio:
+		nodo.mouse_entered.connect(func(): _reproducir_audio(audio))
+		nodo.focus_entered.connect(func(): _reproducir_audio(audio))
 
 func _on_boton_continuar_pressed():
+	# (Tu lógica de validación original sigue aquí igual)
 	var nombre = input_nombre.text.strip_edges()
-	
-	# --- VALIDACIÓN 1: Vacío ---
 	if nombre == "":
 		mostrar_error("¡Debes escribir un nombre!", audio_error_vacio)
 		return 
-	
-	# --- VALIDACIÓN 2: Números ---
 	if _tiene_numeros(nombre):
-		mostrar_error("El nombre no puede contener números.", audio_error_numeros)
+		mostrar_error("Sin números, por favor.", audio_error_numeros)
 		return 
 	
-	# --- ÉXITO ---
-	print("Nombre válido: ", nombre)
 	GlobalSettings.nombre_jugador = nombre
-	
-	# Audio de éxito antes de cambiar
 	_reproducir_audio(audio_exito)
-	
-	# Opcional: Vibración cortita de "Éxito" (50ms)
-	if OS.has_feature("mobile"):
-		Input.vibrate_handheld(50)
-	
-	# Pequeña pausa opcional
-	# await get_tree().create_timer(1.0).timeout
-	
+	if OS.has_feature("mobile"): Input.vibrate_handheld(50)
 	Transicion.cambiar_escena(escena_menu)
 
-# --- FUNCIÓN INTELIGENTE DE AUDIO ---
+# --- UTILS ---
 func _reproducir_audio(stream: AudioStream):
-	if stream == null:
-		return
-		
-	if audio_player.playing:
-		audio_player.stop()
-		
+	if stream == null: return
+	if audio_player.playing: audio_player.stop()
 	audio_player.stream = stream
 	audio_player.play()
 
-# --- VALIDACIONES ---
 func _tiene_numeros(texto: String) -> bool:
-	for caracter in texto:
-		if caracter >= "0" and caracter <= "9":
-			return true 
+	for c in texto:
+		if c >= "0" and c <= "9": return true 
 	return false
 
 func mostrar_error(mensaje: String, audio_feedback: AudioStream = null):
-	# 1. Feedback Visual
-	print("ERROR: ", mensaje)
-	if label_error:
-		label_error.text = mensaje
-		label_error.modulate = Color.RED
-		
-		# Animación temblor
-		var tween = create_tween()
-		tween.tween_property(label_error, "position:x", label_error.position.x + 5, 0.05)
-		tween.tween_property(label_error, "position:x", label_error.position.x - 5, 0.05)
-		tween.tween_property(label_error, "position:x", label_error.position.x, 0.05)
-	
-	# 2. Feedback Auditivo (Prioridad)
-	if audio_feedback:
-		_reproducir_audio(audio_feedback)
-		
-	# 3. Feedback Táctil (VIBRACIÓN) - NUEVO
-	# Solo vibra si detecta que es un dispositivo móvil
-	if OS.has_feature("mobile"):
-		# 400 milisegundos es una vibración media-larga, ideal para errores
-		Input.vibrate_handheld(400)
+	if label_error: label_error.text = mensaje
+	if audio_feedback: _reproducir_audio(audio_feedback)
+	if OS.has_feature("mobile"): Input.vibrate_handheld(400)

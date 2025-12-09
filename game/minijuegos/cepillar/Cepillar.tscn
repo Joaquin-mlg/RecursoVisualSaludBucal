@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://0mq636bbf6c"]
+[gd_scene load_steps=37 format=3 uid="uid://0mq636bbf6c"]
 
 [ext_resource type="Script" uid="uid://k250t2wduodj" path="res://game/minijuegos/cepillar/cepillar.gd" id="1_ry835"]
 [ext_resource type="Texture2D" uid="uid://t2r4prdkfif2" path="res://game/minijuegos/cepillar/assets/CajaHerramientas.png" id="2_2q01c"]
@@ -6,7 +6,10 @@
 [ext_resource type="Texture2D" uid="uid://cod301kr54s71" path="res://game/menu/fondo/AsteroideFinal.png" id="2_sh8yq"]
 [ext_resource type="Script" uid="uid://c7s1tehmws42i" path="res://game/menu/fondo_nebulosa.gd" id="3_2mj7n"]
 [ext_resource type="Script" uid="uid://2b1tq2vybfau" path="res://game/minijuegos/cepillar/asteroide.gd" id="3_6n0rt"]
+[ext_resource type="AudioStream" uid="uid://cflx12q8lwf6j" path="res://game/audio/narraciones/InstruccioneCepilla.mp3" id="3_6nm4s"]
+[ext_resource type="AudioStream" uid="uid://cp481uyaqund" path="res://game/audio/narraciones/Muy-bien-.mp3" id="3_n5xed"]
 [ext_resource type="Script" uid="uid://dk14gq4uokmas" path="res://game/minijuegos/cepillar/rocas.gd" id="3_p6kxp"]
+[ext_resource type="AudioStream" uid="uid://6avvwewibdqh" path="res://game/audio/narraciones/Asteroide.mp3" id="4_o46j2"]
 [ext_resource type="Script" uid="uid://dopncrntbmlvp" path="res://game/minijuegos/cepillar/hilo_dental.gd" id="5_q76mo"]
 [ext_resource type="Texture2D" uid="uid://c47p5s320e8ej" path="res://game/minijuegos/cepillar/assets/AsteroideTriste.png" id="6_bdevt"]
 [ext_resource type="Script" uid="uid://c1puq5komhe5w" path="res://game/config/EfectoIdle.gd" id="7_8i4xa"]
@@ -19,7 +22,13 @@
 [ext_resource type="Script" uid="uid://cdr6if5tlbedu" path="res://game/minijuegos/cepillar/enjuague.gd" id="12_2q01c"]
 [ext_resource type="Texture2D" uid="uid://kkfa6vfnis4r" path="res://game/minijuegos/cepillar/assets/HiloDentalFinal.png" id="13_bdevt"]
 [ext_resource type="Texture2D" uid="uid://51vjnjavmoxm" path="res://game/minijuegos/cepillar/assets/EnjuagueBucal.png" id="15_8i4xa"]
+[ext_resource type="AudioStream" uid="uid://b25iwq5rl4mi3" path="res://game/audio/narraciones/Cepillo.mp3" id="16_s2evb"]
+[ext_resource type="AudioStream" uid="uid://djxyj48veau2r" path="res://game/audio/narraciones/Hilodental.mp3" id="19_6nm4s"]
 [ext_resource type="AudioStream" uid="uid://g6vi0nxvnmxf" path="res://game/audio/musica/Juego 2_Asteroide.mp3" id="20_walue"]
+[ext_resource type="Script" uid="uid://dwr0sdl0irisw" path="res://game/config/ControladorSonidos.gd" id="22_dv000"]
+[ext_resource type="AudioStream" uid="uid://yrpxag81has8" path="res://game/audio/narraciones/Enjuague bucal.mp3" id="22_o46j2"]
+[ext_resource type="AudioStream" uid="uid://djhel0xkxvkv0" path="res://game/audio/efectos/click_002.ogg" id="23_w0nat"]
+[ext_resource type="Script" uid="uid://b4la3v425need" path="res://game/minijuegos/cepillar/controlador_mando.gd" id="29_j3cit"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ry835"]
 size = Vector2(290, 778)
@@ -46,6 +55,9 @@ size = Vector2(113.75, 182)
 position = Vector2(322, 180)
 script = ExtResource("1_ry835")
 textura_asteroide_feliz = ExtResource("2_sh8yq")
+audio_intro = ExtResource("3_6nm4s")
+audio_info_asteroide = ExtResource("4_o46j2")
+audio_victoria = ExtResource("3_n5xed")
 
 [node name="fondo" type="Sprite2D" parent="."]
 position = Vector2(702, 387.5)
@@ -148,6 +160,56 @@ collision_mask = 16
 position = Vector2(773.16296, 407.02872)
 shape = SubResource("CircleShape2D_a5j87")
 
+[node name="heramientas" type="Node2D" parent="."]
+visibility_layer = 2
+
+[node name="Cepillo" type="Area2D" parent="heramientas" groups=["herramientas"]]
+position = Vector2(37, 640)
+collision_layer = 2
+script = ExtResource("8_2q01c")
+audio_descripcion = ExtResource("16_s2evb")
+
+[node name="Sprite2D" type="Sprite2D" parent="heramientas/Cepillo"]
+position = Vector2(-18, -298)
+scale = Vector2(0.17767866, 0.15754552)
+texture = ExtResource("11_2mj7n")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="heramientas/Cepillo"]
+position = Vector2(-7.125, -283.74997)
+shape = SubResource("RectangleShape2D_qk7k4")
+
+[node name="HiloDental" type="Area2D" parent="heramientas" groups=["herramientas"]]
+position = Vector2(0, 172)
+collision_layer = 32
+collision_mask = 4
+script = ExtResource("5_q76mo")
+audio_descripcion = ExtResource("19_6nm4s")
+
+[node name="Sprite2D" type="Sprite2D" parent="heramientas/HiloDental"]
+position = Vector2(30.000015, -84.00001)
+scale = Vector2(0.18171296, 0.1517857)
+texture = ExtResource("13_bdevt")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="heramientas/HiloDental"]
+position = Vector2(20.5, -80)
+shape = SubResource("RectangleShape2D_6n0rt")
+
+[node name="Enjuague" type="Area2D" parent="heramientas" groups=["herramientas"]]
+position = Vector2(-1, 379)
+collision_layer = 16
+collision_mask = 8
+script = ExtResource("12_2q01c")
+audio_descripcion = ExtResource("22_o46j2")
+
+[node name="Sprite2D" type="Sprite2D" parent="heramientas/Enjuague"]
+position = Vector2(28.000015, 232.49997)
+scale = Vector2(0.6935867, 0.53457)
+texture = ExtResource("15_8i4xa")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="heramientas/Enjuague"]
+position = Vector2(33.875, 230)
+shape = SubResource("RectangleShape2D_2q01c")
+
 [node name="UI" type="CanvasLayer" parent="."]
 
 [node name="ProgresoLimpieza" type="ProgressBar" parent="UI"]
@@ -170,57 +232,19 @@ metadata/_edit_use_anchors_ = true
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(637, 362)
 
-[node name="heramientas" type="Node2D" parent="."]
-visibility_layer = 2
-
-[node name="Cepillo" type="Area2D" parent="heramientas" groups=["herramientas"]]
-position = Vector2(37, 640)
-collision_layer = 2
-script = ExtResource("8_2q01c")
-
-[node name="Sprite2D" type="Sprite2D" parent="heramientas/Cepillo"]
-position = Vector2(-18, -298)
-scale = Vector2(0.17767866, 0.15754552)
-texture = ExtResource("11_2mj7n")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="heramientas/Cepillo"]
-position = Vector2(-7.125, -283.74997)
-shape = SubResource("RectangleShape2D_qk7k4")
-
-[node name="HiloDental" type="Area2D" parent="heramientas" groups=["herramientas"]]
-position = Vector2(0, 172)
-collision_layer = 32
-collision_mask = 4
-script = ExtResource("5_q76mo")
-
-[node name="Sprite2D" type="Sprite2D" parent="heramientas/HiloDental"]
-position = Vector2(30.000015, -84.00001)
-scale = Vector2(0.18171296, 0.1517857)
-texture = ExtResource("13_bdevt")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="heramientas/HiloDental"]
-position = Vector2(20.5, -80)
-shape = SubResource("RectangleShape2D_6n0rt")
-
-[node name="Enjuague" type="Area2D" parent="heramientas" groups=["herramientas"]]
-position = Vector2(-1, 379)
-collision_layer = 16
-collision_mask = 8
-script = ExtResource("12_2q01c")
-
-[node name="Sprite2D" type="Sprite2D" parent="heramientas/Enjuague"]
-position = Vector2(28.000015, 232.49997)
-scale = Vector2(0.6935867, 0.53457)
-texture = ExtResource("15_8i4xa")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="heramientas/Enjuague"]
-position = Vector2(33.875, 230)
-shape = SubResource("RectangleShape2D_2q01c")
-
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("20_walue")
 volume_db = -10.097
 autoplay = true
+
+[node name="Narrador" type="AudioStreamPlayer" parent="."]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+script = ExtResource("22_dv000")
+sonido_click = ExtResource("23_w0nat")
+
+[node name="ControladorMando" type="Node" parent="."]
+script = ExtResource("29_j3cit")
 
 [connection signal="area_entered" from="Asteroide/Rocas/Roca3" to="Asteroide/Rocas/Roca3" method="_on_area_entered"]
 [connection signal="area_entered" from="heramientas/Cepillo" to="heramientas/Cepillo" method="_on_area_entered"]

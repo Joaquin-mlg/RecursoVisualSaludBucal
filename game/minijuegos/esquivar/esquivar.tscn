@@ -1,22 +1,31 @@
-[gd_scene load_steps=13 format=3 uid="uid://ddt4ihh27dja4"]
+[gd_scene load_steps=17 format=3 uid="uid://ddt4ihh27dja4"]
 
 [ext_resource type="Script" uid="uid://o4brvc8yk4qm" path="res://game/minijuegos/esquivar/player_esquivar.gd" id="1_2e0mf"]
 [ext_resource type="Script" uid="uid://dkbgkal4tfsbt" path="res://game/minijuegos/esquivar/esquivar.gd" id="1_w25gl"]
 [ext_resource type="Script" uid="uid://db3866gmeyjs1" path="res://game/minijuegos/esquivar/spawner.gd" id="2_6omkn"]
 [ext_resource type="Texture2D" uid="uid://cgmjrhgctjyyc" path="res://game/minijuegos/esquivar/Assets/parallax1.png" id="2_bffs2"]
 [ext_resource type="Texture2D" uid="uid://btyvgpr41fn8r" path="res://game/minijuegos/esquivar/Assets/parallax3.png" id="2_i6tjx"]
+[ext_resource type="AudioStream" uid="uid://cbw2i0q6kc5pb" path="res://game/audio/narraciones/InstruccionesFinal.mp3" id="2_w2x27"]
 [ext_resource type="Script" uid="uid://cqemp1tuq6ij3" path="res://game/minijuegos/esquivar/fondo.gd" id="2_xi4py"]
+[ext_resource type="AudioStream" uid="uid://dvfymjkcl0c8e" path="res://game/audio/narraciones/Enfrente.mp3" id="3_118wn"]
 [ext_resource type="Texture2D" uid="uid://cep5wlx221n6b" path="res://game/minijuegos/esquivar/Assets/parallax4.png" id="3_isa2x"]
 [ext_resource type="PackedScene" uid="uid://dmvx4dofooko4" path="res://game/minijuegos/esquivar/asteroide.tscn" id="3_qjfgf"]
 [ext_resource type="Texture2D" uid="uid://drblgyndbo07" path="res://game/minijuegos/esquivar/Assets/Nave_Espacial.png" id="3_w25gl"]
+[ext_resource type="AudioStream" uid="uid://3a50kpa4mo27" path="res://game/audio/narraciones/Izquierda.mp3" id="4_k34aq"]
 [ext_resource type="Texture2D" uid="uid://buba14gftggme" path="res://game/minijuegos/esquivar/Assets/parallax2.png" id="4_xi4py"]
+[ext_resource type="AudioStream" uid="uid://bgx8cqg0uuhaq" path="res://game/audio/narraciones/Derecha.mp3" id="5_yrq4o"]
 [ext_resource type="AudioStream" uid="uid://ggu3pxaxewhx" path="res://game/audio/musica/Juego 1_Nave.mp3" id="6_lagwc"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_lagwc"]
 radius = 16.807566
 
-[node name="Esquivar" type="Node2D"]
+[node name="Esquivar" type="Node2D" node_paths=PackedStringArray("player_ref") groups=["Player"]]
 script = ExtResource("1_w25gl")
+player_ref = NodePath("Player")
+audio_intro = ExtResource("2_w2x27")
+audio_alerta_frente = ExtResource("3_118wn")
+audio_alerta_izq = ExtResource("5_yrq4o")
+audio_alerta_der = ExtResource("4_k34aq")
 
 [node name="Fondo" type="Node2D" parent="."]
 script = ExtResource("2_xi4py")
@@ -85,8 +94,10 @@ autostart = true
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("6_lagwc")
-volume_db = -11.106
+volume_db = -9.577
 pitch_scale = 0.96
 autoplay = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

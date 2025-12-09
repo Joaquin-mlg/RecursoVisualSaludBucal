@@ -10,10 +10,11 @@ script = ExtResource("1_1af6a")
 visible = false
 
 [node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="."]
-offset_left = 6.0
+offset_left = -29.0
 offset_top = 1.0
-offset_right = 6.0
-offset_bottom = 1.0
+offset_right = 1977.0
+offset_bottom = 1142.0
+scale = Vector2(1.105, 1.105)
 stream = ExtResource("2_700hu")
 volume_db = -10.0
 

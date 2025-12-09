@@ -1,95 +1,122 @@
 extends Area2D
 
-signal objeto_clasificado(es_correcto)
+signal objeto_clasificado(es_correcto: bool)
 
-var arrastrando = false
-var es_bueno = false 
-var posicion_inicial
+# --- VARIABLES INTERNAS ---
+var es_bueno: bool = false
+var audio_identificacion: AudioStream
+var nombre_objeto: String = ""
 
-# --- ACCESIBILIDAD ---
-var escala_base = Vector2(1, 1) # Guardaremos el tamaño configurado aquí
+var dragging = false
+var drag_offset = Vector2()
+var posicion_inicial = Vector2()
+
+# --- NUEVO PARA MANDO PS4 ---
+var mouse_sobre_mi = false # ¿El cursor virtual está encima?
+
+var nivel_principal: Node2D
 
 func _ready():
 	posicion_inicial = global_position
+	nivel_principal = get_tree().get_first_node_in_group("nivel_clasificacion")
 	
-	# 1. Aplicar tamaño según GlobalSettings
-	var tam = GlobalSettings.tamanio_actual
-	escala_base = Vector2(tam, tam)
-	scale = escala_base
+	# --- CONEXIONES PARA DETECTAR EL CURSOR ---
+	mouse_entered.connect(_on_mouse_enter)
+	mouse_exited.connect(_on_mouse_exit)
 
-func configurar(datos):
-	es_bueno = datos["es_bueno"]
-	
-	if FileAccess.file_exists(datos["texture_path"]):
-		$Sprite2D.texture = load(datos["texture_path"])
-	else:
-		if has_node("Label"): $Label.text = datos["nombre"]
-		$Sprite2D.modulate = Color.GREEN if es_bueno else Color.RED
+# --- DETECCIÓN DE CURSOR ---
+func _on_mouse_enter():
+	mouse_sobre_mi = true
+	# Al poner el cursor encima, dice el nombre
+	if not dragging:
+		_solicitar_narracion()
 
-func _on_input_event(_viewport, event, _shape_idx):
-	if event is InputEventMouseButton or event is InputEventScreenTouch:
-		if event.pressed:
-			arrastrando = true
-			
-			# Efecto de "Levantar" (Crece un 20% respecto a su base)
-			var escala_arrastre = escala_base * 1.2
-			
-			# Usamos un Tween rápido para que se vea suave al agarrar
-			var tween = create_tween()
-			tween.tween_property(self, "scale", escala_arrastre, 0.1)
-			
-			z_index = 10 
+func _on_mouse_exit():
+	mouse_sobre_mi = false
 
+# --- INPUT HÍBRIDO (MANDO + MOUSE) ---
 func _input(event):
-	if not arrastrando:
-		return
-		
-	if (event is InputEventMouseButton or event is InputEventScreenTouch) and not event.pressed:
-		# AL SOLTAR
-		arrastrando = false
-		z_index = 0
-		
-		# Vuelve a su tamaño base (grande o pequeño según config)
-		var tween = create_tween()
-		tween.tween_property(self, "scale", escala_base, 0.1)
-		
-		verificar_donde_cayo()
+	# 1. SOLTAR EL OBJETO
+	if dragging:
+		# Si sueltas el botón X del mando O sueltas el clic izquierdo
+		if event.is_action_released("click_mando") or (event is InputEventMouseButton and not event.pressed):
+			dragging = false
+			verificar_clasificacion()
+			return
+
+	# 2. AGARRAR EL OBJETO CON MANDO (Botón X)
+	# Si el cursor está encima Y presionas X
+	if mouse_sobre_mi and Input.is_action_just_pressed("click_mando"):
+		iniciar_arrastre()
+
+# --- INPUT DE MOUSE (Respaldo para PC) ---
+func _input_event(_viewport, event, _shape_idx):
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+		iniciar_arrastre()
+
+# --- LÓGICA DE ARRASTRE ---
+func iniciar_arrastre():
+	dragging = true
+	# Calculamos la diferencia para que no salte al centro
+	drag_offset = global_position - get_global_mouse_position()
+	
+	# Vibración al agarrar
+	if OS.has_feature("mobile"):
+		Input.vibrate_handheld(50)
 
 func _process(_delta):
-	# Interpolación simple para que el objeto siga al mouse suavemente (opcional)
-	# Si prefieres que sea instantáneo usa: global_position = get_global_mouse_position()
-	if arrastrando:
-		global_position = global_position.lerp(get_global_mouse_position(), 25 * _delta)
+	if dragging:
+		# El objeto sigue al mouse (o al cursor virtual del mando)
+		global_position = get_global_mouse_position() + drag_offset
 
-func verificar_donde_cayo():
-	var areas_colisionadas = get_overlapping_areas()
-	var soltado_en_zona = false
+# --- CONFIGURACIÓN (Viene del Spawner) ---
+func configurar(datos):
+	es_bueno = datos["es_bueno"]
+	nombre_objeto = datos["nombre"]
 	
-	for area in areas_colisionadas:
-		# Importante: Asegúrate que tus zonas tengan estos GRUPOS
-		if area.is_in_group("zona_buena"):
-			soltado_en_zona = true
-			validar_resultado(es_bueno == true) 
-			return 
-			
-		elif area.is_in_group("zona_mala"):
-			soltado_en_zona = true
-			validar_resultado(es_bueno == false)
+	# Cargar imagen
+	var tex = load(datos["texture_path"])
+	$Sprite2D.texture = tex 
+	
+	# Cargar Audio (Manejo robusto)
+	if datos.has("audio_nombre"):
+		var data = datos["audio_nombre"]
+		if data is AudioStream:
+			audio_identificacion = data
+		elif data is String:
+			audio_identificacion = load(data)
+
+# --- NARRACIÓN ---
+func _solicitar_narracion():
+	if audio_identificacion and nivel_principal:
+		nivel_principal._reproducir_voz(audio_identificacion)
+
+# --- LÓGICA DE CLASIFICACIÓN ---
+func verificar_clasificacion():
+	var areas = get_overlapping_areas()
+	
+	for area in areas:
+		if area.is_in_group("zona_mochila"): 
+			if es_bueno: procesar_acierto()
+			else: procesar_error()
 			return
 			
-	if not soltado_en_zona:
-		regresar_al_centro()
-
-func validar_resultado(acerto: bool):
-	emit_signal("objeto_clasificado", acerto)
+		elif area.is_in_group("zona_basura"): 
+			if not es_bueno: procesar_acierto()
+			else: procesar_error()
+			return
 	
-	if acerto:
-		queue_free()
-	else:
-		regresar_al_centro()
+	# Si no tocó nada, regresa
+	regresar_a_inicio()
 
-func regresar_al_centro():
+func procesar_acierto():
+	emit_signal("objeto_clasificado", true)
+	queue_free()
+
+func procesar_error():
+	emit_signal("objeto_clasificado", false)
+	regresar_a_inicio()
+
+func regresar_a_inicio():
 	var tween = create_tween()
-	tween.tween_property(self, "global_position", posicion_inicial, 0.5)\
-		.set_trans(Tween.TRANS_ELASTIC)\
-		.set_ease(Tween.EASE_OUT)
+	tween.tween_property(self, "global_position", posicion_inicial, 0.3).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
