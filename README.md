@@ -90,5 +90,5 @@ game/
 
 \## 📜 Licencia
 
-Este proyecto se distribuye bajo la licencia del COMUNISMO.
+Este proyecto se distribuye bajo la licencia libre solo dar las respectivas menciones al autor original.
 
